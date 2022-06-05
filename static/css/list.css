@@ -1,0 +1,218 @@
+.wrap {
+  width: 1080px;
+  margin: auto;
+  padding: 80px 30px;
+  background-color: #ffffff;
+}
+
+.list-title {
+  margin-bottom: 30px;
+}
+
+.list-title span {
+  font-weight: 900;
+  font-size: 30px;
+  position: relative;
+  right: 326px;
+  top: 44px;
+}
+
+.list-title img:first-child {
+  transform: translateX(-14px);
+}
+
+.list-title img:nth-child(2) {
+  transform: translateX(102px);
+}
+
+.mb-3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 109px;
+  bottom: 22px;
+  transform: scale(0.75);
+}
+
+#searchInput {
+  width: 80%;
+  background-color: #dddddd;
+  color: var(--default);
+  font-size: 25px;
+  border-radius: 30px;
+  padding-left: 55px;
+  margin-bottom: 20px;
+}
+
+#searchInput:focus {
+  box-shadow: 0 0 1px 1px var(--orange);
+  border: 0.5px solid var(--orange);
+}
+
+#searchInfo {
+  font-size: 25px;
+  font-weight: 500;
+  margin-left: 30px;
+  margin-bottom: 20px;
+}
+
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 30px;
+  background-color: #dddddd;
+  border-radius: 30px;
+  margin-bottom: 30px;
+}
+
+.filter-row {
+  display: flex;
+  margin: 10px 0px;
+}
+
+.filter-one {
+  display: flex;
+  width: 50%;
+  align-items: flex-start;
+}
+
+.filter-values {
+  display: flex;
+}
+
+.filter-key {
+  background-color: var(--orange);
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  color: white;
+  width: 90px;
+  border-radius: 30px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-right: 20px;
+}
+
+.filter-values {
+  background-color: #ffa500;
+  border-radius: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.filter-value {
+  margin-left: 7px;
+  margin-right: 7px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.filter-values .current {
+  color: var(--default);
+}
+
+.filter-value:hover {
+  color: var(--default);
+}
+
+
+.list-sort a {
+  margin-right: 15px;
+  color: #8c8c8c;
+  transition: all 0.1s ease-in-out;
+}
+.list-sort {
+  font-size: 20px;
+  font-weight: 400;
+  margin-left: 30px;
+  margin-bottom: 15px;
+}
+
+.list-sort .current {
+  font-weight: 600;
+  color: var(--default);
+}
+
+
+
+.list-sort a:hover {
+  font-weight: 600;
+  color: var(--default);
+
+}
+
+.spinner-border {
+  margin-top: 30px;
+}
+
+.naviBar {
+    background-color: #FF6219;
+    width: 100%;
+    height: 70px;
+    position: fixed;
+    z-index: 100;
+}
+
+.naviBar ul li {
+    list-style: none;
+    color: #3A3845;
+    background-color: #FF6219;
+    float: left;
+    line-height: 70px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.naviBar .logoIcon {
+    height: 65px;
+    transition: all 0.3s ease-in-out;
+    margin-left: 55px;
+    margin-right: 55px;
+}
+
+.naviBar .logoIcon:hover {
+  transform: rotateY(180deg) scale(1.2);
+}
+
+.menuLink {
+    text-decoration: none;
+    color: #3A3845;
+    display: block;
+    width: 180px;
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.menuLink:hover {
+    transition: 0.5s;
+    font-size: 19px;
+    text-decoration: none;
+    color: #3A3845;
+    background: #FFF3ED;
+}
+
+.myPageLink {
+    position: absolute;
+    right: 19%;
+}
+
+.loginIcon {
+    height: 38px;
+
+}
+
+.loginIcon:hover {
+    transition: 0.5s;
+    transform: scale(1.08)
+}
