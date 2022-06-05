@@ -1,0 +1,327 @@
+/*전체 폰트*/
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+/*여기서부터 네비게이션바*/
+.naviBar {
+    background-color: #FF6219;
+    width: 100%;
+    height: 70px;
+    position: fixed;
+    z-index: 100;
+}
+
+.naviBar ul li {
+    list-style: none;
+    color: #3A3845;
+    background-color: #FF6219;
+    float: left;
+    line-height: 70px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.naviBar .logoIcon {
+    height: 65px;
+    transition: all 0.3s ease-in-out;
+    margin-left: 55px;
+    margin-right: 55px;
+}
+
+.naviBar .logoIcon:hover {
+  transform: rotateY(180deg) scale(1.2);
+}
+
+.menuLink {
+    text-decoration: none;
+    color: #3A3845;
+    display: block;
+    width: 180px;
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.menuLink:hover {
+    transition: 0.5s;
+    font-size: 19px;
+    text-decoration: none;
+    color: #3A3845;
+    background: #FFF3ED;
+}
+
+.myPageLink {
+    position: absolute;
+    right: 19%;
+}
+
+.loginIcon {
+    height: 38px;
+
+}
+
+.loginIcon:hover {
+    transition: 0.5s;
+    transform: scale(1.08)
+}
+
+/*실제 컨텐츠 작성*/
+.wrap {
+    width: 1080px;
+    margin: auto;
+    color: #3A3845;
+}
+
+/*여기서부터 입력 창*/
+.random-food {
+    width: 500px;
+    right: 229px;
+    margin-top: 100px;
+}
+
+.recipe-total {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/*레시피 타이틀 전체 박스*/
+.recipe-title {
+    margin-top: 41px;
+    border: 1px solid #8C8C8C;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 643px;
+    height: 90%;
+    padding: 21px;
+}
+
+/*레시피 제목*/
+.input-title {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+}
+
+.input-title > div{
+    display: flex;
+    flex-direction: column;
+}
+
+.input-title-label {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.input-title-input {
+    width: 473px;
+    height: 30px;
+    border: 1px solid #8C8C8C;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    font-size: 13px;
+    text-align: left;
+    font-weight: 500;
+    color: #3A3845;
+    margin-right: 10px;
+    padding: 10px;
+}
+
+.input-title-button {
+    width: 83px;
+    height: 30px;
+    border: 1px solid #8C8C8C;
+    border-radius: 0 2px 2px 0;
+    box-sizing: border-box;
+    font-size: 13px;
+    display: block;
+    text-align: center;
+    font-weight: 500;
+}
+
+/*이미지 첨부*/
+.input-img {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+}
+
+.input-img > label {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.input-img > input {
+    width: 473px;
+    height: 30px;
+    font-weight: 500;
+    font-size: 13px;
+    color: #3A3845;
+}
+
+/*난이도 및 레시피 전체 박스*/
+.recipe-level {
+    margin-top: 41px;
+    border: 1px solid #8C8C8C;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 643px;
+
+    padding: 21px;
+}
+
+/*제작 시간*/
+.input-time {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+}
+
+.input-time > label {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.input-time > div {
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+}
+
+.input-time > div > input {
+    width: 180px;
+    border: 1px solid #8C8C8C;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+}
+
+.input-time > div > span {
+    width: 55px;
+    border: 1px solid #8C8C8C;
+    border-radius: 0 2px 2px 0;
+    box-sizing: border-box;
+    margin-right: 5px;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+/*난이도*/
+.select-level {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+}
+
+.select-level > label {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.select-level > select {
+    width: 473px;
+    height: 30px;
+    font-weight: 500;
+    font-size: 13px;
+    color: #3A3845;
+}
+
+/*레시피 재료*/
+.ingredient-title {
+    font-weight: 500;
+    font-size: 15px;
+    color: #3A3845;
+    margin-left: 10px;
+}
+
+.ingredient-sub {
+    font-weight: 500;
+    font-size: 10px;
+    color: #3A3845;
+}
+
+.input-ingredient {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.input-ingredient > label {
+    font-weight: 600;
+    font-size: 15px;
+    color: #3A3845;
+
+}
+
+.input-ingredient > input {
+    width: 220px;
+    height: 30px;
+}
+
+.ingredient-third {
+    font-weight: 600;
+    font-size: 15px;
+    color: #3A3845;
+    line-height: 18px;
+    text-decoration-line: underline;
+    margin-left: 20px;
+}
+
+/*조리 순서*/
+.order-title {
+    font-weight: 500;
+    font-size: 15px;
+    color: #3A3845;
+    margin-left: 10px;
+}
+
+.order-sub {
+    font-weight: 500;
+    font-size: 10px;
+    color: #3A3845;
+}
+
+.input-order > label {
+    font-weight: 600;
+    font-size: 15px;
+    color: #3A3845;
+    margin-left: 20px;
+}
+
+.input-order > input {
+    width: 473px;
+    height: 30px;
+}
+
+.order-third {
+    font-weight: 600;
+    font-size: 15px;
+    color: #3A3845;
+    line-height: 18px;
+    text-decoration-line: underline;
+    margin-left: 20px;
+}
+
+/*작성완료 버튼*/
+.fin-btn {
+    margin: 30px 0 30px 0;
+    position: relative;
+    width: 107px;
+    height: 37px;
+
+    background: #FF6219;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 100px;
+
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+
+    color: #FFFFFF;
+}

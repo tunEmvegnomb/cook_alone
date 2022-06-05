@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <title>자취생에 의한 자취생만을 위한 너만의 레시피</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
+    <!-- style.css 파일을 같은 폴더에 만들고, head 태그에서 불러오기 -->
+    <link rel="stylesheet" type="text/css" href="\static\css\make_recipe.css">
+    <script src="\static\js\make_recipe.js"></script>
+</head>
+
+<body>
+<!--    여기서부터 네비게이션바-->
+<nav class="naviBar">
+        <ul>
+            <li><a class="logoLink" href="/"><img class="logoIcon" src="/static/img/logo.png"></a></li>
+            <li><a class="menuLink" href="/list">전체 레시피 보기</a></li>
+            <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
+            <li><a class="menuLink" href="/write">나만의 레시피</a></li>
+            <li><a class="menuLink" href="/mypage">마이페이지</a></li>
+            <li><a class="myPageLink" href="/login"><img src="/static/img/myPageIcon.png" class="loginIcon"></a></li>
+        </ul>
+    </nav>
+<!--실제 컨텐츠 작성-->
+<div class="wrap">
+    <!--여기서부터 입력 창-->
+    <div>
+        <img src="\static\img\selmake.png" alt="이미지" class="random-food"/>
+        <div class="recipe-total">
+            <!--레시피 타이틀-->
+            <div class="recipe-title">
+                <p style="font-weight: 600;">레시피 타이틀</p>
+                <hr style="width: 600px; border: 1px solid #8C8C8C;">
+                <!--레시피 제목-->
+                <div class="input-title  mb-3">
+                    <label class="col-sm-2 col-form-label input-title-label">제목</label>
+                    <input type="text" class="input-title-input" placeholder="내가 만드는 레시피의 타이틀을 입력해주세요."
+                           aria-describedby="button-addon2">
+                </div>
+                <!--이미지 첨부-->
+                <div class="input-img mb-3">
+                    <label class="col-sm-2 col-form-label">이미지</label>
+                    <input class="form-control form-control-sm" id="file_upload" type="file">
+                </div>
+            </div>
+            <!--난이도 및 레시피-->
+            <div class="recipe-level">
+                <div>
+                    <p style="font-weight: 600;">난이도 및 레시피</p>
+                <hr style="width: 600px; border: 1px solid #8C8C8C;">
+                <!--제작 시간-->
+                <div class="input-time input-group mb-3">
+                    <label class="col-sm-2 col-form-label">제작 시간</label>
+                    <div>
+                        <input type="text" class="form-control" id="time1">
+                        <span class="input-group-text">시간</span>
+                        <input type="text" class="form-control" id="time2">
+                        <span class="input-group-text">분</span>
+                    </div>
+                </div>
+                <!--난이도-->
+                <div class="select-level">
+                    <label class="col-sm-2 col-form-label">난이도</label>
+                    <select class="form-select" aria-label="Default select example" id="diff">
+                        <option selected>난이도를 선택해주세요!</option>
+                        <option value="1">상</option>
+                        <option value="2">중</option>
+                        <option value="3">하</option>
+                    </select>
+                </div>
+                </div>
+
+                <hr style="width: 600px; border: 1px solid #8C8C8C;">
+                <!--레시피 재료-->
+                <div class="recipe-ingredient">
+                    <p class="ingredient-title">레시피 재료   <span class="ingredient-sub">요리에 들어가는 재료와 정량을 적어주세요!</span></p>
+                    <div class="row g-3" id="recipe-ing">
+                        <div class="input-ingredient col col-row" >
+                            <label class="col-sm-2 col-form-label">●</label>
+                            <input type="text" class="form-control col-md-2">
+                        </div>
+                        <div class="input-ingredient col col-row">
+                            <label class="col-sm-2 col-form-label">●</label>
+                            <input type="text" class="form-control col-md-2">
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="input-ingredient col col-row">
+                            <label class="col-sm-2 col-form-label">●</label>
+                            <input type="text" class="form-control col-md-2">
+                        </div>
+                        <div class="input-ingredient col col-row">
+                            <label class="col-sm-2 col-form-label">●</label>
+                            <input type="text" class="form-control col-md-2">
+                        </div>
+                    </div>
+                    <div id="recipe-ing-add">
+                        <div class="input-ingredient col col-row" id="recipe-ing-input">
+                            <label class="col-sm-1 col-form-label">●</label>
+                            <input type="text" class="form-control col-md-2" id="ing">
+                        </div>
+                    </div>
+                    <p class="ingredient-third" type="button" id="ing-add" onclick="ing_add()">추가</p>
+                </div>
+                <hr style="width: 600px; border: 1px solid #8C8C8C;">
+                <!--조리 순서-->
+                <div class="recipe-order" id="recipe-order">
+                  <p class="order-title">조리 순서   <span class="order-sub">조리 순서를 정확하게 작성해주세요!</span></p>
+                  <div class="input-order mb-3 row" id="recipe-order-input">
+                    <label class="col-sm-1 col-form-label">●</label>
+                    <input type="text" class="form-control col-sm-10" id="detail">
+                  </div>
+                  <div class="input-order mb-3 row">
+                    <label class="col-sm-1 col-form-label">●</label>
+                    <input type="text" class="form-control col-sm-10" >
+                  </div>
+                  <div class="input-order mb-3 row">
+                    <label class="col-sm-1 col-form-label">●</label>
+                    <input type="text" class="form-control col-sm-10" >
+                  </div>
+                  <div class="input-order mb-3 row">
+                    <label class="col-sm-1 col-form-label">●</label>
+                    <input type="text" class="add-input form-control col-sm-10" >
+                  </div>
+                  <div id="recipe-order-add">
+                      <div class="input-order mb-3 row">
+                          <label class="col-sm-1 col-form-label">●</label>
+                          <input type="text" class="add-input form-control col-sm-10">
+                      </div>
+                  </div>
+                  <p class="order-third" type="button" id="order-add" onclick="order_add()">추가</p>
+                </div>
+
+            </div>
+            <!--작성완료 버튼-->
+            <button class="fin-btn" onclick="recipe_create()">작성완료</button>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
