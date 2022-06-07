@@ -23,159 +23,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/detail.css/">
 
+
     <title>상세 레시피 페이지</title>
-    <script>
 
-        $(document).ready(function () {
-        // 레시피 이름 url에서 가져오기
-            const urlParams = new URLSearchParams(window.location.search);
-            const name = urlParams.get("recipe_name");
-            // console.log(name)
-
-            $.ajax({
-                type: "GET",
-                url: `/detail/recipe-detail?recipe_name=${name}`,
-                data: {},
-                success: function (response) {
-
-                    let targetRecipe = response['target_recipe']
-                    // console.log(targetRecipe)
-
-                    let recipeName = targetRecipe['recipe_name']
-                    let recipeImg = targetRecipe['recipe_img']
-                    let recipeIngs = targetRecipe['recipe_ing']
-                    let recipeDiff = targetRecipe['recipe_diff']
-                    let recipeTime = targetRecipe['recipe_time']
-                    let recipeDetails = targetRecipe['recipe_detail']
-                    let recipeLike = targetRecipe['recipe_like']
-                    let recipeWritter = targetRecipe['recipe_writter']
-                    // console.log(recipeName, recipeImg, recipeIngs, recipeDiff, recipeTime, recipeDetails, recipeLike, recipeWritter)
-
-            // 레시피 이미지, 레시피 타이틀 박스, 레시피 탭의 아이콘 박스 append
-                    temp_html = `<img class="recipe_img" src="${recipeImg}">`
-                    temp_html2 = `<span class="recipe_name" id="name">${recipeName}</span><br>
-                                  <span class="recipe_writter" id="writter">${recipeWritter}</span><br>
-                                  <span class="recipe_diff"><img src="/static/img/diffIcon.png" class="diffIcon">${recipeDiff}</span><br>
-                                  <div class="recipe_add">
-                                      <button type="button" id="bookmarkBtn"><img src="/static/img/addIcon.png" class="addIcon"></button>
-                                      <p class="arrow_box">즐겨찾기에 추가!</p>
-                                  </div>
-                                  <span class="recipe_like"><img src="/static/img/likeIcon.png" class="likeIcon">${recipeLike}</span>`
-
-                    temp_html3 = `<div class="timeIconWrap">
-                                      <img src="/static/img/timeIcon.png" class="timeIcon">
-                                      <span class="timeBox">${recipeTime}</span>
-                                  </div>
-                                  <div class="diff2IconWrap">
-                                      <img src="/static/img/3starsIcon.png" class="diff2Icon">
-                                      <span class="diff2Box">${recipeDiff}</span>
-                                  </div>`
-
-                    $('#imgWrap').append(temp_html)
-                    $('#titleWrap').append(temp_html2)
-                    $('#iconWrap').append(temp_html3)
-
-            // 레시피 조리과정 append
-                    let recipeDetail = recipeDetails.split("\n");
-                    // console.log(recipeDetail)
-
-                    for(let i = 0; i < recipeDetail.length; i++) {
-                        let detail = recipeDetail[i];
-                        // console.log(detail)
-
-                        temp_html4 = `<li class="process">${detail}</li>`
-
-                        $('#processList').append(temp_html4)
-
-                    }
-            // 레시피 재료 append
-                    let recipeIng = recipeIngs.split("\n");
-                    // console.log(recipeIng)
-
-                    for(let i = 0; i < recipeIng.length; i++) {
-                        let Ing = recipeIng[i];
-                        // console.log(detail)
-
-                        temp_html5 = `<li class="ingredient">${Ing}</li>`
-
-                        $('#ingList').append(temp_html5)
-                    }
-                    }
-
-            })
-
-        // 리뷰 등록하기(create 기능) ajax
-            $(document).on('click', '#reviewPostBtn', function () {
-                    let nickName = sessionStorage.getItem("user_nickname")
-                    let content = $('#reviewInput').val()
-                    console.log(nickName, content)
-
-                    $.ajax({
-                        type: "POST",
-                        url: '/detail/review-post',
-                        data: {user_nickname_give: nickName, review_content_give:content, recipe_name_give: name},
-                        success: function (response) { // 성공하면
-                            let answer = response["msg"]
-                            alert(answer);
-                            location.reload();
-                        }
-
-                    })
-
-            })
-
-        // 리뷰 리스팅 기능 ajax
-            $.ajax({
-                type: "GET",
-                url: `/detail/review-list?recipe_name=${name}`,
-                data: {},
-                success: function (response) {
-                    let reviews = response['reviews']
-                    // console.log(reviews)
-
-                    for (let i = 0; i < reviews.length; i++) {
-                        let reviewContent = reviews[i]['review_content']
-                        let nickName = reviews[i]['user_nickname']
-                        let reviewUpdate = reviews[i]['review_update']
-
-                        // console.log(reviewContent, nickName, reviewUpdate)
-
-                        temp_html = `<div class="reviewList">
-                                        <span class="userName">작성자: ${nickName}</span>
-                                        <span class="reviewDate">${reviewUpdate}</span>
-                                        <span class="review">${reviewContent}</span>
-                                    </div>`
-
-                        $('#reviewList').append(temp_html)
-                    }
-
-
-
-                }
-            })
-
-
-        })
-
-    // 즐겨찾기 추가 기능 ajax
-        $(document).on('click','#bookmarkBtn', function() {
-                $.ajax({
-                    type: "POST",
-                    url: "/detail/bookmark",
-                    data: {},
-                    success: function (response) { // 성공하면
-                        alert(response["msg"]);
-                        window.location.reload();
-                    }
-                 })
-            } )
-
-
-
-
-
-
-    </script>
 </head>
 <body>
     <nav class="naviBar">
@@ -193,9 +43,8 @@
         <div class="detailWrap">
             <div class="detailImgWrap" id="imgWrap">
 <!--                레시피 이미지 들어가는 부분-->
+                <img src="{{ recipe.img_url }}" style = "width: 500px; height: auto"
             </div>
-            <div class="detailTitleWrap" id="titleWrap">
-<!--                레시피 타이틀 박스 들어가는 부분-->
             </div>
             <div class="imforWrap">
                 <div class="container">
@@ -210,11 +59,13 @@
                         <div id="tab-1" class="tabContent current">
                             <div class="iconWrap" id="iconWrap">
 <!--                                조리시간, 난이도 아이콘 들어가는 정보 박스 부분-->
+                                {{ recipe.timecost }} -- {{ recipe.difficulty }}
                             </div>
                             <div class="ingredientWrap">
                                 <span class="ingTitle">📌 최소한 이건 준비하자!</span>
                                 <ul class="ingList" id="ingList">
 <!--                                    레시피 재료 들어가는 부분-->
+                                    {{ recipe.ingredient }}
                                 </ul>
                             </div>
                         </div>
@@ -223,6 +74,7 @@
                                 <span class="processTitle">📌 이정돈 만들 수 있다!</span>
                                 <ul class="processList" id="processList">
 <!--                                    레시피 조리과정 들어가는 부분-->
+                                    {{ recipe.cookstep }}
                                 </ul>
                             </div>
                         </div>
