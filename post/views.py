@@ -31,10 +31,17 @@ def upload_recipes(request):
             return redirect('/')
 
     elif request.method == 'POST':
+        author = request.user.username
+        print(author)
         form = RecipeForm(request.POST, request.FILES)
+        print("0번")
 
+        print(form)
         if form.is_valid():
+            print("1번")
             form.save()
+            print("2번")
+
             return redirect('list/')
         else:
             return HttpResponse('fail')
