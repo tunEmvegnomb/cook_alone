@@ -8,8 +8,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/static/css/styles.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/css/signin.css" />
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -30,34 +29,41 @@
             <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
             <li><a class="menuLink" href="/write">나만의 레시피</a></li>
             <li><a class="menuLink" href="/mypage">마이페이지</a></li>
+            <a class="nav-link" href="/logout"> 로그아웃 </a>
             <li><a class="myPageLink" href="/login"><img src="/static/img/myPageIcon.png" class="loginIcon"></a></li>
         </ul>
     </nav>
     <main class="wrap main-col login-main">
       <span class="logo">@@로고@@</span>
-      <form class="login-form">
-        <div class="login-id">
-          <img src="/static/img/login_id.png" class="login-icon id-icon" />
-          <input type="email" id="loginId" placeholder="아이디" required />
-        </div>
-        <div class="login-password">
-          <img
-            src="/static/img/login_password.png"
-            class="login-icon password-icon"
-          />
-          <input
-            type="password"
-            id="loginPassword"
-            placeholder="비밀번호"
-            required
-          />
-        </div>
-        <button type="" class="login-btn" onclick="login()">로그인</button>
+      <form class="login-form" action="/signin/" method="post">
+          {% csrf_token %}
+            <div class="login-id">
+              <img src="/static/img/login_id.png" class="login-icon id-icon" />
+              <input class="form-control" type="text" id="username" name="username" placeholder="아이디" />
+            </div>
+            <div class="login-password">
+              <img
+                src="/static/img/login_password.png"
+                class="login-icon password-icon"
+              />
+              <input
+                class="form-control"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="비밀번호"
+              />
+            </div>
+          {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+          {% endif %}
+        <button type="submit">로그인</button>
         <a href="/signup"
-          ><button type="button" class="signup_btn">회원가입</button></a
+          ><button type="button">회원가입</button></a
         >
       </form>
     </main>
-    <script type="text/javascript" src="/static/js/login.js"></script>
   </body>
 </html>

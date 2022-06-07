@@ -40,20 +40,19 @@ def sign_up_view(request):
         # return redirect('signin/', {'msg':'회원가입 성공'})
 
 def sign_in_view(request):
-    if reqeust.method == 'POST':
-        email = request.POST.get('email', '')
+    if request.method == 'POST':
+        username = request.POST.get('username', '')
         password = request.POST.get('password', '')
+        print(username, password)
 
-        me = auth.authenticate(request, email=email, password=password)
+        me = auth.authenticate(request, username=username, password=password)
+        print(me)
+
         if me is not None:
             auth.login(request, me)
             return redirect('/')
         else:
-            if email == '' or password == '':
-                return render(request, 'signin.html',{'error' : '데이터를 전부 입력해주세요'})
-            else:
-                if me.email != email or me.password != password:
-                    return render(request, 'signin.html',{'error' : '유저 네임 혹은 패스워드가 맞지 않습니다'})
+            return render(request, 'signin.html',{'error':'유저 이름 혹은 패스워드를 입력해주세요'})
 
     elif request.method == 'GET':
         user = request.user.is_authenticated
