@@ -9,3 +9,6 @@ urlpatterns =[
     path('list/', views.view_list, name='list'),
     path('upload/', views.upload_recipes, name='upload_recipes'),
 ]
+
+if settings.DEBUG:#<-세팅이 개발자모드일때,
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #<-url에 미디어 루트도 추가한다
