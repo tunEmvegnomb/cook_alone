@@ -18,7 +18,7 @@ def view_list(request):
         recipe = Recipe.objects.all()
         all_recipe = DefaultRecipe.objects.all()
 
-        return render(request, 'list.html', {'recipes':all_recipe})
+        return render(request, 'list.html', {'recipes': all_recipe})
 
 def upload_recipes(request):
     if request.method == 'GET':
