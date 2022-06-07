@@ -4,8 +4,13 @@ from .forms import *
 from django.http import HttpResponse
 from webScrapping.models import DefaultRecipe
 # Create your views here.
+
 def home(request):
-    return redirect('list/')
+    user = request.user.is_authenticated
+    if user:
+        return redirect('/list')
+    else:
+        return redirect('/signin')
 
 def view_list(request):
     if request.method == 'GET':
@@ -13,7 +18,6 @@ def view_list(request):
         all_recipe = DefaultRecipe.objects.all()
 
         return render(request, 'list.html', {'recipes':all_recipe})
-
 
 def upload_recipes(request):
     if request.method == 'GET':
