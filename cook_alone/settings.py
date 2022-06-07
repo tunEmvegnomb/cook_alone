@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'post',
     'recommend',
     'webScrapping',
+    'detail',
 ]
 
 MIDDLEWARE = [
