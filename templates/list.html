@@ -34,6 +34,9 @@
         <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
         <li><a class="menuLink" href="/upload">나만의 레시피</a></li>
         <li><a class="menuLink" href="/mypage">마이페이지</a></li>
+          {% if user.is_authenticated %}
+            <a class="nav-link" href="/logout"> 로그아웃 </a>
+          {% endif %}
         <li>
           <a class="myPageLink" href="/login"
             ><img src="/static/img/myPageIcon.png" class="loginIcon"

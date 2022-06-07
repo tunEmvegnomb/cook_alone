@@ -44,10 +44,8 @@ def sign_in_view(request):
 
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
-        print(username, password)
 
         me = auth.authenticate(request, username=username, password=password)
-        print(me)
 
         if me is not None:
             auth.login(request, me)
