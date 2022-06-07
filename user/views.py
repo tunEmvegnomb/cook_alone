@@ -41,6 +41,7 @@ def sign_up_view(request):
 
 def sign_in_view(request):
     if request.method == 'POST':
+
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
         print(username, password)
