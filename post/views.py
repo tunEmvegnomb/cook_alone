@@ -3,14 +3,18 @@ from .models import Recipe, Timecate, Diffcate
 from .forms import *
 from django.http import HttpResponse
 # Create your views here.
+
 def home(request):
-    return redirect('list/')
+    user = request.user.is_authenticated
+    if user:
+        return redirect('/list')
+    else:
+        return redirect('/signin')
 
 def view_list(request):
     if request.method == 'GET':
         recipe = Recipe.objects.all()
         return render(request, 'list.html', {'recipe':recipe})
-
 
 def upload_recipes(request):
     if request.method == 'GET':
