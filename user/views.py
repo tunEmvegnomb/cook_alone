@@ -40,7 +40,7 @@ def sign_up_view(request):
         # return redirect('signin/', {'msg':'회원가입 성공'})
 
 def sign_in_view(request):
-    if reqeust.method == 'POST':
+    if request.method == 'POST':
         email = request.POST.get('email', '')
         password = request.POST.get('password', '')
 
