@@ -17,16 +17,16 @@ from django.db import models
 #     created_at = models.DateTimeField(auto_now_add=True)
 #     updated_at = models.DateTimeField(auto_now=True)
 #
-# class Timecate(models.Model):
-#     class Meta:
-#         db_table = "timecost"
-#     def __str__(self):
-#         return self.timecost
-#     timecost = models.CharField(max_length=50, default='')
-#
-# class Diffcate(models.Model):
-#     class Meta:
-#         db_table = "difficulty"
-#     def __str__(self):
-#         return self.difficulty
-#     difficulty = models.CharField(max_length=50, default='')
+class Timecate(models.Model):
+    class Meta:
+        db_table = "timecost"
+    def __str__(self):
+        return self.timecost
+    timecost = models.CharField(max_length=50, default='')
+
+class Diffcate(models.Model):
+    class Meta:
+        db_table = "difficulty"
+    def __str__(self):
+        return self.difficulty
+    difficulty = models.CharField(max_length=50, default='')
