@@ -18,7 +18,27 @@ def view_list(request):
         recipe = Recipe.objects.all()
         all_recipe = DefaultRecipe.objects.all()
 
-        return render(request, 'list.html', {'recipes': all_recipe})
+        return render(request, 'list.html', {'recipes': all_recipe, 'new_recipe':recipe})
+    elif request.method == 'POST':
+        searched = request.POST.get('searched', '')
+        print(searched)
+        all_recipe = DefaultRecipe.objects.all()
+        print(all_recipe)
+
+        search_list=[]
+        for i in range(DefaultRecipe.objects.count()):
+            title = DefaultRecipe.objects.all().values()[i]['title'] #제목 꺼내오기
+            if searched in title:
+                search_list.append(title)
+        print(search_list[0:2])
+
+        recipe = Recipe.objects.all()
+        return render(request, 'list.html', {'recipes': all_recipe, 'new_recipe':recipe, 'searched':searched, 'search_list':search_list })
+
+
+
+
+
 
 def upload_recipes(request):
     if request.method == 'GET':

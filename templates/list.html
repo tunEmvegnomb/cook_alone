@@ -23,6 +23,13 @@
             width: 100%;
             height: 100%;
         }
+        .mb-3{
+            background: #fff;
+            width:100%;
+            border-radius: 5px;
+            box-shadow: 0 1px 5px 3px rgba(0,0,0,.12);
+
+        }
     </style>
 
     <meta charset="UTF-8"/>
@@ -55,21 +62,25 @@
 </nav>
 <main class="wrap">
     <div class="list-title">
-        <img src="/static/img/cook_hat.png"/>
-        <img src="/static/img/cook_hat.png"/>
+        <img src=""/>
+        <img src=""/>
         <span>전세계 1인 가구를 위한 레시피</span>
     </div>
-    <form>
+
+
+    <form action="/search/" method="post">
+        {% csrf_token %}
         <div class="mb-3">
-            <img src="/static/img/search.png" class="search-icon"/>
-            <input
-                    type="text"
-                    class="form-control"
-                    id="searchInput"
-                    placeholder="메뉴명, 재료 등으로 검색해보세요!"
-            />
+            <input class="form-control" type="text" name="searched">
+            <button type="submit">submit</button>
         </div>
     </form>
+
+    {% if searched %}
+        <h1>{{ searched }}</h1>
+    {% else %}
+        <h1>Please search</h1>
+    {% endif %}
     <div class="filters">
         <div class="filter-row">
             <div class="filter-one">
@@ -119,7 +130,9 @@
     </div>
 
     <div class="row row-cols-1 row-cols-md-3 g-4 card-group">
-        {% for recipe in recipes %}
+        {% if searched %}
+        {% else %}
+            {% for recipe in recipes %}
             <div class="col">
                 <div class="card">
                     <div class="card-img-div">
@@ -152,6 +165,7 @@
                 </div>
             </div>
         {% endfor %}
+        {% endif %}
     </div>
     <div class="d-flex justify-content-center">
         <div class="spinner-border" role="status">
@@ -159,10 +173,34 @@
         </div>
     </div>
 </main>
+<script>
+    {#const title_input= document.getElementById("title_input");//검색창 내용물#}
+    {##}
+    {#function recipe_scroll(title){#}
+    {#    const title_id = document.getElementById("recipe_scroll_" + title);//자동완성제목#}
+    {#    title_input.value = title_id.innerText;#}
+    {# }//자동완성을 클릭하면 검색창에 클릭한 제목이 뜨게 만들어주는 함수#}
+    {##}
+    {#title_input.addEventListener('input', function(){#}
+    {#    const title_class = document.querySelectorAll('.input_title_list > .input_title_list_obj');#}
+    {#    var include_text = document.getElementById("title_input").value;//검색창 내용물의 값#}
+    {##}
+    {#    for (let i=0; i<title_class.length; i++){#}
+    {#        title_class[i].style.display = title_class[i].innerText.includes(include_text))?'block' : 'none';#}
+    {#    }#}
+    {# })#}
+    {##}
+    {##}
+    {##}
+
+
+
+</script>
 <script
         src="https://kit.fontawesome.com/e04b9acc8d.js"
         crossorigin="anonymous"
 ></script>
+
 <script type="text/javascript" src="/static/js/list.js"></script>
 </body>
 </html>
