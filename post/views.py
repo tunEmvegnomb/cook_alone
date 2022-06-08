@@ -3,6 +3,7 @@ from .models import Recipe, Timecate, Diffcate
 from .forms import *
 from django.http import HttpResponse
 from webScrapping.models import DefaultRecipe
+
 # Create your views here.
 
 def home(request):
@@ -17,7 +18,7 @@ def view_list(request):
         recipe = Recipe.objects.all()
         all_recipe = DefaultRecipe.objects.all()
 
-        return render(request, 'list.html', {'recipes':all_recipe})
+        return render(request, 'list.html', {'recipes': all_recipe})
 
 def upload_recipes(request):
     if request.method == 'GET':
@@ -42,6 +43,3 @@ def upload_recipes(request):
                                         difficulty=difficulty, ingredient=ingredient, cookstep=cookstep)
         my_post.save()
         return HttpResponse('success')
-
-
-
