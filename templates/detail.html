@@ -81,10 +81,13 @@
                         <div id="tab-3" class="tabContent">
                             <div class="reviewWrap">
                                 <span class="reviewTitle">📌 나도 만들었다! 내가 만든 요리 후기</span>
-                                <div class="reviewWrite">
-                                    <input type="text" placeholder="후기를 작성해주세요!" class="reviewInput" id="reviewInput">
-                                    <button type="button" class="reviewBtn" id="reviewPostBtn">등록</button>
-                                </div>
+                                <form action="/detail/<int:id>" method="post">
+                                    {% csrf_token %}
+                                     <div class="reviewWrite">
+                                        <input type="text" placeholder="후기를 작성해주세요!" class="comment" id="comment" name="comment">
+                                        <button type="submit" class="reviewBtn" id="reviewPostBtn">등록</button>
+                                    </div>
+                                </form>
                                 <hr class="line">
                                 <div class="reviewListWrap" id="reviewList">
 <!--                                    리뷰 List 들어가는 부분-->
