@@ -13,8 +13,7 @@ def view_detail(request, id):
 def like_post(request, id):
     me = request.user
     recipe = DefaultRecipe.objects.get(id=id)
-
-    target_like = LikeModel.objects.filter(me=me, recipe=recipe)
+    target_like = LikeModel.objects.filter(like_me=me, like_recipe=recipe)
     if target_like:
        target_like.delete()
     else:
