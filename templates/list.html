@@ -142,19 +142,25 @@
 
                 <span class="filter-key">Timecost</span>
                 <div class="filter-values" id="recipe_time">
-                    <button id="ten" class="filter-value">10분</button>
-                    <button id="twenty" class="filter-value">20분</button>
-                    <button id="thirty" class="filter-value">30분</button>
-                    <button id="sixty" class="filter-value">60분</button>
+                    {% for filter in timecost %}
+                    <form action="/search/filter/" method="post">
+                        {% csrf_token %}
+                        <button id="{{ filter }}" class="filter-value" name="timecost" value={{ filter }} type="submit">{{ filter }}</button>
+                    </form>
+                    {% endfor %}
+
                 </div>
             </div>
             <div class="filter-one">
                 <span class="filter-key">Difficulty</span>
                 <div class="filter-values" id="recipe_diff">
-                    <button id="difficult_button" class="filter-value">상</button>
-                    <button id="soso_button" class="filter-value">중</button>
-                    <button id="easy_button" class="filter-value">하</button>
-               </div>
+                    {% for filter in difficulty %}
+                    <form action="/search/filter/" method="post">
+                        {% csrf_token %}
+                        <button id="{{ filter }}" class="filter-value" name="difficulty" value={{ filter }} type="submit">{{ filter }}</button>
+                    {% endfor %}
+
+                </div>
             </div>
         </div>
     </div>
