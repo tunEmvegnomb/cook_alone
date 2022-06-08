@@ -8,19 +8,20 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
     <link rel="stylesheet" href="/static/css/detail.css/">
 
 
@@ -28,78 +29,79 @@
 
 </head>
 <body>
-    <nav class="naviBar">
-        <ul>
-            <li><a class="logoLink" href="/"><img class="logoIcon" src="/static/img/logo.png"></a></li>
-            <li><a class="menuLink" href="/list">전체 레시피 보기</a></li>
-            <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
-            <li><a class="menuLink" href="/write">나만의 레시피</a></li>
-            <li><a class="menuLink" href="/mypage">마이페이지</a></li>
-            <li><a class="myPageLink" href="/login"><img src="/static/img/myPageIcon.png" class="loginIcon"></a></li>
-        </ul>
-    </nav>
+<nav class="naviBar">
+    <ul>
+        <li><a class="logoLink" href="/"><img class="logoIcon" src="/static/img/logo.png"></a></li>
+        <li><a class="menuLink" href="/list">전체 레시피 보기</a></li>
+        <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
+        <li><a class="menuLink" href="/write">나만의 레시피</a></li>
+        <li><a class="menuLink" href="/mypage">마이페이지</a></li>
+        <li><a class="myPageLink" href="/login"><img src="/static/img/myPageIcon.png" class="loginIcon"></a></li>
+    </ul>
+</nav>
 
-    <div class="wrap">
-        <div class="detailWrap">
-            <div class="detailImgWrap" id="imgWrap">
-<!--                레시피 이미지 들어가는 부분-->
-                <img src="{{ recipe.img_url }}" style = "width: 500px; height: auto"
+<div class="wrap">
+    <div class="detailWrap">
+        <div class="detailImgWrap" id="imgWrap">
+            <!--                레시피 이미지 들어가는 부분-->
+            <img src="{{ recipe.img_url }}" style="width: 500px; height: auto">
+            <h3>{{ recipe.title }}</h3>
+        </div>
+    </div>
+    <div class="imforWrap">
+        <div class="container">
+            <div class="sortBar">
+                <ul class="tabs">
+                    <li class="recipeSort current" data-tab="tab-1">레시피</li>
+                    <li class="recipeSort" data-tab="tab-2">조리과정</li>
+                    <li class="recipeSort" data-tab="tab-3">리뷰</li>
+                </ul>
             </div>
-            </div>
-            <div class="imforWrap">
-                <div class="container">
-                    <div class="sortBar">
-                        <ul class="tabs">
-                            <li class="recipeSort current" data-tab="tab-1">레시피</li>
-                            <li class="recipeSort" data-tab="tab-2">조리과정</li>
-                            <li class="recipeSort" data-tab="tab-3">리뷰</li>
+            <div class="contentWrap">
+                <div id="tab-1" class="tabContent current">
+                    <div class="iconWrap" id="iconWrap">
+                        <!--                                조리시간, 난이도 아이콘 들어가는 정보 박스 부분-->
+                        {{ recipe.timecost }} -- {{ recipe.difficulty }}
+                    </div>
+                    <div class="ingredientWrap">
+                        <span class="ingTitle">📌 최소한 이건 준비하자!</span>
+                        <ul class="ingList" id="ingList">
+                            <!--                                    레시피 재료 들어가는 부분-->
+                            {{ recipe.ingredient }}
                         </ul>
                     </div>
-                    <div class="contentWrap">
-                        <div id="tab-1" class="tabContent current">
-                            <div class="iconWrap" id="iconWrap">
-<!--                                조리시간, 난이도 아이콘 들어가는 정보 박스 부분-->
-                                {{ recipe.timecost }} -- {{ recipe.difficulty }}
-                            </div>
-                            <div class="ingredientWrap">
-                                <span class="ingTitle">📌 최소한 이건 준비하자!</span>
-                                <ul class="ingList" id="ingList">
-<!--                                    레시피 재료 들어가는 부분-->
-                                    {{ recipe.ingredient }}
-                                </ul>
-                            </div>
-                        </div>
-                        <div id="tab-2" class="tabContent">
-                            <div class="processWrap">
-                                <span class="processTitle">📌 이정돈 만들 수 있다!</span>
-                                <ul class="processList" id="processList">
-<!--                                    레시피 조리과정 들어가는 부분-->
-                                    {{ recipe.cookstep }}
-                                </ul>
-                            </div>
-                        </div>
-                        <div id="tab-3" class="tabContent">
-                            <div class="reviewWrap">
-                                <span class="reviewTitle">📌 나도 만들었다! 내가 만든 요리 후기</span>
-                                <div class="reviewWrite">
-                                    <input type="text" placeholder="후기를 작성해주세요!" class="reviewInput" id="reviewInput">
-                                    <button type="button" class="reviewBtn" id="reviewPostBtn">등록</button>
-                                </div>
-                                <hr class="line">
-                                <div class="reviewListWrap" id="reviewList">
-<!--                                    리뷰 List 들어가는 부분-->
-                                </div>
-
-                            </div>
-                        </div>
+                </div>
+                <div id="tab-2" class="tabContent">
+                    <div class="processWrap">
+                        <span class="processTitle">📌 이정돈 만들 수 있다!</span>
+                        <ul class="processList" id="processList">
+                            <!--                                    레시피 조리과정 들어가는 부분-->
+                            {{ recipe.cookstep }}
+                        </ul>
                     </div>
                 </div>
+                <div id="tab-3" class="tabContent">
+                    <div class="reviewWrap">
+                        <span class="reviewTitle">📌 나도 만들었다! 내가 만든 요리 후기</span>
+                        <div class="reviewWrite">
+                            <input type="text" placeholder="후기를 작성해주세요!" class="reviewInput" id="reviewInput">
+                            <button type="button" class="reviewBtn" id="reviewPostBtn">등록</button>
+                        </div>
+                        <hr class="line">
+                        <div class="reviewListWrap" id="reviewList">
+                            <!--                                    리뷰 List 들어가는 부분-->
+                        </div>
 
-
+                    </div>
+                </div>
             </div>
         </div>
 
 
     </div>
-    <script type="text/javascript" src="/static/js/detail.js/"></script>
+</div>
+
+
+</div>
+<script type="text/javascript" src="/static/js/detail.js/"></script>
 </body>
