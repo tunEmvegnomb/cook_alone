@@ -23,6 +23,13 @@
             width: 100%;
             height: 100%;
         }
+        .mb-3{
+            background: #fff;
+            width:100%;
+            border-radius: 5px;
+            box-shadow: 0 1px 5px 3px rgba(0,0,0,.12);
+
+        }
     </style>
 
     <meta charset="UTF-8"/>
@@ -55,43 +62,28 @@
 </nav>
 <main class="wrap">
     <div class="list-title">
-        <img src="/static/img/cook_hat.png"/>
-        <img src="/static/img/cook_hat.png"/>
+        <img src=""/>
+        <img src=""/>
         <span>전세계 1인 가구를 위한 레시피</span>
+        <br><br><br>
     </div>
-    <form>
+    {% if searched %}
+        <h1>{{ searched }}</h1>
+    {% else %}
+        <h1>Please search</h1>
+    {% endif %}
+
+
+    <form action="/search/" method="post">
+        {% csrf_token %}
         <div class="mb-3">
-            <img src="/static/img/search.png" class="search-icon"/>
-            <input
-                    type="text"
-                    class="form-control"
-                    id="searchInput"
-                    placeholder="메뉴명, 재료 등으로 검색해보세요!"
-            />
+            <input class="form-control" type="text" name="searched">
+            <button type="submit">submit</button>
         </div>
     </form>
+
+
     <div class="filters">
-        <div class="filter-row">
-            <div class="filter-one">
-                <span class="filter-key">맛</span>
-                <div class="filter-values" id="recipe_taste">
-                    <a href="#" class="filter-value">달달</a>
-                    <a href="#" class="filter-value">짭짤</a>
-                    <a href="#" class="filter-value">단짠</a>
-                    <a href="#" class="filter-value">신라면 매운맛</a>
-                </div>
-            </div>
-            <div class="filter-one">
-                <span class="filter-key">재료</span>
-                <div class="filter-values" id="recipe_ing">
-                    <a href="#" class="filter-value">계란</a>
-                    <a href="#" class="filter-value">식빵</a>
-                    <a href="#" class="filter-value">김치</a>
-                    <a href="#" class="filter-value">크림치즈</a>
-                    <a href="#" class="filter-value">초콜릿</a>
-                </div>
-            </div>
-        </div>
         <div class="filter-row">
             <div class="filter-one">
                 <span class="filter-key">조리시간</span>
@@ -119,7 +111,8 @@
     </div>
 
     <div class="row row-cols-1 row-cols-md-3 g-4 card-group">
-        {% for recipe in recipes %}
+        {% if searched %}
+            {% for recipe in search_list %}
             <div class="col">
                 <div class="card">
                     <div class="card-img-div">
@@ -152,6 +145,41 @@
                 </div>
             </div>
         {% endfor %}
+        {% else %}
+            {% for recipe in recipes %}
+            <div class="col">
+                <div class="card">
+                    <div class="card-img-div">
+                        <a href="/detail/{{ recipe.id }}">
+                            <img
+                                    src={{ recipe.img_url }}
+                                            class="card-img-top"
+                                    alt="..."
+                                    style="width: 320px; height: 240px"
+                            />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-info">
+                            <a href="#" class="recipe-link"
+                            ><span class="card-title">{{ recipe.title }}</span></a
+                            >
+                            <div class="card-bottom-row">
+                                <span class="card-text">황영상</span>
+                                <div class="like-div">
+                                    <span class="like-text">추천</span>
+                                    <span class="like-num">12</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-like">
+                            <i class="fa-regular fa-thumbs-up like-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% endif %}
     </div>
     <div class="d-flex justify-content-center">
         <div class="spinner-border" role="status">
@@ -159,10 +187,34 @@
         </div>
     </div>
 </main>
+<script>
+    {#const title_input= document.getElementById("title_input");//검색창 내용물#}
+    {##}
+    {#function recipe_scroll(title){#}
+    {#    const title_id = document.getElementById("recipe_scroll_" + title);//자동완성제목#}
+    {#    title_input.value = title_id.innerText;#}
+    {# }//자동완성을 클릭하면 검색창에 클릭한 제목이 뜨게 만들어주는 함수#}
+    {##}
+    {#title_input.addEventListener('input', function(){#}
+    {#    const title_class = document.querySelectorAll('.input_title_list > .input_title_list_obj');#}
+    {#    var include_text = document.getElementById("title_input").value;//검색창 내용물의 값#}
+    {##}
+    {#    for (let i=0; i<title_class.length; i++){#}
+    {#        title_class[i].style.display = title_class[i].innerText.includes(include_text))?'block' : 'none';#}
+    {#    }#}
+    {# })#}
+    {##}
+    {##}
+    {##}
+
+
+
+</script>
 <script
         src="https://kit.fontawesome.com/e04b9acc8d.js"
         crossorigin="anonymous"
 ></script>
+
 <script type="text/javascript" src="/static/js/list.js"></script>
 </body>
 </html>
