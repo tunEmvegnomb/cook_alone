@@ -32,33 +32,14 @@ def upload_recipes(request):
 
     elif request.method == 'POST':
         author = request.user
-        title = request.POST.get('title','')
-        img_url = request.FILES.get('image_url','')
-        timecost = request.POST.get('timecost','')
-        difficulty = request.POST.get('difficulty','')
-        ingredient = request.POST.get('ingredient','')
-        cookstep = request.POST.get('ingredient','')
-        print(author)
-        print(img_url)
-        print(title)
-        print(timecost)
-        print(difficulty)
-        print(ingredient)
-        print(cookstep)
+        title = request.POST.get('title', '')
+        img_url = request.FILES.get('image_url', '')
+        timecost = request.POST.get('timecost', '')
+        difficulty = request.POST.get('difficulty', '')
+        ingredient = request.POST.get('ingredient', '')
+        cookstep = request.POST.get('ingredient', '')
 
-        Recipe(
-            author=author,
-            title=title,
-            img_url=img_url,
-            timecost=timecost,
-            difficulty=difficulty,
-            ingredient=ingredient,
-            cookstep=cookstep,
-
-        ).save()
-
+        my_post = Recipe.objects.create(author=author, title=title, img_url=img_url, timecost=timecost,
+                                        difficulty=difficulty, ingredient=ingredient, cookstep=cookstep)
+        my_post.save()
         return HttpResponse('success')
-
-
-
-
