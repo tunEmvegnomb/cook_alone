@@ -65,7 +65,13 @@
         <img src=""/>
         <img src=""/>
         <span>전세계 1인 가구를 위한 레시피</span>
+        <br><br><br>
     </div>
+    {% if searched %}
+        <h1>{{ searched }}</h1>
+    {% else %}
+        <h1>Please search</h1>
+    {% endif %}
 
 
     <form action="/search/" method="post">
@@ -76,33 +82,8 @@
         </div>
     </form>
 
-    {% if searched %}
-        <h1>{{ searched }}</h1>
-    {% else %}
-        <h1>Please search</h1>
-    {% endif %}
+
     <div class="filters">
-        <div class="filter-row">
-            <div class="filter-one">
-                <span class="filter-key">맛</span>
-                <div class="filter-values" id="recipe_taste">
-                    <a href="#" class="filter-value">달달</a>
-                    <a href="#" class="filter-value">짭짤</a>
-                    <a href="#" class="filter-value">단짠</a>
-                    <a href="#" class="filter-value">신라면 매운맛</a>
-                </div>
-            </div>
-            <div class="filter-one">
-                <span class="filter-key">재료</span>
-                <div class="filter-values" id="recipe_ing">
-                    <a href="#" class="filter-value">계란</a>
-                    <a href="#" class="filter-value">식빵</a>
-                    <a href="#" class="filter-value">김치</a>
-                    <a href="#" class="filter-value">크림치즈</a>
-                    <a href="#" class="filter-value">초콜릿</a>
-                </div>
-            </div>
-        </div>
         <div class="filter-row">
             <div class="filter-one">
                 <span class="filter-key">조리시간</span>
