@@ -1,3 +1,8 @@
+body{
+    font-family: 'Gowun Batang', serif;
+}
+
+
 .signup-title {
   font-size: 25px;
   font-weight: 700;
@@ -87,7 +92,7 @@
 }
 
 .naviBar {
-    background-color: #FF6219;
+    background-color: #63a355;
     width: 100%;
     height: 70px;
     position: fixed;
@@ -97,7 +102,7 @@
 .naviBar ul li {
     list-style: none;
     color: #3A3845;
-    background-color: #FF6219;
+    background-color: #63a355;
     float: left;
     line-height: 70px;
     vertical-align: middle;

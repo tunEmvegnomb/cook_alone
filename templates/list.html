@@ -8,6 +8,7 @@
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
             crossorigin="anonymous"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/list.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script
@@ -16,7 +17,11 @@
             crossorigin="anonymous"
     ></script>
 
+
     <style>
+        body{
+            font-family: 'Gowun Batang', serif;
+        }
         .cardImage {
             background-size: cover;
             background-position: center;
@@ -29,6 +34,9 @@
             border-radius: 5px;
             box-shadow: 0 1px 5px 3px rgba(0,0,0,.12);
 
+        }
+        .yes_filter_ten_min{
+            display: flex;
         }
     </style>
 
@@ -146,7 +154,7 @@
             </div>
         {% endfor %}
         {% else %}
-            {% for recipe in recipes %}
+            {% for recipe in ten_min %}
             <div class="col">
                 <div class="card">
                     <div class="card-img-div">
@@ -178,7 +186,40 @@
                     </div>
                 </div>
             </div>
-        {% endfor %}
+            {% endfor %}
+            {% for recipe in recipes %}
+                <div class="col">
+                <div class="card">
+                    <div class="card-img-div">
+                        <a href="/detail/{{ recipe.id }}">
+                            <img
+                                    src={{ recipe.img_url }}
+                                            class="card-img-top"
+                                    alt="..."
+                                    style="width: 320px; height: 240px"
+                            />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-info">
+                            <a href="#" class="recipe-link"
+                            ><span class="card-title">{{ recipe.title }}</span></a
+                            >
+                            <div class="card-bottom-row">
+                                <span class="card-text">황영상</span>
+                                <div class="like-div">
+                                    <span class="like-text">추천</span>
+                                    <span class="like-num">12</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-like">
+                            <i class="fa-regular fa-thumbs-up like-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         {% endif %}
     </div>
     <div class="d-flex justify-content-center">

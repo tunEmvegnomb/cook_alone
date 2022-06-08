@@ -27,7 +27,7 @@ def view_list(request):
         soso = DefaultRecipe.objects.filter(timecost="초급").values()
         easy = DefaultRecipe.objects.filter(timecost="아무나").values()
 
-        doc={
+        doc = {
             'recipes': all_recipe,
             'new_recipe': recipe,
             'ten_min': ten_min,
