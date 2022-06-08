@@ -28,8 +28,8 @@ def view_list(request):
         search_list=[]
         for i in range(DefaultRecipe.objects.count()):
             title = DefaultRecipe.objects.all().values()[i]['title'] #제목 꺼내오기
-            if searched in title:
-                search_list.append(title)
+            if searched in title:#타이틀에 내가 원하는 이름이 있다면
+                search_list.append(DefaultRecipe.objects.all().values()[i])#내가 원하는 데이터 만으로 쿼리셋으로 만든다
         print(search_list[0:2])
 
         recipe = Recipe.objects.all()

@@ -131,6 +131,39 @@
 
     <div class="row row-cols-1 row-cols-md-3 g-4 card-group">
         {% if searched %}
+            {% for recipe in search_list %}
+            <div class="col">
+                <div class="card">
+                    <div class="card-img-div">
+                        <a href="/detail/{{ recipe.id }}">
+                            <img
+                                    src={{ recipe.img_url }}
+                                            class="card-img-top"
+                                    alt="..."
+                                    style="width: 320px; height: 240px"
+                            />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-info">
+                            <a href="#" class="recipe-link"
+                            ><span class="card-title">{{ recipe.title }}</span></a
+                            >
+                            <div class="card-bottom-row">
+                                <span class="card-text">황영상</span>
+                                <div class="like-div">
+                                    <span class="like-text">추천</span>
+                                    <span class="like-num">12</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-like">
+                            <i class="fa-regular fa-thumbs-up like-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
         {% else %}
             {% for recipe in recipes %}
             <div class="col">
