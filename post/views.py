@@ -38,8 +38,6 @@ def upload_recipes(request):
         difficulty = request.POST.get('difficulty', '')
         ingredient = request.POST.get('ingredient', '')
         cookstep = request.POST.get('ingredient', '')
-        print(img_url)
-        print(title)
 
 
         my_post = Recipe.objects.create(author=author, title=title, img_url=img_url, timecost=timecost,
