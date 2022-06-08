@@ -30,13 +30,18 @@ def upload_recipes(request):
             return redirect('/')
 
     elif request.method == 'POST':
-        form = RecipeForm(request.POST, request.FILES)
+        author = request.user
+        title = request.POST.get('title', '')
+        img_url = request.FILES.get('image_url', '')
+        timecost = request.POST.get('timecost', '')
+        difficulty = request.POST.get('difficulty', '')
+        ingredient = request.POST.get('ingredient', '')
+        cookstep = request.POST.get('ingredient', '')
 
-        if form.is_valid():
-            form.save()
-            return redirect('list/')
-        else:
-            return HttpResponse('fail')
+        my_post = Recipe.objects.create(author=author, title=title, img_url=img_url, timecost=timecost,
+                                        difficulty=difficulty, ingredient=ingredient, cookstep=cookstep)
+        my_post.save()
+        return HttpResponse('success')
 
 
 
