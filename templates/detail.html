@@ -45,10 +45,18 @@
         <div class="detailImgWrap" id="imgWrap">
             <!--                레시피 이미지 들어가는 부분-->
             <img src="{{ recipe.img_url }}" style="width: 500px; height: auto">
-            <h3>{{ recipe.title }}</h3>
-            <form>
-                <button >꺼야꺼야 요리할꺼야</button>
-            </form>
+            <h3>{{ recipe.title }}--{{ recipe.id }}</h3>
+            {% if not like_status %}
+                <form method="post" action="/detail/like/{{ recipe.id }}">
+                    {% csrf_token %}
+                    <button>꺼야꺼야 요리할꺼야</button>
+                </form>
+            {% else %}
+                <form method="post" action="/detail/like/{{ recipe.id }}">
+                    {% csrf_token %}
+                    <button>아니아니 안할꺼야</button>
+                </form>
+            {% endif %}
         </div>
     </div>
     <div class="imforWrap">
