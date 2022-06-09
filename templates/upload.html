@@ -25,18 +25,26 @@
 <body>
 <!--    여기서부터 네비게이션바-->
 <nav class="naviBar">
-        <ul>
-            <li><a class="logoLink" href="/"><img class="logoIcon" src=""></a></li>
-            <li><a class="menuLink" href="/search">전체 레시피 보기</a></li>
-            <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
-            <li><a class="menuLink" href="/write">나만의 레시피</a></li>
-            <li><a class="menuLink" href="/mypage">마이페이지</a></li>
-              {% if user.is_authenticated %}
-                <a class="nav-link" href="/logout"> 로그아웃 </a>
-              {% endif %}
-            <li><a class="myPageLink" href="/login"><img src="" class="loginIcon"></a></li>
-        </ul>
-    </nav>
+    <ul>
+        <li><a class="logoLink" href="/"><img class="logoIcon" src=""></a></li>
+        <li><a class="menuLink" href="/search">전체 레시피 보기</a></li>
+        <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
+        <li><a class="menuLink" href="/write">나만의 레시피</a></li>
+        <li><a class="menuLink" href="/mypage">마이페이지</a></li>
+        {% if user.is_authenticated %}
+            <a class="nav-link" href="/logout"> 로그아웃 </a>
+        {% endif %}
+        <li>
+            <a class="myPageLink" href="/login"
+            ><img src="/static/image/source/myPageIcon.png" class="loginIcon"
+            /></a>
+        </li>
+        {% if user.is_authenticated %}
+            <li><a class="menuLink" href="/logout"> 로그아웃 </a></li>
+            <li> {{ user }} 님 반갑습니다</li>
+        {% endif %}
+    </ul>
+</nav>
 <!--실제 컨텐츠 작성-->
 <div class="wrap">
     <!--여기서부터 입력 창-->
@@ -64,9 +72,9 @@
                     <!--제작 시간-->
                     <div class="select-level">
                         <label for="timecost" class="col-sm-2 col-form-label">제작 시간</label>
-                        <select  name="timecost" class="form-select" id="time">
+                        <select name="timecost" class="form-select" id="time">
                             {% for time in timecost %}
-                            <option value="{{ time.timecost }}">{{ time.timecost }}</option>
+                                <option value="{{ time.timecost }}">{{ time.timecost }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -83,7 +91,7 @@
                 <!--난이도 및 레시피-->
                 <div class="recipe-level">
                     <div>
-                    <!--난이도-->
+                        <!--난이도-->
                         <span></span>
                         <div class="select-level">
                         </div>
@@ -94,7 +102,7 @@
                     <div class="recipe-ingredient">
                         <p class="ingredient-title">레시피 재료</p>
                         <div class="row g-3" id="recipe-ing">
-                            <div class="input-ingredient col col-row" >
+                            <div class="input-ingredient col col-row">
                                 <textarea name="ingredient" class="form-control" cols="30" name="ingredient"></textarea>
                             </div>
 
@@ -103,11 +111,12 @@
                     <hr style="width: 600px; border: 1px solid #8C8C8C;">
                     <!--조리 순서-->
                     <div class="recipe-order" id="recipe-order">
-                      <p class="order-title">조리 순서</p>
-                      <div class="input-order mb-3 row" id="recipe-order-input">
+                        <p class="order-title">조리 순서</p>
+                        <div class="input-order mb-3 row" id="recipe-order-input">
 
-                        <textarea name="cookstep" class="form-control" cols="50" rows="10" name="cookstep"></textarea>
-                      </div>
+                            <textarea name="cookstep" class="form-control" cols="50" rows="10"
+                                      name="cookstep"></textarea>
+                        </div>
 
                     </div>
 

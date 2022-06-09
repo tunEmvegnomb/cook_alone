@@ -37,7 +37,15 @@
         <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
         <li><a class="menuLink" href="/write">나만의 레시피</a></li>
         <li><a class="menuLink" href="/mypage">마이페이지</a></li>
-        <li><a class="myPageLink" href="/login"><img src="/static/img/myPageIcon.png" class="loginIcon"></a></li>
+        <li>
+            <a class="myPageLink" href="/login"
+            ><img src="/static/image/source/myPageIcon.png" class="loginIcon"
+            /></a>
+        </li>
+        {% if user.is_authenticated %}
+            <li><a class="menuLink" href="/logout"> 로그아웃 </a></li>
+            <li> {{ user }} 님 반갑습니다</li>
+        {% endif %}
     </ul>
 </nav>
 
@@ -114,7 +122,7 @@
                                             </a>
                                         </div>
 
-                                    <div style="text-align: right">
+                                        <div style="text-align: right">
                                         <a href="/detail/comment/update/{{ cm.id }}">
                                             <span class="badge rounded-pill bg-success">수정</span>
                                         </a>
