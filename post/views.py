@@ -50,7 +50,9 @@ def view_filter(request):
     if request.method == 'POST':
         timecost_value = request.POST.get('timecost','')
         difficulty_value = request.POST.get('difficulty', '')
+        print("1번")
         print(timecost_value)
+        print("2번")
         print(difficulty_value)
 
         recipe = Recipe.objects.all()
@@ -66,21 +68,33 @@ def view_filter(request):
 
         timecost = ["10분", "20분", "30분", "60분"]
         difficulty = ["상", "중", "하"]
+
+        if timecost_value == "10분":
+            filter_value = ten_min
+            print("3번")
+            print(filter_value)
+        elif timecost_value == "20분":
+            filter_value = twenty_min
+        elif timecost_value == "30분":
+            filter_value = thirty_min
+        elif timecost_value == "60분":
+            filter_value = sixty_min
+        elif difficulty_value == "상":
+            filter_value = twenty_min
+        elif difficulty_value == "중":
+            filter_value = twenty_min
+        elif difficulty_value == "하":
+            filter_value = twenty_min
+
+
         doc = {
             'recipes': all_recipe,
             'new_recipe': recipe,
-            'ten_min': ten_min,
-            'twenty_min': twenty_min,
-            'thirty_min': thirty_min,
-            'sixty_min': sixty_min,
-            'difficult': difficult,
-            'soso': soso,
-            'easy': easy,
             'timecost': timecost,
             'difficulty': difficulty,
-            'timecost_value': timecost_value,
-            'difficulty_value': difficulty_value,
+            'filter_value': filter_value
         }
+        print(filter_value)
 
         return render(request, 'list.html', doc)
 
@@ -109,5 +123,5 @@ def upload_recipes(request):
         my_post = Recipe.objects.create(author=author, title=title, img_url=img_url, timecost=timecost,
                                         difficulty=difficulty, ingredient=ingredient, cookstep=cookstep)
         my_post.save()
-        return HttpResponse('success')
+        return redirect('/')
 

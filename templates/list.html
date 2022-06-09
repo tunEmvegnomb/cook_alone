@@ -188,7 +188,7 @@
                     </div>
                     <div class="card-body">
                         <div class="card-info">
-                            <a href="#" class="recipe-link"
+                            <a href="/detail/{{ recipe.id }}" class="recipe-link"
                             ><span class="card-title">{{ recipe.title }}</span></a
                             >
                             <div class="card-bottom-row">
@@ -206,253 +206,8 @@
                 </div>
             </div>
         {% endfor %}
-        {% else %}
-            {% for recipe in ten_min %}
-            <div class="filter-cols" id="ten_min">
-                    <div class="yes_filter_ten_min">
-                        <div class="card">
-                        <div class="card-img-div">
-                            <a href="/detail/{{ recipe.id }}">
-                                <img
-                                        src={{ recipe.img_url }}
-                                                class="card-img-top"
-                                        alt="..."
-                                        style="width: 320px; height: 240px; object-fit: cover"
-                                />
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-info">
-                                <a href="#" class="recipe-link"
-                                ><span class="card-title">{{ recipe.title }}</span></a
-                                >
-                                <div class="card-bottom-row">
-                                    <span class="card-text">황영상</span>
-                                    <div class="like-div">
-                                        <span class="like-text">추천</span>
-                                        <span class="like-num">12</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-like">
-                                <i class="fa-regular fa-thumbs-up like-icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-            </div>
-            {% endfor %}
-            {% for recipe in twenty_min %}
-            <div class="filter-cols" id="twenty_min">
-                    <div class="yes_filter_ten_min">
-                        <div class="card">
-                        <div class="card-img-div">
-                            <a href="/detail/{{ recipe.id }}">
-                                <img
-                                        src={{ recipe.img_url }}
-                                                class="card-img-top"
-                                        alt="..."
-                                        style="width: 320px; height: 240px; object-fit: cover"
-                                />
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-info">
-                                <a href="#" class="recipe-link"
-                                ><span class="card-title">{{ recipe.title }}</span></a
-                                >
-                                <div class="card-bottom-row">
-                                    <span class="card-text">황영상</span>
-                                    <div class="like-div">
-                                        <span class="like-text">추천</span>
-                                        <span class="like-num">12</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-like">
-                                <i class="fa-regular fa-thumbs-up like-icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-            </div>
-            {% endfor %}
-            {% for recipe in thirty_min %}
-            <div class="filter-cols" id="thirty_min">
-                    <div class="yes_filter_ten_min">
-                        <div class="card">
-                        <div class="card-img-div">
-                            <a href="/detail/{{ recipe.id }}">
-                                <img
-                                        src={{ recipe.img_url }}
-                                                class="card-img-top"
-                                        alt="..."
-                                        style="width: 320px; height: 240px; object-fit: cover"
-                                />
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-info">
-                                <a href="#" class="recipe-link"
-                                ><span class="card-title">{{ recipe.title }}</span></a
-                                >
-                                <div class="card-bottom-row">
-                                    <span class="card-text">황영상</span>
-                                    <div class="like-div">
-                                        <span class="like-text">추천</span>
-                                        <span class="like-num">12</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-like">
-                                <i class="fa-regular fa-thumbs-up like-icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-            </div>
-            {% endfor %}
-            {% for recipe in sixty_min %}
-            <div class="filter-cols" id="sixty_min">
-                    <div class="yes_filter_ten_min">
-                        <div class="card">
-                        <div class="card-img-div">
-                            <a href="/detail/{{ recipe.id }}">
-                                <img
-                                        src={{ recipe.img_url }}
-                                                class="card-img-top"
-                                        alt="..."
-                                        style="width: 320px; height: 240px; object-fit: cover"
-                                />
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-info">
-                                <a href="#" class="recipe-link"
-                                ><span class="card-title">{{ recipe.title }}</span></a
-                                >
-                                <div class="card-bottom-row">
-                                    <span class="card-text">황영상</span>
-                                    <div class="like-div">
-                                        <span class="like-text">추천</span>
-                                        <span class="like-num">12</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-like">
-                                <i class="fa-regular fa-thumbs-up like-icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-            </div>
-            {% endfor %}
-            {% for recipe in difficult %}
-            <div class="filter-cols" id="difficult">
-                    <div class="yes_filter_ten_min">
-                        <div class="card">
-                        <div class="card-img-div">
-                            <a href="/detail/{{ recipe.id }}">
-                                <img
-                                        src={{ recipe.img_url }}
-                                                class="card-img-top"
-                                        alt="..."
-                                        style="width: 320px; height: 240px; object-fit: cover"
-                                />
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-info">
-                                <a href="#" class="recipe-link"
-                                ><span class="card-title">{{ recipe.title }}</span></a
-                                >
-                                <div class="card-bottom-row">
-                                    <span class="card-text">황영상</span>
-                                    <div class="like-div">
-                                        <span class="like-text">추천</span>
-                                        <span class="like-num">12</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-like">
-                                <i class="fa-regular fa-thumbs-up like-icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-            </div>
-            {% endfor %}
-            {% for recipe in soso %}
-            <div class="filter-cols" id="soso">
-                    <div class="yes_filter_ten_min">
-                        <div class="card">
-                        <div class="card-img-div">
-                            <a href="/detail/{{ recipe.id }}">
-                                <img
-                                        src={{ recipe.img_url }}
-                                                class="card-img-top"
-                                        alt="..."
-                                        style="width: 320px; height: 240px; object-fit: cover"
-                                />
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-info">
-                                <a href="#" class="recipe-link"
-                                ><span class="card-title">{{ recipe.title }}</span></a
-                                >
-                                <div class="card-bottom-row">
-                                    <span class="card-text">황영상</span>
-                                    <div class="like-div">
-                                        <span class="like-text">추천</span>
-                                        <span class="like-num">12</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-like">
-                                <i class="fa-regular fa-thumbs-up like-icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-            </div>
-            {% endfor %}
-            {% for recipe in easy %}
-            <div class="filter-cols" id="easy">
-                    <div class="yes_filter_ten_min">
-                        <div class="card">
-                        <div class="card-img-div">
-                            <a href="/detail/{{ recipe.id }}">
-                                <img
-                                        src={{ recipe.img_url }}
-                                                class="card-img-top"
-                                        alt="..."
-                                        style="width: 320px; height: 240px; object-fit: cover"
-                                />
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-info">
-                                <a href="#" class="recipe-link"
-                                ><span class="card-title">{{ recipe.title }}</span></a
-                                >
-                                <div class="card-bottom-row">
-                                    <span class="card-text">황영상</span>
-                                    <div class="like-div">
-                                        <span class="like-text">추천</span>
-                                        <span class="like-num">12</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-like">
-                                <i class="fa-regular fa-thumbs-up like-icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-            </div>
-            {% endfor %}
-            {% for recipe in recipes %}
+        {% elif timecost %}
+            {% for recipe in filter_value %}
                 <div class="col">
                 <div class="card">
                     <div class="card-img-div">
@@ -467,7 +222,7 @@
                     </div>
                     <div class="card-body">
                         <div class="card-info">
-                            <a href="#" class="recipe-link"
+                            <a href="/detail/{{ recipe.id }}" class="recipe-link"
                             ><span class="card-title">{{ recipe.title }}</span></a
                             >
                             <div class="card-bottom-row">
@@ -485,7 +240,75 @@
                 </div>
             </div>
             {% endfor %}
+        {% elif difficulty %}
+            {% for recipe in filter_value %}
+                <div class="col">
+                <div class="card">
+                    <div class="card-img-div">
+                        <a href="/detail/{{ recipe.id }}">
+                            <img
+                                    src={{ recipe.img_url }}
+                                            class="card-img-top"
+                                    alt="..."
+                                    style="width: 320px; height: 240px"
+                            />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-info">
+                            <a href="/detail/{{ recipe.id }}" class="recipe-link"
+                            ><span class="card-title">{{ recipe.title }}</span></a
+                            >
+                            <div class="card-bottom-row">
+                                <span class="card-text">황영상</span>
+                                <div class="like-div">
+                                    <span class="like-text">추천</span>
+                                    <span class="like-num">12</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-like">
+                            <i class="fa-regular fa-thumbs-up like-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
         {% endif %}
+            {% for recipe in recipes %}
+                <div class="col">
+                <div class="card">
+                    <div class="card-img-div">
+                        <a href="/detail/{{ recipe.id }}">
+                            <img
+                                    src={{ recipe.img_url }}
+                                            class="card-img-top"
+                                    alt="..."
+                                    style="width: 320px; height: 240px"
+                            />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-info">
+                            <a href="/detail/{{ recipe.id }}" class = "recipe-link" >
+                                <span class="card-title">{{ recipe.title }}</span>
+                            </a>
+                            <div class="card-bottom-row">
+                                <span class="card-text">황영상</span>
+                                <div class="like-div">
+                                    <span class="like-text">추천</span>
+                                    <span class="like-num">12</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-like">
+                            <i class="fa-regular fa-thumbs-up like-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
     </div>
     <div class="d-flex justify-content-center">
         <div class="spinner-border" role="status">
