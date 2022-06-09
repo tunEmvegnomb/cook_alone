@@ -1,79 +1,87 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
+<head>
     <!-- Bootstrap CSS, JS -->
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+            crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/static/css/signup.css" />
-      <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/signup.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-      crossorigin="anonymous"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"
     ></script>
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>전세계 1인 가구를 위한 레시피</title>
-    <link rel="shortcut icon" href="/static/image/source/cook_hat.png" />
+    <link rel="shortcut icon" href="/static/image/source/cook_hat.png"/>
 
-  </head>
+</head>
 
-  <body>
-    <nav class="naviBar">
-        <ul>
-            <li><a class="logoLink" href="/"><img class="logoIcon" src="/static/image/source/logo.png"></a></li>
-            <li><a class="menuLink" href="/search">전체 레시피 보기</a></li>
-            <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
-            <li><a class="menuLink" href="/write">나만의 레시피</a></li>
-            <li><a class="menuLink" href="/mypage">마이페이지</a></li>
-            <li><a class="myPageLink" href="/login"><img src="/static/image/source/myPageIcon.png" class="loginIcon"></a></li>
-        </ul>
-    </nav>
-    <main class="wrap main-col signup-main">
-      <h1 class="signup-title">회원가입</h1>
-      <form class="form-area" method="post" action="/signup/">
-            {% csrf_token %}
-            <div class="signup-div">
-              <label for="email">아이디(이메일)</label>
-              <input class="form-control" id="email" type="email" name="email" placeholder="아이디"/>
-              <!-- <button type="button" class="id_check">중복확인</button> -->
-              <label for="password">비밀번호</label>
-              <input class="form-control"
-                id="password"
-                type="password"
-                name="password"
-                placeholder="비밀번호"
-              />
-              <label for="password2">비밀번호 확인</label>
-              <input class="form-control"
-                id="password2"
-                type="password"
-                name="password2"
-                placeholder="비밀번호 확인"
-              />
-              <label for="username">닉네임</label>
-              <input class="form-control"
-                id="username"
-                type="text"
-                name="username"
-                placeholder="닉네임을 입력하세요"
-              />
+<body>
+<nav class="naviBar">
+    <ul>
+        <li><a class="logoLink" href="/"><img class="logoIcon" src="/static/image/source/logo.png"></a></li>
+        <li><a class="menuLink" href="/search">전체 레시피 보기</a></li>
+        <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
+        <li><a class="menuLink" href="/write">나만의 레시피</a></li>
+        <li><a class="menuLink" href="/mypage">마이페이지</a></li>
+{#        <li>#}
+{#            <a class="myPageLink" href="/login"#}
+{#            ><img src="/static/image/source/myPageIcon.png" class="loginIcon"#}
+{#            /></a>#}
+{#        </li>#}
+        {% if user.is_authenticated %}
+            <li> {{ user }} 님 반갑습니다</li>
+            <li><a class="menuLink" href="/logout"> 로그아웃 </a></li>
+        {% endif %}
+    </ul>
+</nav>
+<main class="wrap main-col signup-main">
+    <h1 class="signup-title">회원가입</h1>
+    <form class="form-area" method="post" action="/signup/">
+        {% csrf_token %}
+        <div class="signup-div">
+            <label for="email">아이디(이메일)</label>
+            <input class="form-control" id="email" type="email" name="email" placeholder="아이디"/>
+            <!-- <button type="button" class="id_check">중복확인</button> -->
+            <label for="password">비밀번호</label>
+            <input class="form-control"
+                   id="password"
+                   type="password"
+                   name="password"
+                   placeholder="비밀번호"
+            />
+            <label for="password2">비밀번호 확인</label>
+            <input class="form-control"
+                   id="password2"
+                   type="password"
+                   name="password2"
+                   placeholder="비밀번호 확인"
+            />
+            <label for="username">닉네임</label>
+            <input class="form-control"
+                   id="username"
+                   type="text"
+                   name="username"
+                   placeholder="닉네임을 입력하세요"
+            />
+        </div>
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
             </div>
-            {% if error %}
-                <div class="alert alert-danger" role="alert">
-                    {{ error }}
-                </div>
-            {% endif %}
+        {% endif %}
         <button type="submit">회원가입</button>
         <a href="/signin" class="login-link"
-          >회원이신가요? 로그인 페이지로 이동</a
+        >회원이신가요? 로그인 페이지로 이동</a
         >
-      </form>
-    </main>
-  </body>
+    </form>
+</main>
+</body>
 </html>

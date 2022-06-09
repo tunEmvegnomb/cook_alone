@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="/static/css/detail.css/">
 
 
+
     <title>상세 레시피 페이지</title>
 
 </head>
@@ -36,25 +37,35 @@
         <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
         <li><a class="menuLink" href="/write">나만의 레시피</a></li>
         <li><a class="menuLink" href="/mypage">마이페이지</a></li>
-        <li><a class="myPageLink" href="/login"><img src="/static/image/source/myPageIcon.png" class="loginIcon"></a></li>
+
+        {% if user.is_authenticated %}
+            <li> {{ user }} 님 반갑습니다</li>
+            <li><a class="menuLink" href="/logout"> 로그아웃 </a></li>
+        {% else %}
+          <li>
+              <a class="myPageLink" href="/login"
+              ><img src="/static/image/source/myPageIcon.png" class="loginIcon"
+              /></a>
+          </li>
+        {% endif %}
     </ul>
 </nav>
-
+  
 <div class="wrap">
     <div class="detailWrap">
         <div class="detailImgWrap" id="imgWrap">
             <!--                레시피 이미지 들어가는 부분-->
-            <img src="{{ recipe.img_url }}" style="width: 500px; height: auto">
-            <h3>{{ recipe.title }}--{{ recipe.id }}</h3>
+            <img  src="{{ recipe.img_url }}" style="width: 500px; height: auto">
+            <h3 style="margin: 20px 0;">{{ recipe.title }}--{{ recipe.id }}</h3>
             {% if not like_status %}
                 <form method="post" action="/detail/like/{{ recipe.id }}">
                     {% csrf_token %}
-                    <button>꺼야꺼야 요리할꺼야</button>
+                    <button class="btn btn-success" style="margin: 20px 0;">꺼야꺼야 요리할꺼야</button>
                 </form>
             {% else %}
                 <form method="post" action="/detail/like/{{ recipe.id }}">
                     {% csrf_token %}
-                    <button>아니아니 안할꺼야</button>
+                    <button class="btn btn-danger" style="margin: 20px 0;">아니아니 안할꺼야</button>
                 </form>
             {% endif %}
         </div>
@@ -72,7 +83,11 @@
                 <div id="tab-1" class="tabContent current">
                     <div class="iconWrap" id="iconWrap">
                         <!--                                조리시간, 난이도 아이콘 들어가는 정보 박스 부분-->
-                        {{ recipe.timecost }} -- {{ recipe.difficulty }}
+                        <p style="font-size: 25px"><img class="size20" src="../static/image/source/diffIcon.png">
+                            {{ recipe.timecost }}
+                            <span style="width: 20px"></span>
+                            <img class="size20" src="../static/image/source/timeIcon.png">
+                            {{ recipe.difficulty }}</p>
                     </div>
                     <div class="ingredientWrap">
                         <span class="ingTitle">📌 최소한 이건 준비하자!</span>
@@ -113,7 +128,7 @@
                                             </a>
                                         </div>
 
-                                    <div style="text-align: right">
+                                        <div style="text-align: right">
                                         <a href="/detail/comment/update/{{ cm.id }}">
                                             <span class="badge rounded-pill bg-success">수정</span>
                                         </a>

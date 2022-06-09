@@ -1,6 +1,4 @@
-* {
-    font-family: 'Gowun Batang', serif;
-}
+
 
 body {
     background-color: #ECECEC;
@@ -573,9 +571,12 @@ body {
     border: 0;
 }
 
+.likebtn {
+    margin: 20px 0;
+}
 
-
-
-
+.size20 {
+    width: 30px;
+}
 
 
