@@ -104,17 +104,18 @@
         <li><a class="logoLink" href="/"><img class="logoIcon" src="/static/image/source/logo.png"></a></li>
         <li><a class="menuLink" href="/search">전체 레시피 보기</a></li>
         <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
-        <li><a class="menuLink" href="/upload">나만의 레시피</a></li>
+        <li><a class="menuLink" href="/write">나만의 레시피</a></li>
         <li><a class="menuLink" href="/mypage">마이페이지</a></li>
-        <li>
-{#        <li>#}
-{#            <a class="myPageLink" href="/login"#}
-{#            ><img src="/static/image/source/myPageIcon.png" class="loginIcon"#}
-{#            /></a>#}
-{#        </li>#}
+
         {% if user.is_authenticated %}
             <li> {{ user }} 님 반갑습니다</li>
             <li><a class="menuLink" href="/logout"> 로그아웃 </a></li>
+        {% else %}
+          <li>
+              <a class="myPageLink" href="/login"
+              ><img src="/static/image/source/myPageIcon.png" class="loginIcon"
+              /></a>
+          </li>
         {% endif %}
     </ul>
 </nav>
