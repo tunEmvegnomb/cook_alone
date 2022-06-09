@@ -112,12 +112,13 @@
                                                 <span class="badge rounded-pill bg-danger">삭제</span>
                                             </a>
                                         </div>
-                                    {% endif %}
+
                                     <div style="text-align: right">
-                                        <a href="/detail/{{ cm.id }}">
+                                        <a href="/detail/comment/update/{{ cm.id }}">
                                             <span class="badge rounded-pill bg-success">수정</span>
                                         </a>
                                     </div>
+                                    {% endif %}
                                     <div>
                                         <h5>{{ cm.comment_content }} <span
                                                 style="font-size: 12px">{{ cm.comment_me }}-{{ cm.created_at|timesince }} 전</span> </h5>

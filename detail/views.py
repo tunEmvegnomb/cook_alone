@@ -51,3 +51,25 @@ def comment_delete(request, id):
     target_recipe = all_comment.comment_recipe.id
     all_comment.delete()
     return redirect(f'/detail/{target_recipe}')
+
+
+@login_required
+def comment_update(request, id):
+    all_comment = CommentModel.objects.get(id=id)
+    context = {
+        'all_comment' : all_comment
+    }
+    return render(request, 'comment_update.html', context)
+
+
+@login_required
+def comment_update_end(request, id):
+
+        all_comment = CommentModel.objects.get(id=id)
+        target_recipe = all_comment.comment_recipe.id
+
+        all_comment.comment_content = request.POST.get('comment_update')
+        all_comment.save()
+        print(all_comment.comment_content)
+        return redirect(f'/detail/{target_recipe}')
+
