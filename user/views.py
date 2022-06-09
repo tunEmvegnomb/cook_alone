@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import UserModel
 from webScrapping.models import DefaultRecipe
 from post.models import Recipe
-from detail.models import CommentModel
+from detail.models import CommentModel, LikeModel
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 from django.contrib import auth
@@ -77,7 +77,9 @@ def myrecipe(request):
             #내가 쓴 레시피 정보를 가져와서 보여줘야됨
             myrecipe = Recipe.objects.all()
             mycomment = CommentModel.objects.all()
-            return render(request, 'mypage.html', {'me': me, 'myrecipe': myrecipe, 'mycomment': mycomment})
+            mylike = LikeModel.objects.all()
+
+            return render(request, 'mypage.html', {'me': me, 'myrecipe': myrecipe, 'mycomment' : mycomment, 'mylike' : mylike})
 
         else:
             return render(request, 'signin.html')

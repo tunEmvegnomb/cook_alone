@@ -57,37 +57,46 @@
                         <ul class="tabs">
                             <li class="recipeSort current" data-tab="tab-1">내 레시피</li>
                             <li class="recipeSort" data-tab="tab-2">내가 쓴 후기</li>
-                            <li class="recipeSort" data-tab="tab-3">저장한 레시피</li>
+                            <li class="recipeSort" data-tab="tab-3">좋아요한 레시피</li>
                         </ul>
                     </div>
                     <div class="contentWrap">
-                            <div id="tab-1" class="tabContent current">
-                                {% for myrp in myrecipe %}
-                                    <div>
-                                        {{ myrp.title }}
-                                    </div>
-                                    <a href="/detail/{{ myrp.id }}">
-                                        <img src="..."
-                                             alt="..."
-                                             style="width: 320px; height: 240px"/>
-                                    </a>
-                                {% endfor %}
-                            </div>
-                            <div id="tab-2" class="tabContent">
-                                {% for mycm in mycomment %}
+                        <div id="tab-1" class="tabContent current">
+                            {% for myrp in myrecipe %}
+                                <div>
+                                    {{ myrp.title }}
+                                </div>
+                                <a href="/detail/{{ myrp.id }}">
+                                    <img src="../media/uploads/나또.jpeg"
+                                         alt="..."
+                                         style="width: 320px; height: 240px"/>
+                                </a>
+                            {% endfor %}
+                        </div>
+                        <div id="tab-2" class="tabContent">
+                            {% for mycm in mycomment %}
+                                <a href="/detail/{{ mycm.comment_recipe.id }}">
                                     <div>
                                         {{ mycm.comment_content }}
                                     </div>
-                                {% endfor %}
-                            </div>
-                            <div id="tab-3" class="tabContent">
-                            </div>
+                                </a>
+                            {% endfor %}
+                        </div>
+                        <div id="tab-3" class="tabContent">
+                            {% for mylk in mylike %}
+                                <div>
+                                    <a href="/detail/{{ mylk.like_recipe.id }}">
+                                        {{ mylk.like_recipe }}
+                                    </a>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
+
+    </div>
     </div>
 </main>
 <script type="text/javascript" src="/static/js/detail.js"></script>
