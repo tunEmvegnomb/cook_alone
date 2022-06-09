@@ -6,4 +6,4 @@
 #
 #     class Meta:
 #         model = Recipe
-#         fields = ['author', 'title', 'img_url', 'ingredient', 'cookstep', 'difficulty', 'timecost']
+#         fields = ['title', 'img_url', 'difficulty','timecost', 'ingredient', 'cookstep']

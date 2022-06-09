@@ -3,10 +3,11 @@ from detail.models import LikeModel
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .models import CommentModel
+from post.models import Recipe
 
 # Create your views here.
 def view_detail(request, id):
-    target_recipe = DefaultRecipe.objects.get(id=id)
+    target_recipe = Recipe.objects.get(id=id)
     target_like = LikeModel.objects.filter(like_recipe=id)
     all_comment = CommentModel.objects.filter(comment_recipe=id).order_by('-created_at')
     if target_like:
@@ -18,7 +19,7 @@ def view_detail(request, id):
 @login_required
 def like_post(request, id):
     me = request.user
-    recipe = DefaultRecipe.objects.get(id=id)
+    recipe = Recipe.objects.get(id=id)
     target_like = LikeModel.objects.filter(like_me=me, like_recipe=recipe)
     if target_like:
        target_like.delete()
@@ -33,7 +34,7 @@ def like_post(request, id):
 def comment_post(request, id):
     if request.method == 'POST':
         me = request.user
-        recipe = DefaultRecipe.objects.get(id=id)
+        recipe = Recipe.objects.get(id=id)
         target_comment = CommentModel.objects.filter(comment_me = me, comment_recipe=recipe)
         comment_content = request.POST.get('comment','')
 
