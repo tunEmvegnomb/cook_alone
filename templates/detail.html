@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="/static/css/detail.css/">
 
 
+
     <title>상세 레시피 페이지</title>
 
 </head>
@@ -45,17 +46,17 @@
     <div class="detailWrap">
         <div class="detailImgWrap" id="imgWrap">
             <!--                레시피 이미지 들어가는 부분-->
-            <img src="{{ recipe.img_url }}" style="width: 500px; height: auto">
-            <h3>{{ recipe.title }}--{{ recipe.id }}</h3>
+            <img  src="{{ recipe.img_url }}" style="width: 500px; height: auto">
+            <h3 style="margin: 20px 0;">{{ recipe.title }}--{{ recipe.id }}</h3>
             {% if not like_status %}
                 <form method="post" action="/detail/like/{{ recipe.id }}">
                     {% csrf_token %}
-                    <button>꺼야꺼야 요리할꺼야</button>
+                    <button class="btn btn-success" style="margin: 20px 0;">꺼야꺼야 요리할꺼야</button>
                 </form>
             {% else %}
                 <form method="post" action="/detail/like/{{ recipe.id }}">
                     {% csrf_token %}
-                    <button>아니아니 안할꺼야</button>
+                    <button class="btn btn-danger" style="margin: 20px 0;">아니아니 안할꺼야</button>
                 </form>
             {% endif %}
         </div>

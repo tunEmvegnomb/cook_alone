@@ -1,7 +1,3 @@
-* {
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
 body {
     background-color: #ECECEC;
     font-family: 'Gowun Batang', serif;
@@ -573,8 +569,9 @@ body {
     border: 0;
 }
 
-
-
+.likebtn {
+    margin: 20px 0;
+}
 
 
 
