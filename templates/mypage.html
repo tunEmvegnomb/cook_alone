@@ -45,7 +45,7 @@
         <span class="mypage-greeting"
         >안녕하세요, <span class="mypage-nickname">{{ user }}</span>님!</span
         >
-        <span class="mypage-email">{{ email }}</span>
+        <span class="mypage-email">{{ me.email }}</span>
     </div>
     <div class="mypage-cols">
         <div class="mypage-first-col">
@@ -54,6 +54,7 @@
                 <li class="mypage-menu"><a href="/myreview">내가 쓴 후기</a></li>
                 <li class="mypage-menu"><a href="/mylike">저장한 레시피</a></li>
             </ul>
+
             <button class="logout-btn">로그아웃</button>
         </div>
         <div class="mypage-sec-col">
@@ -62,41 +63,17 @@
             </a
             >
             <div class="myrecipe-grid">
+                {% for myrp in myrecipe %}
                 <div class="myrecipe-item">
                     <a href="#" class="myrecipe-title"
-                    ><span>얼그레이 마들렌</span></a
+                    ><span>{{ myrp.title }}</span></a
                     >
                     <span>추천</span>
                     <span>11</span>
                     <span class="myrecipe-update">수정</span>
                     <span class="myrecipe-remove">삭제</span>
                 </div>
-                <div class="myrecipe-item">
-                    <a href="#" class="myrecipe-title"
-                    ><span>미니 레몬파운드 케이크</span></a
-                    >
-                    <span>추천</span>
-                    <span>11</span>
-                    <span class="myrecipe-update">수정</span>
-                    <span class="myrecipe-remove">삭제</span>
-                </div>
-                <div class="myrecipe-item">
-                    <a href="#" class="myrecipe-title"
-                    ><span>레드벨벳 크림치즈 쿠키</span></a
-                    >
-                    <span>추천</span>
-                    <span>11</span>
-                    <span class="myrecipe-update">수정</span>
-                    <span class="myrecipe-remove">삭제</span>
-                </div>
-                <div class="myrecipe-item">
-                    <a href="#" class="myrecipe-title"
-                    ><span>소보루 블루베리 머핀</span></a
-                    >
-                    <span>추천</span>
-                    <span>11</span>
-                    <span class="myrecipe-update">수정</span>
-                    <span class="myrecipe-remove">삭제</span>
+                {% endfor %}
                 </div>
             </div>
         </div>
