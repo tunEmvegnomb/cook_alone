@@ -8,13 +8,25 @@ from .models import CommentModel
 # Create your views here.
 def view_detail(request, id):
     target_recipe = DefaultRecipe.objects.get(id=id)
+    print(f'target_recipe->{target_recipe}')
     target_like = LikeModel.objects.filter(like_recipe=id)
     all_comment = CommentModel.objects.filter(comment_recipe=id).order_by('-created_at')
+
+    # 타겟 재료 정제
+    target_ing = target_recipe.ingredient
+    target_ing = target_ing.split('>')
+    del target_ing[-1]
+
+    # 타겟 순서 정제
+    target_step = target_recipe.cookstep
+    target_step = target_step.split('>')
+    del target_step[-1]
+    print(f'target_step->{target_step}')
     if target_like:
         like_status = True
     else:
         like_status = False
-    return render(request, 'detail.html', {'recipe': target_recipe, 'like_status': like_status, 'comment':all_comment})
+    return render(request, 'detail.html', {'recipe': target_recipe, 'like_status': like_status, 'comment':all_comment, 'ing_list': target_ing, 'cookstep_list':target_step})
 
 @login_required
 def like_post(request, id):
