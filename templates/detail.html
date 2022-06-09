@@ -74,7 +74,11 @@
                 <div id="tab-1" class="tabContent current">
                     <div class="iconWrap" id="iconWrap">
                         <!--                                조리시간, 난이도 아이콘 들어가는 정보 박스 부분-->
-                        {{ recipe.timecost }} -- {{ recipe.difficulty }}
+                        <p style="font-size: 25px"><img class="size20" src="../static/image/source/diffIcon.png">
+                            {{ recipe.timecost }}
+                            <span style="width: 20px"></span>
+                            <img class="size20" src="../static/image/source/timeIcon.png">
+                            {{ recipe.difficulty }}</p>
                     </div>
                     <div class="ingredientWrap">
                         <span class="ingTitle">📌 최소한 이건 준비하자!</span>
