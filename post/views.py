@@ -11,9 +11,12 @@ from webScrapping.models import DefaultRecipe
 def home(request):
     user = request.user.is_authenticated
     if user:
-        return redirect('/search')
+        return redirect('/main')
     else:
         return redirect('/signin')
+
+def view_main(request):
+    return render(request,'main.html')
 
 def view_search(request):
     total_recipe = DefaultRecipe.objects.count()
@@ -50,10 +53,6 @@ def view_filter(request):
     if request.method == 'POST':
         timecost_value = request.POST.get('timecost','')
         difficulty_value = request.POST.get('difficulty', '')
-        print("1번")
-        print(timecost_value)
-        print("2번")
-        print(difficulty_value)
 
         recipe = Recipe.objects.all()
         all_recipe = DefaultRecipe.objects.all()
@@ -71,8 +70,6 @@ def view_filter(request):
 
         if timecost_value == "10분":
             filter_value = ten_min
-            print("3번")
-            print(filter_value)
         elif timecost_value == "20분":
             filter_value = twenty_min
         elif timecost_value == "30분":
@@ -94,7 +91,7 @@ def view_filter(request):
             'difficulty': difficulty,
             'filter_value': filter_value
         }
-        print(filter_value)
+
 
         return render(request, 'list.html', doc)
 
