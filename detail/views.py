@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from webScrapping.models import DefaultRecipe
 from detail.models import LikeModel
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse

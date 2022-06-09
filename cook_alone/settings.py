@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'user',
     'post',
     'recommend',
-    'webScrapping',
     'detail',
 ]
 
