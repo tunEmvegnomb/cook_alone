@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <!-- Bootstrap CSS, JS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>전세계 1인 가구를 위한 레시피</title>
+    <link rel="shortcut icon" href="/static/img/cook_hat.png" />
+  </head>
+
+  <body>
+    <nav class="naviBar">
+        <ul>
+            <li><a class="logoLink" href="/"><img class="logoIcon" src="/static/img/logo.png"></a></li>
+            <li><a class="menuLink" href="/list">전체 레시피 보기</a></li>
+            <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
+            <li><a class="menuLink" href="/write">나만의 레시피</a></li>
+            <li><a class="menuLink" href="/mypage">마이페이지</a></li>
+            <li><a class="myPageLink" href="/login"><img src="/static/img/myPageIcon.png" class="loginIcon"></a></li>
+        </ul>
+    </nav>
+    <main class="wrap mypage-main">
+      <div class="mypage-title">
+        <span class="mypage-greeting"
+          >안녕하세요, <span class="mypage-nickname">황영상</span>님!</span
+        >
+        <span class="mypage-email">spartamaking@gmail.com</span>
+      </div>
+      <div class="mypage-cols">
+        <div class="mypage-first-col">
+          <ul class="mypage-menubar">
+            <li class="mypage-menu current"><a href="#">내 레시피</a></li>
+            <li class="mypage-menu"><a href="/myreview">내가 쓴 후기</a></li>
+            <li class="mypage-menu"><a href="/mylike">저장한 레시피</a></li>
+          </ul>
+          <button class="logout-btn">로그아웃</button>
+        </div>
+        <div class="mypage-sec-col">
+          <a href="#" class="new_recipe-link">
+            <button class="new_recipe-btn">레시피 만들러 가기</button></a
+          >
+          <div class="myrecipe-grid">
+            <div class="myrecipe-item">
+              <a href="#" class="myrecipe-title"
+                ><span>얼그레이 마들렌</span></a
+              >
+              <span>추천</span>
+              <span>11</span>
+              <span class="myrecipe-update">수정</span>
+              <span class="myrecipe-remove">삭제</span>
+            </div>
+            <div class="myrecipe-item">
+              <a href="#" class="myrecipe-title"
+                ><span>미니 레몬파운드 케이크</span></a
+              >
+              <span>추천</span>
+              <span>11</span>
+              <span class="myrecipe-update">수정</span>
+              <span class="myrecipe-remove">삭제</span>
+            </div>
+            <div class="myrecipe-item">
+              <a href="#" class="myrecipe-title"
+                ><span>레드벨벳 크림치즈 쿠키</span></a
+              >
+              <span>추천</span>
+              <span>11</span>
+              <span class="myrecipe-update">수정</span>
+              <span class="myrecipe-remove">삭제</span>
+            </div>
+            <div class="myrecipe-item">
+              <a href="#" class="myrecipe-title"
+                ><span>소보루 블루베리 머핀</span></a
+              >
+              <span>추천</span>
+              <span>11</span>
+              <span class="myrecipe-update">수정</span>
+              <span class="myrecipe-remove">삭제</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script type="text/javascript" src="/static/js/mypage.js"></script>
+  </body>
+</html>
