@@ -1,0 +1,203 @@
+.mypage-cols {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mypage-first-col {
+  display: flex;
+  flex-direction: column;
+  padding: 0 50px;
+}
+
+.mypage-title {
+  padding: 100px 50px 0 50px;
+}
+
+.mypage-title > span {
+  display: block;
+}
+
+.mypage-title .mypage-greeting {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.mypage-title .mypage-nickname {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.mypage-title .mypage-email {
+  font-size: 20px;
+  margin-left: 2px;
+}
+
+.mypage-menubar {
+  margin: 80px 0;
+  padding: 20px 30px;
+  border: 3px solid var(--orange);
+  border-radius: 15px;
+}
+
+.mypage-menubar li {
+  list-style: none;
+  margin: 10px 0;
+}
+
+.mypage-menu a {
+  text-decoration: none;
+  color: #8c8c8c;
+  font-size: 25px;
+}
+
+.mypage-menu a:hover {
+  color: var(--default);
+}
+
+.mypage-menubar .current a {
+  text-decoration: underline;
+  color: var(--default);
+  font-weight: 500;
+}
+
+.logout-btn {
+  font-size: 20px;
+  color: #8c8c8c;
+  background-color: white;
+  border: 1px solid #8c8c8c;
+  border-radius: 30px;
+  width: 110px;
+}
+
+.mypage-sec-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 50px;
+}
+
+.mypage-sec-col .new_recipe-btn {
+  background-color: var(--bluegreen);
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-size: 25px;
+  font-weight: 700;
+  width: 400px;
+  height: 50px;
+  margin-top: 10px;
+}
+
+.myrecipe-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 35px;
+  margin: 55px 0;
+}
+
+.myrecipe-item {
+  width: 170px;
+  height: 160px;
+  border: 1px solid var(--default);
+  border-radius: 23px;
+  padding: 14px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.myrecipe-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+}
+
+.myrecipe-title {
+  grid-column: 1 / span 2;
+  font-weight: 600;
+  text-align: center;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  line-height: 120%;
+  text-decoration: none;
+  color: var(--default);
+}
+
+.myrecipe-item i {
+  color: var(--default);
+}
+
+.myrecipe-title:hover,
+.myrecipe-update:hover,
+.myrecipe-remove:hover {
+  color: black;
+}
+
+.myrecipe-update,
+.myrecipe-remove {
+  font-size: 15px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.naviBar {
+    background-color: #FF6219;
+    width: 100%;
+    height: 70px;
+    position: fixed;
+    z-index: 100;
+}
+
+.naviBar ul li {
+    list-style: none;
+    color: #3A3845;
+    background-color: #FF6219;
+    float: left;
+    line-height: 70px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.naviBar .logoIcon {
+    height: 65px;
+    transition: all 0.3s ease-in-out;
+    margin-left: 55px;
+    margin-right: 55px;
+}
+
+.naviBar .logoIcon:hover {
+  transform: rotateY(180deg) scale(1.2);
+}
+
+.menuLink {
+    text-decoration: none;
+    color: #3A3845;
+    display: block;
+    width: 180px;
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.menuLink:hover {
+    transition: 0.5s;
+    font-size: 19px;
+    text-decoration: none;
+    color: #3A3845;
+    background: #FFF3ED;
+}
+
+.myPageLink {
+    position: absolute;
+    right: 19%;
+}
+
+.loginIcon {
+    height: 38px;
+
+}
+
+.loginIcon:hover {
+    transition: 0.5s;
+    transform: scale(1.08)
+}
