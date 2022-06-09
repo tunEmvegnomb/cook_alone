@@ -20,26 +20,11 @@ def view_search(request):
     recipe = Recipe.objects.all()
     all_recipe = DefaultRecipe.objects.all()
 
-    ten_min = DefaultRecipe.objects.filter(difficulty="10분 이내").values()
-    twenty_min = DefaultRecipe.objects.filter(difficulty="20분 이내").values()
-    thirty_min = DefaultRecipe.objects.filter(difficulty="30분 이내").values()
-    sixty_min = DefaultRecipe.objects.filter(difficulty="60분 이내").values()
-    difficult = DefaultRecipe.objects.filter(timecost="중급").values()
-    soso = DefaultRecipe.objects.filter(timecost="초급").values()
-    easy = DefaultRecipe.objects.filter(timecost="아무나").values()
-
     timecost = ["10분", "20분", "30분", "60분"]
     difficulty = ["상", "중", "하"]
     doc = {
         'recipes': all_recipe,
         'new_recipe': recipe,
-        'ten_min': ten_min,
-        'twenty_min': twenty_min,
-        'thirty_min': thirty_min,
-        'sixty_min': sixty_min,
-        'difficult': difficult,
-        'soso': soso,
-        'easy': easy,
         'timecost': timecost,
         'difficulty': difficulty,
     }

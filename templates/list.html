@@ -99,7 +99,7 @@
             ><img class="logoIcon" src="/static/img/logo.png"
             /></a>
         </li>
-        <li><a class="menuLink" href="/list">전체 레시피 보기</a></li>
+        <li><a class="menuLink" href="/search">전체 레시피 보기</a></li>
         <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
         <li><a class="menuLink" href="/upload">나만의 레시피</a></li>
         <li><a class="menuLink" href="/mypage">마이페이지</a></li>
@@ -159,6 +159,7 @@
                         {% csrf_token %}
                         <button id="{{ filter }}" class="filter-value" name="difficulty" value={{ filter }} type="submit">{{ filter }}</button>
                     {% endfor %}
+                    </form>
 
                 </div>
             </div>
