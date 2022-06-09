@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <title>자취생에 의한 자취생만을 위한 너만의 레시피</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
+    <!-- style.css 파일을 같은 폴더에 만들고, head 태그에서 불러오기 -->
+    <link rel="stylesheet" type="text/css" href = "\static\css\main.css">
+    <script src="\static\js\main.js"></script>
+</head>
+
+<body>
+        <!--    여기서부터 네비게이션바-->
+        <nav class="naviBar">
+        <ul>
+            <li><a class="logoLink" href="/"><img class="logoIcon" src="/static/img/logo.png"></a></li>
+            <li><a class="menuLink" href="/list">전체 레시피 보기</a></li>
+            <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
+            <li><a class="menuLink" href="/write">나만의 레시피</a></li>
+            <li><a class="menuLink" href="/mypage">마이페이지</a></li>
+            <li><a class="myPageLink" href="/login"><img src="/static/img/myPageIcon.png" class="loginIcon"></a></li>
+        </ul>
+    </nav>
+        <!--실제 컨텐츠 작성-->
+        <div class="wrap">
+            <!--메인 배너-->
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="\static\img\Rectangle 11.png" class="d-block w-100" alt="1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="\static\img\Rectangle 12.png" class="d-block w-100" alt="2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="\static\img\Rectangle 13.png" class="d-block w-100" alt="3">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <!--메인 추천 레시피-->
+            <div id="main-random">
+                <div>
+                <img src="\static\img\ONE-POP-1.png" alt="이미지" class="random-food"/>
+                <div class="random-food-recipe" >
+                    <img src="\static\img\recipe.png" alt="이미지"/>
+                    <div>
+                        <div>
+                            <h2 style="font-weight: 900;">추천 레시피 이름</h2>
+                            <br>
+                            <div class="random-food-recipe-difficulty">
+                                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <img src="\static\img\time.png" alt="이미지"
+                                         style="width: 50px; height: 50px; margin-bottom: 10px"/>
+                                    <p style="font-weight: 500;">5분 이내</p>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <img src="\static\img\star.png" alt="이미지"
+                                         style="width: 50px; height: 50px; margin-bottom: 10px"/>
+                                    <p style="font-weight: 500;">사람이면 제조 가능</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p style="font-weight: 600;">최소한 이건 준비하자!</p>
+                                <div class="ingredient">
+                                    <ul>
+                                        <li class="ingredient-li">1번 재료</li>
+                                        <li class="ingredient-li">1번 재료</li>
+                                        <li class="ingredient-li">1번 재료</li>
+                                    </ul>
+                                    <ul>
+                                        <li class="ingredient-li">1번 재료</li>
+                                        <li class="ingredient-li">1번 재료</li>
+                                        <li class="ingredient-li">1번 재료</li>
+                                    </ul>
+                                    <ul>
+                                        <li class="ingredient-li">1번 재료</li>
+                                        <li class="ingredient-li">1번 재료</li>
+                                        <li class="ingredient-li">1번 재료</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+
+
+            <!--메인 베스트 레시피-->
+            <div class="best-recipe" style="margin-bottom: 100px">
+                <div class="best-recipe-top">
+                    <img src="\static\img\rank.png" alt="이미지" class="random-food"/>
+                    <h5 style="font-weight: 600;">
+                        <span class="best-recipe-text" type="button" style="margin-right: 10px" onclick="main_top3()">월간</span>
+                        <span class="best-recipe-text" type="button" onclick="main_top3()">주간</span>
+                        <span class="best-recipe-text" type="button" onclick="main_top3()">일간</span></h5>
+                </div>
+                <div style="margin-bottom: -60px">
+                    <button type="button" class="btn">더보기</button>
+                </div>
+                <div id="image-card">
+                    <div style="display: flex; justify-content: space-around;">
+                    <div>
+                        <img src="\static\img\rank-1.png" alt="이미지" class="best-recipe-rank-top"/>
+                        <img src="\static\img\recipe-small.png" alt="이미지"/>
+                    </div>
+                    <div>
+                        <img src="\static\img\rank-2.png" alt="이미지" class="best-recipe-rank-second"/>
+                        <img src="\static\img\recipe-small.png" alt="이미지"/>
+                    </div>
+                    <div>
+                        <img src="\static\img\rank-3.png" alt="이미지" class="best-recipe-rank-third"/>
+                        <img src="\static\img\recipe-small.png" alt="이미지"/>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
