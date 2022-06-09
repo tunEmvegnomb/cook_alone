@@ -80,11 +80,11 @@ def view_filter(request):
         elif timecost_value == "60분":
             filter_value = sixty_min
         elif difficulty_value == "상":
-            filter_value = twenty_min
+            filter_value = difficult
         elif difficulty_value == "중":
-            filter_value = twenty_min
+            filter_value = soso
         elif difficulty_value == "하":
-            filter_value = twenty_min
+            filter_value = easy
 
 
         doc = {
