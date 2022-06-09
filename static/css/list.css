@@ -63,17 +63,18 @@
 
 
 .filters {
-  display: flex;
-  flex-direction: column;
-  padding: 10px 30px;
-  background-color: #dddddd;
-  border-radius: 30px;
-  margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 15px;
+    background-color: #dddddd;
+    border-radius: 5px;
+    /*margin-bottom: 30px;*/
+    height: 60px;
 }
 
 .filter-row {
   display: flex;
-  margin: 10px 0px;
+  /*margin: 10px 0px;*/
 }
 
 .filter-one {
@@ -87,35 +88,41 @@
 }
 
 .filter-key {
-  background-color: var(--orange);
-  font-size: 20px;
-  font-weight: 600;
-  text-align: center;
-  color: white;
-  width: 90px;
-  border-radius: 30px;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  margin-right: 20px;
+    background-color: var(--orange);
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+    width: 90px;
+    border-radius: 30px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-right: 20px;
+    text-shadow: 1px 1px 1px gray;
 }
 
 .filter-values {
-  background-color: #ffa500;
-  border-radius: 30px;
+  background-color: #63a355;
+  border-radius: 5px;
   padding-left: 10px;
   padding-right: 10px;
+  border: none
+}
+.filter-values:hover{
+    box-shadow: 0 1px 5px 3px rgba(0,0,0,.12);
 }
 
 .filter-value {
-  margin-left: 7px;
-  margin-right: 7px;
-  margin-top: 3px;
-  margin-bottom: 3px;
-  color: white;
-  font-size: 20px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s ease-in-out;
+    margin-left: 7px;
+    margin-right: 7px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    border: none;
+    background-color:transparent;
 }
 
 .filter-values .current {
@@ -123,7 +130,7 @@
 }
 
 .filter-value:hover {
-  color: var(--default);
+  color: white;
 }
 
 
@@ -157,7 +164,7 @@
 }
 
 .naviBar {
-    background-color: #FF6219;
+    background-color: #63a355;
     width: 100%;
     height: 70px;
     position: fixed;
@@ -167,7 +174,7 @@
 .naviBar ul li {
     list-style: none;
     color: #3A3845;
-    background-color: #FF6219;
+    background-color: #63a355;
     float: left;
     line-height: 70px;
     vertical-align: middle;
