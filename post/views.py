@@ -32,6 +32,7 @@ def view_search(request):
         'difficulty': difficulty,
     }
 
+
     if request.method == 'GET':
         return render(request, 'list.html', doc)
     elif request.method == 'POST':
