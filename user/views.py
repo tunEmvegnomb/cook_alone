@@ -64,3 +64,14 @@ def sign_in_view(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+
+@login_required
+def mypage(request):
+    if request.method == 'GET':
+        user = request.user.is_authenticated
+        if user:
+            return render(request, 'mypage.html')
+
+        else:
+            return render(request, 'signin.html')
