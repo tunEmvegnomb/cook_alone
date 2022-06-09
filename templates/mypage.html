@@ -8,17 +8,19 @@
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
             crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/static/css/styles.css"/>
+    <link rel="stylesheet" href="/static/css/mypage.css"/>
+    <link rel="stylesheet" href="/static/css/detail.css/">
     <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"
     ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>전세계 1인 가구를 위한 레시피</title>
-    <link rel="shortcut icon" href="/static/img/cook_hat.png"/>
+    <link rel="shortcut icon" href="/static/image/source/cook_hat.png"/>
 </head>
 
 <body>
@@ -28,12 +30,12 @@
         <li><a class="menuLink" href="/list">전체 레시피 보기</a></li>
         <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
         <li><a class="menuLink" href="/write">나만의 레시피</a></li>
-        <li><a class="menuLink" href="/mypage">마이페이지</a></li>
-{#        <li>#}
-{#            <a class="myPageLink" href="/login"#}
-{#            ><img src="/static/image/source/myPageIcon.png" class="loginIcon"#}
-{#            /></a>#}
-{#        </li>#}
+        <li><a class="menuLink" href="/myrecipe">마이페이지</a></li>
+        {#        <li>#}
+        {#            <a class="myPageLink" href="/login"#}
+        {#            ><img src="/static/image/source/myPageIcon.png" class="loginIcon"#}
+        {#            /></a>#}
+        {#        </li>#}
         {% if user.is_authenticated %}
             <li> {{ user }} 님 반갑습니다</li>
             <li><a class="menuLink" href="/logout"> 로그아웃 </a></li>
@@ -43,65 +45,51 @@
 <main class="wrap mypage-main">
     <div class="mypage-title">
         <span class="mypage-greeting"
-        >안녕하세요, <span class="mypage-nickname">황영상</span>님!</span
+        >안녕하세요, <span class="mypage-nickname">{{ user }}</span>님!</span
         >
-        <span class="mypage-email">spartamaking@gmail.com</span>
+        <span class="mypage-email">{{ me.email }}</span>
     </div>
     <div class="mypage-cols">
         <div class="mypage-first-col">
-            <ul class="mypage-menubar">
-                <li class="mypage-menu current"><a href="#">내 레시피</a></li>
-                <li class="mypage-menu"><a href="/myreview">내가 쓴 후기</a></li>
-                <li class="mypage-menu"><a href="/mylike">저장한 레시피</a></li>
-            </ul>
-            <button class="logout-btn">로그아웃</button>
-        </div>
-        <div class="mypage-sec-col">
-            <a href="#" class="new_recipe-link">
-                <button class="new_recipe-btn">레시피 만들러 가기</button>
-            </a
-            >
-            <div class="myrecipe-grid">
-                <div class="myrecipe-item">
-                    <a href="#" class="myrecipe-title"
-                    ><span>얼그레이 마들렌</span></a
-                    >
-                    <span>추천</span>
-                    <span>11</span>
-                    <span class="myrecipe-update">수정</span>
-                    <span class="myrecipe-remove">삭제</span>
-                </div>
-                <div class="myrecipe-item">
-                    <a href="#" class="myrecipe-title"
-                    ><span>미니 레몬파운드 케이크</span></a
-                    >
-                    <span>추천</span>
-                    <span>11</span>
-                    <span class="myrecipe-update">수정</span>
-                    <span class="myrecipe-remove">삭제</span>
-                </div>
-                <div class="myrecipe-item">
-                    <a href="#" class="myrecipe-title"
-                    ><span>레드벨벳 크림치즈 쿠키</span></a
-                    >
-                    <span>추천</span>
-                    <span>11</span>
-                    <span class="myrecipe-update">수정</span>
-                    <span class="myrecipe-remove">삭제</span>
-                </div>
-                <div class="myrecipe-item">
-                    <a href="#" class="myrecipe-title"
-                    ><span>소보루 블루베리 머핀</span></a
-                    >
-                    <span>추천</span>
-                    <span>11</span>
-                    <span class="myrecipe-update">수정</span>
-                    <span class="myrecipe-remove">삭제</span>
+            <div class="imforWrap">
+                <div class="container">
+                    <div class="sortBar">
+                        <ul class="tabs">
+                            <li class="recipeSort current" data-tab="tab-1">내 레시피</li>
+                            <li class="recipeSort" data-tab="tab-2">내가 쓴 후기</li>
+                            <li class="recipeSort" data-tab="tab-3">저장한 레시피</li>
+                        </ul>
+                    </div>
+                    <div class="contentWrap">
+                            <div id="tab-1" class="tabContent current">
+                                {% for myrp in myrecipe %}
+                                    <div>
+                                        {{ myrp.title }}
+                                    </div>
+                                    <a href="/detail/{{ myrp.id }}">
+                                        <img src="..."
+                                             alt="..."
+                                             style="width: 320px; height: 240px"/>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            <div id="tab-2" class="tabContent">
+                                {% for mycm in mycomment %}
+                                    <div>
+                                        {{ mycm.comment_content }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div id="tab-3" class="tabContent">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </main>
-<script type="text/javascript" src="/static/js/mypage.js"></script>
+<script type="text/javascript" src="/static/js/detail.js"></script>
 </body>
 </html>

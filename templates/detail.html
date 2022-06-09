@@ -93,7 +93,9 @@
                         <span class="ingTitle">📌 최소한 이건 준비하자!</span>
                         <ul class="ingList" id="ingList">
                             <!--                                    레시피 재료 들어가는 부분-->
-                            {{ recipe.ingredient }}
+                            {% for ing in ing_list %}
+                                {{ ing }}
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -102,7 +104,10 @@
                         <span class="processTitle">📌 이정돈 만들 수 있다!</span>
                         <ul class="processList" id="processList">
                             <!--                                    레시피 조리과정 들어가는 부분-->
-                            {{ recipe.cookstep }}
+                            {% for step in cookstep_list %}
+                                <p>{{ step }}</p>
+
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -145,12 +150,7 @@
                 </div>
             </div>
         </div>
-
-
     </div>
-</div>
-
-
 </div>
 <script type="text/javascript" src="/static/js/detail.js/"></script>
 </body>
