@@ -10,11 +10,22 @@ def view_detail(request, id):
     target_recipe = Recipe.objects.get(id=id)
     target_like = LikeModel.objects.filter(like_recipe=id)
     all_comment = CommentModel.objects.filter(comment_recipe=id).order_by('-created_at')
+
+    # 타겟 재료 정제
+    target_ing = target_recipe.ingredient
+    target_ing = target_ing.split('>')
+    del target_ing[-1]
+
+    # 타겟 순서 정제
+    target_step = target_recipe.cookstep
+    target_step = target_step.split('>')
+    del target_step[-1]
+    print(f'target_step->{target_step}')
     if target_like:
         like_status = True
     else:
         like_status = False
-    return render(request, 'detail.html', {'recipe': target_recipe, 'like_status': like_status, 'comment':all_comment})
+    return render(request, 'detail.html', {'recipe': target_recipe, 'like_status': like_status, 'comment':all_comment, 'ing_list': target_ing, 'cookstep_list':target_step})
 
 @login_required
 def like_post(request, id):
@@ -51,3 +62,25 @@ def comment_delete(request, id):
     target_recipe = all_comment.comment_recipe.id
     all_comment.delete()
     return redirect(f'/detail/{target_recipe}')
+
+
+@login_required
+def comment_update(request, id):
+    all_comment = CommentModel.objects.get(id=id)
+    context = {
+        'all_comment' : all_comment
+    }
+    return render(request, 'comment_update.html', context)
+
+
+@login_required
+def comment_update_end(request, id):
+
+        all_comment = CommentModel.objects.get(id=id)
+        target_recipe = all_comment.comment_recipe.id
+
+        all_comment.comment_content = request.POST.get('comment_update')
+        all_comment.save()
+        print(all_comment.comment_content)
+        return redirect(f'/detail/{target_recipe}')
+

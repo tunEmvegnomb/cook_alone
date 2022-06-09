@@ -17,16 +17,16 @@ def home(request):
 def view_main(request):
     return render(request,'main.html')
 
+
 def view_search(request):
-    total_recipe = Recipe.objects.count()
-    recipe = Recipe.objects.all()
-    all_recipe = Recipe.objects.all()
+    # total_recipe = Recipe.objects.count()
+    # recipe = Recipe.objects.all()
+    all_recipe = Recipe.objects.all().order_by('-id')
 
     timecost = ["10분", "20분", "30분", "60분"]
     difficulty = ["상", "중", "하"]
     doc = {
         'recipes': all_recipe,
-        'new_recipe': recipe,
         'timecost': timecost,
         'difficulty': difficulty,
     }
@@ -37,7 +37,7 @@ def view_search(request):
         searched = request.POST.get('searched', '')
 
         search_list= []
-        for i in range(total_recipe):
+        for i in range(all_recipe):
             title = Recipe.objects.all().values()[i]['title'] #제목 꺼내오기
             if searched in title:#타이틀에 내가 원하는 이름이 있다면
                 search_list.append(Recipe.objects.all().values()[i])#내가 원하는 데이터 만으로 쿼리셋으로 만든다
@@ -92,6 +92,7 @@ def view_filter(request):
         }
 
 
+
         return render(request, 'list.html', doc)
 
 
@@ -109,14 +110,14 @@ def upload_recipes(request):
     elif request.method == 'POST':
         author = request.user
         title = request.POST.get('title', '')
-        img_url = request.FILES.get('img_url', '')
+        img_file = request.FILES.get('img_url', '')
         timecost = request.POST.get('timecost', '')
         difficulty = request.POST.get('difficulty', '')
         ingredient = request.POST.get('ingredient', '')
         cookstep = request.POST.get('ingredient', '')
 
 
-        my_post = Recipe.objects.create(author=author, title=title, img_url=img_url, timecost=timecost,
+        my_post = Recipe.objects.create(author=author, title=title, img_file=img_file, timecost=timecost,
                                         difficulty=difficulty, ingredient=ingredient, cookstep=cookstep)
         my_post.save()
         return redirect('/')

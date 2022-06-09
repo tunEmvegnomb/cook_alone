@@ -47,6 +47,14 @@
             box-shadow: 0 1px 5px 3px rgba(0, 0, 0, .12);
         }
 
+        <
+        <
+        <
+        <
+        <
+        <
+        <
+        HEAD
         .card:hover {
             box-shadow: 0 1px 5px 3px rgba(0, 0, 0, .22);
             transition: 0.5s;
@@ -56,11 +64,59 @@
             height: 120px;
         }
 
+        =
+        =
+        =
+        =
+        =
+        =
+        =
+
+        .card:hover {
+            box-shadow: 0 1px 5px 3px rgba(0, 0, 0, .22);
+            transition: 0.5s;
+        }
+
+        .card-body {
+            height: 120px;
+        }
+
+        >>> >>> > main
         .like-div {
             float: left;
         }
 
     </style>
+    <script>
+
+
+        $(document).ready(function () {
+            $('#ten').click(function () {
+                $('#ten_min').show();
+            })
+            $('#twenty').click(function () {
+                $('#twenty_min').show();
+            })
+            $('#thirty').click(function () {
+                $('#thirty_min').show();
+            })
+            $('#sixty').click(function () {
+                $('#sixty_min').show();
+            })
+            $('#difficult_button').click(function () {
+                $('#difficult').show();
+            })
+            $('#soso_button').click(function () {
+                $('#soso').show();
+            })
+            $('#easy_button').click(function () {
+                $('#easy').show();
+            })
+
+        })
+
+
+    </script>
 
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -81,11 +137,11 @@
             <li> {{ user }} 님 반갑습니다</li>
             <li><a class="menuLink" href="/logout"> 로그아웃 </a></li>
         {% else %}
-          <li>
-              <a class="myPageLink" href="/login"
-              ><img src="/static/image/source/myPageIcon.png" class="loginIcon"
-              /></a>
-          </li>
+            <li>
+                <a class="myPageLink" href="/login"
+                ><img src="/static/image/source/myPageIcon.png" class="loginIcon"
+                /></a>
+            </li>
         {% endif %}
     </ul>
 </nav>
@@ -157,11 +213,12 @@
                         <div class="card-img-div">
                             <a href="/detail/{{ recipe.id }}">
                                 <img
-                                        src={{ recipe.img_url }}
-                                                class="card-img-top"
+                                        src=f"{{ recipe.img_url }}"
+                                        class="card-img-top"
                                         alt="..."
                                         style="width: 320px; height: 240px; object-fit: cover"
                                 />
+
                             </a>
                         </div>
                         <div class="card-body">
