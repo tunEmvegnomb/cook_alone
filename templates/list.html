@@ -367,7 +367,7 @@
                                 <span class="card-title">{{ recipe.title }}</span>
                             </a>
                             <div class="card-bottom-row">
-                                {% if recipe.author is None %}
+                                {% if recipe.author_id is None %}
                                     <span class="card-text"> 더 맛있는 레시피</span>
                                 {% else %}
                                     <span class="card-text">{{ recipe.author }}</span>

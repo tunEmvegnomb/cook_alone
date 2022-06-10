@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Recipe, Timecate, Diffcate
 from detail.models import LikeModel
-from .forms import *
-from django.http import HttpResponse
-from post.models import Recipe
+from user.models import UserModel
 from recommend.models import RecommendModel
 # Create your views here.
 
@@ -36,7 +34,16 @@ def view_search(request):
     all_recipe = list(recipes.values('id','title','img_url','img_file', 'author_id'))
     for a in range(total):
         num = LikeModel.objects.filter(like_recipe_id=a+1).count()
+        id = all_recipe[a]['author_id']
+
+        try:
+            author = UserModel.objects.get(id=id)
+            author = str(author)
+        except:
+            author = "더 맛있는 레시피"
+
         all_recipe[a]['like_num']=num
+        all_recipe[a]['author'] = author
     all_recipe.reverse()
 
     timecost = ["10분", "20분", "30분", "60분"]
@@ -54,6 +61,7 @@ def view_search(request):
 
         search_list = []
 
+        # !!검색기능 만들기!!
         for i in range(total):
             title = Recipe.objects.all().values()[i]['title'] #제목 꺼내오기
 
