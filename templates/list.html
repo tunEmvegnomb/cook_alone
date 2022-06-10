@@ -117,7 +117,7 @@
         <li><a class="menuLink" href="/search">전체 레시피 보기</a></li>
         <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
         <li><a class="menuLink" href="/write">나만의 레시피</a></li>
-        <li><a class="menuLink" href="/myrecipe">마이페이지</a></li>
+        <li><a class="menuLink" href="/myrecipe/{{ user.id }}">마이페이지</a></li>
 
         {% if user.is_authenticated %}
             <li> {{ user }} 님 반갑습니다</li>
