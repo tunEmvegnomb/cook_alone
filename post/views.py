@@ -31,17 +31,18 @@ def view_main(request):
 
 def view_search(request):
 
-    # recipe = Recipe.objects.all()
+
     total = Recipe.objects.count()
     all_recipe = Recipe.objects.all().order_by('-id')
-    # like_count ={}
-    # for a in range(total):
-    #     likenum = LikeModel.objects.filter(like_recipe_id=1957).count()
-    #     print(likenum)
-    #     like_count[id]
-    # likenum = LikeModel.objects.filter(like_recipe_id=1957).count()
-
-
+    like_count ={}
+    like_all=[]
+    for a in range(total):
+        num = LikeModel.objects.filter(like_recipe_id=a+1).count()
+        id= (a+1)
+        like_count['id']=id
+        like_count['like_num']=num
+        like_all.append(like_count.copy())
+    print(like_all)
 
     timecost = ["10분", "20분", "30분", "60분"]
     difficulty = ["상", "중", "하"]
@@ -49,8 +50,9 @@ def view_search(request):
         'recipes': all_recipe,
         'timecost': timecost,
         'difficulty': difficulty,
-        # 'like_count' : like_count,
+        'like_all' : like_all,
     }
+
 
     if request.method == 'GET':
         return render(request, 'list.html', doc)
