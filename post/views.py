@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Recipe, Timecate, Diffcate
-from .forms import *
-from django.http import HttpResponse
+from detail.models import LikeModel
 from post.models import Recipe
 from recommend.models import RecommendModel
+from user.models import UserModel
 # Create your views here.
 
 
@@ -29,9 +29,24 @@ def view_main(request):
 
 
 def view_search(request):
-    # total_recipe = Recipe.objects.count()
-    # recipe = Recipe.objects.all()
-    all_recipe = Recipe.objects.all().order_by('-id')
+    total = Recipe.objects.count()
+    recipes = Recipe.objects.all()
+
+    all_recipe = list(recipes.values('id','title','img_url','img_file', 'author_id'))
+
+    for a in range(total):
+        num = LikeModel.objects.filter(like_recipe_id=a+1).count()
+        id = all_recipe[a]['author_id']
+
+        try:
+            author = UserModel.objects.get(id=id)
+            author = str(author)
+        except:
+            author = "더 맛있는 레시피"
+
+        all_recipe[a]['like_num']=num
+        all_recipe[a]['author'] = author
+    all_recipe.reverse()
 
     timecost = ["10분", "20분", "30분", "60분"]
     difficulty = ["상", "중", "하"]
@@ -40,22 +55,23 @@ def view_search(request):
         'timecost': timecost,
         'difficulty': difficulty,
     }
-
     if request.method == 'GET':
         return render(request, 'list.html', doc)
     elif request.method == 'POST':
         searched = request.POST.get('searched', '')
 
-        search_list= []
-        for i in range(all_recipe):
+        search_list = []
+
+        # !!검색기능 만들기!!
+        for i in range(total):
             title = Recipe.objects.all().values()[i]['title'] #제목 꺼내오기
+
             if searched in title:#타이틀에 내가 원하는 이름이 있다면
                 search_list.append(Recipe.objects.all().values()[i])#내가 원하는 데이터 만으로 쿼리셋으로 만든다
-
         doc['searched'] = searched #앞에서 선언해준 doc에 새로 만든 키값을 추가한다다
         doc['search_list'] = search_list
-
         return render(request, 'list.html', doc)
+
 
 
 def view_filter(request):
@@ -124,7 +140,7 @@ def upload_recipes(request):
         timecost = request.POST.get('timecost', '')
         difficulty = request.POST.get('difficulty', '')
         ingredient = request.POST.get('ingredient', '')
-        cookstep = request.POST.get('cookstep', '')
+        cookstep = request.POST.get('ingredient', '')
 
 
         my_post = Recipe.objects.create(author=author, title=title, img_file=img_file, timecost=timecost,
