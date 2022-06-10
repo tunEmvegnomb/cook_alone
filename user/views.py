@@ -75,9 +75,9 @@ def myrecipe(request, id):
         if user:
             me = request.user
             #내가 쓴 레시피 정보를 가져와서 보여줘야됨
-            myrecipe = Recipe.objects.all()
-            mycomment = CommentModel.objects.all()
-            mylike = LikeModel.objects.all()
+            myrecipe = Recipe.objects.filter(author=id)
+            mycomment = CommentModel.objects.filter(comment_me=id)
+            mylike = LikeModel.objects.filter(like_me=id)
 
             return render(request, 'mypage.html', {'me': me, 'myrecipe': myrecipe, 'mycomment' : mycomment, 'mylike' : mylike})
 
