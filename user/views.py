@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import UserModel
 from post.models import Recipe
-from detail.models import CommentModel
+from detail.models import CommentModel, LikeModel
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 from django.contrib import auth
@@ -69,15 +69,17 @@ def logout(request):
     return redirect('/')
 
 
-def myrecipe(request):
+def myrecipe(request, id):
     if request.method == 'GET':
         user = request.user.is_authenticated #지금 요청을 보낸 사용자가 로그인이 되어 있는 사용자가 맞는지 알아보는 함수
         if user:
             me = request.user
             #내가 쓴 레시피 정보를 가져와서 보여줘야됨
-            myrecipe = Recipe.objects.all()
-            mycomment = CommentModel.objects.all()
-            return render(request, 'mypage.html', {'me': me, 'myrecipe': myrecipe, 'mycomment': mycomment})
+            myrecipe = Recipe.objects.filter(author=id)
+            mycomment = CommentModel.objects.filter(comment_me=id)
+            mylike = LikeModel.objects.filter(like_me=id)
+
+            return render(request, 'mypage.html', {'me': me, 'myrecipe': myrecipe, 'mycomment' : mycomment, 'mylike' : mylike})
 
         else:
             return render(request, 'signin.html')
