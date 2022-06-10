@@ -124,7 +124,7 @@ def upload_recipes(request):
         timecost = request.POST.get('timecost', '')
         difficulty = request.POST.get('difficulty', '')
         ingredient = request.POST.get('ingredient', '')
-        cookstep = request.POST.get('ingredient', '')
+        cookstep = request.POST.get('cookstep', '')
 
 
         my_post = Recipe.objects.create(author=author, title=title, img_file=img_file, timecost=timecost,
