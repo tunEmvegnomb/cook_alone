@@ -33,22 +33,21 @@ def view_search(request):
     total = Recipe.objects.count()
     recipes = Recipe.objects.all()
 
-    all_recipe = list(recipes.values('id','title','img_url','img_file', 'author_id'))
-
+    all_recipe = list(recipes.values('id', 'title', 'img_url', 'img_file', 'author_id'))
+    # !!카드 속 좋아요, 작성자 보이기!!
     for a in range(total):
         num = LikeModel.objects.filter(like_recipe_id=a+1).count()
         id = all_recipe[a]['author_id']
-
         try:
             author = UserModel.objects.get(id=id)
             author = str(author)
         except:
-            author = "더 맛있는 레시피"
-
+            author = "혼자서도 잘해요리"
         all_recipe[a]['like_num']=num
         all_recipe[a]['author'] = author
     all_recipe.reverse()
 
+    # !!최신순, 인기순 필터 만들기!!
     like_sort_list = sorted(all_recipe, key=lambda d: d['like_num'])
     like_sort_list.reverse()
 
@@ -73,12 +72,12 @@ def view_search(request):
 
             if searched in title:#타이틀에 내가 원하는 이름이 있다면
                 search_list.append(Recipe.objects.all().values()[i])#내가 원하는 데이터 만으로 쿼리셋으로 만든다
-        doc['searched'] = searched #앞에서 선언해준 doc에 새로 만든 키값을 추가한다다
+        doc['searched'] = searched #앞에서 선언해준 doc에 새로 만든 키값을 추가한다
         doc['search_list'] = search_list
         return render(request, 'list.html', doc)
 
 
-
+# !!필터기능 만들기!!
 def view_filter(request):
     if request.method == 'POST':
         timecost_value = request.POST.get('timecost','')
@@ -112,8 +111,6 @@ def view_filter(request):
             filter_value = soso
         elif difficulty_value == "하":
             filter_value = easy
-
-
         doc = {
             'recipes': all_recipe,
             'new_recipe': recipe,
@@ -121,9 +118,6 @@ def view_filter(request):
             'difficulty': difficulty,
             'filter_value': filter_value
         }
-
-
-
         return render(request, 'list.html', doc)
 
 
