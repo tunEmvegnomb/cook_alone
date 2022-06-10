@@ -4,6 +4,7 @@ from detail.models import LikeModel
 from post.models import Recipe
 from recommend.models import RecommendModel
 from user.models import UserModel
+import pprint
 # Create your views here.
 
 
@@ -48,12 +49,16 @@ def view_search(request):
         all_recipe[a]['author'] = author
     all_recipe.reverse()
 
+    like_sort_list = sorted(all_recipe, key=lambda d: d['like_num'])
+    like_sort_list.reverse()
+
     timecost = ["10분", "20분", "30분", "60분"]
     difficulty = ["상", "중", "하"]
     doc = {
         'recipes': all_recipe,
         'timecost': timecost,
         'difficulty': difficulty,
+        'like_sort_list': like_sort_list,
     }
     if request.method == 'GET':
         return render(request, 'list.html', doc)
