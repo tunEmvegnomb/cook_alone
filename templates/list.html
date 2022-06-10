@@ -77,26 +77,13 @@
 
 
         $(document).ready(function () {
-            $('#ten').click(function () {
-                $('#ten_min').show();
+            $('.sortByLike').click(function () {
+                $('.col_like_sort').show();
+                $('.col_normal_recipes').hide();
             })
-            $('#twenty').click(function () {
-                $('#twenty_min').show();
-            })
-            $('#thirty').click(function () {
-                $('#thirty_min').show();
-            })
-            $('#sixty').click(function () {
-                $('#sixty_min').show();
-            })
-            $('#difficult_button').click(function () {
-                $('#difficult').show();
-            })
-            $('#soso_button').click(function () {
-                $('#soso').show();
-            })
-            $('#easy_button').click(function () {
-                $('#easy').show();
+            $('.sortByDate').click(function () {
+                $('.col_normal_recipes').show();
+                $('.col_like_sort').hide();
             })
 
         })
@@ -187,8 +174,8 @@
     </div>
     <div id="searchInfo"></div>
     <div class="list-sort">
-        <a href="#" class="sortByDate current">최신순</a>
-        <a href="#" class="sortByLike">인기순</a>
+        <button class="sortByDate">최신순</button>
+        <button class="sortByLike">인기순</button>
     </div>
 <!--------------------필터----------------------->
     <div class="row row-cols-1 row-cols-md-3 g-4 card-group">
@@ -297,7 +284,49 @@
         {% else %}
         {% endif %}
         {% for recipe in recipes %}
-            <div class="col">
+            <div class="col_normal_recipes">
+                <div class="card">
+                    <div class="card-img-div">
+                        <a href="/detail/{{ recipe.id }}">
+                            {% if recipe.img_url %}
+                                <img
+                                        src={{ recipe.img_url }}
+                                                class="card-img-top"
+                                        alt="..."
+                                        style="width: 320px; height: 240px"
+                                />
+                            {% else %}
+                                <img
+                                    src="/media/{{ recipe.img_file }}"
+                                            class="card-img-top"
+                                    alt="..."
+                                    style="width: 320px; height: 240px"
+                            />
+                            {% endif %}
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-info">
+                            <a href="/detail/{{ recipe.id }}" class="recipe-link">
+                                <span class="card-title">{{ recipe.title }}</span>
+                            </a>
+                            <div class="card-bottom-row">
+                                <span class="card-text">{{ recipe.author }}</span>
+                                <div class="like-div">
+                                    <span class="like-text">추천</span>
+                                    <span class="like-num">{{ recipe.like_num }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-like">
+                            <i class="fa-regular fa-thumbs-up like-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% for recipe in like_sort_list %}
+            <div class="col_like_sort">
                 <div class="card">
                     <div class="card-img-div">
                         <a href="/detail/{{ recipe.id }}">
