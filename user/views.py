@@ -69,7 +69,7 @@ def logout(request):
     return redirect('/')
 
 
-def myrecipe(request):
+def myrecipe(request, id):
     if request.method == 'GET':
         user = request.user.is_authenticated #지금 요청을 보낸 사용자가 로그인이 되어 있는 사용자가 맞는지 알아보는 함수
         if user:
