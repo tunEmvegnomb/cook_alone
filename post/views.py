@@ -3,6 +3,7 @@ from .models import Recipe, Timecate, Diffcate
 from .forms import *
 from django.http import HttpResponse
 from post.models import Recipe
+from recommend.models import RecommendModel
 # Create your views here.
 
 
@@ -15,7 +16,13 @@ def home(request):
         return redirect('/signin')
 
 def view_main(request):
-    return render(request,'main.html')
+    target_reco = RecommendModel.objects.get(id=1)
+    target_reco = target_reco.reco1
+    target_reco = int(target_reco.strip('()').split(',')[0]) + 1
+    target_reco = Recipe.objects.get(id=target_reco)
+    # target_reco = Recipe.objects.get(id=target_reco)
+    print(f'그래서 레시피는 뭔데? ->{target_reco}')
+    return render(request,'main.html', {'reco': target_reco})
 
 
 def view_search(request):
