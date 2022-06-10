@@ -14,10 +14,10 @@ class Recipe(models.Model):
     ingredient = models.TextField(null=False)
     cookstep = models.TextField(null=False)
     ##여기까지 form##
-    author = models.ForeignKey(UserModel, on_delete=models.CASCADE, null=True)
-    created_at = models.DateTimeField(auto_now_add=True, null=True)
-    updated_at = models.DateTimeField(auto_now=True, null=True)
-    img_file = models.ImageField(upload_to='uploads/', null=True)#CharField(max_length=200, default='')
+    # author = models.ForeignKey(UserModel, on_delete=models.CASCADE, null=True)
+    # created_at = models.DateTimeField(auto_now_add=True, null=True)
+    # updated_at = models.DateTimeField(auto_now=True, null=True)
+    # img_file = models.ImageField(upload_to='uploads/', null=True)#CharField(max_length=200, default='')
 
 
 
