@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Recipe, Timecate, Diffcate
+from detail.models import LikeModel
 from .forms import *
 from django.http import HttpResponse
 from post.models import Recipe
@@ -22,6 +23,9 @@ def view_search(request):
 
     # recipe = Recipe.objects.all()
     all_recipe = Recipe.objects.all().order_by('-id')
+    # likenum = LikeModel.objects.filter(like_recipe_id="1959").count()
+    # print(likenum)
+
 
     timecost = ["10분", "20분", "30분", "60분"]
     difficulty = ["상", "중", "하"]
@@ -36,7 +40,7 @@ def view_search(request):
     elif request.method == 'POST':
         searched = request.POST.get('searched', '')
 
-        search_list= []
+        search_list = []
         total = Recipe.objects.count()
         for i in range(total):
             title = Recipe.objects.all().values()[i]['title'] #제목 꺼내오기

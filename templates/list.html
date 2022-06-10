@@ -190,8 +190,9 @@
         <a href="#" class="sortByDate current">최신순</a>
         <a href="#" class="sortByLike">인기순</a>
     </div>
-<!--------------------필터----------------------->
+<!--------------------카드 그룹 시작----------------------->
     <div class="row row-cols-1 row-cols-md-3 g-4 card-group">
+<!--------------------검색했을때 카드----------------------->
         {% if searched %}
             {% for recipe in search_list %}
                 <div class="col">
@@ -235,6 +236,7 @@
                     </div>
                 </div>
             {% endfor %}
+<!-------------------timecost필터 카드----------------------->
         {% elif timecost %}
             {% for recipe in filter_value %}
                 <div class="col">
@@ -279,6 +281,7 @@
                 </div>
             {% endfor %}
         {% elif difficulty %}
+<!-------------------difficulty필터 카드----------------------->
             {% for recipe in filter_value %}
                 <div class="col">
                     <div class="card">
@@ -323,6 +326,7 @@
             {% endfor %}
         {% else %}
         {% endif %}
+<!-------------------기본 레시피 카드----------------------->
         {% for recipe in recipes %}
             <div class="col">
                 <div class="card">
@@ -354,7 +358,7 @@
                                 <span class="card-text">황영상</span>
                                 <div class="like-div">
                                     <span class="like-text">추천</span>
-                                    <span class="like-num">12</span>
+                                    <span class="like-num">{{  }}</span>
                                 </div>
                             </div>
                         </div>
