@@ -30,19 +30,14 @@ def view_main(request):
 
 
 def view_search(request):
-
-
     total = Recipe.objects.count()
-    all_recipe = Recipe.objects.all().order_by('-id')
-    like_count ={}
-    like_all=[]
+    recipes = Recipe.objects.all()
+
+    all_recipe = list(recipes.values('id','title','img_url','img_file', 'author_id'))
     for a in range(total):
         num = LikeModel.objects.filter(like_recipe_id=a+1).count()
-        id= (a+1)
-        like_count['id']=id
-        like_count['like_num']=num
-        like_all.append(like_count.copy())
-    print(like_all)
+        all_recipe[a]['like_num']=num
+    all_recipe.reverse()
 
     timecost = ["10분", "20분", "30분", "60분"]
     difficulty = ["상", "중", "하"]
@@ -50,9 +45,7 @@ def view_search(request):
         'recipes': all_recipe,
         'timecost': timecost,
         'difficulty': difficulty,
-        'like_all' : like_all,
     }
-
 
     if request.method == 'GET':
         return render(request, 'list.html', doc)

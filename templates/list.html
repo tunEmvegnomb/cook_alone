@@ -229,7 +229,7 @@
                                     {% endif %}
                                     <div class="like-div">
                                         <span class="like-text">추천</span>
-                                        <span class="like-num">12</span>
+                                        <span class="like-num">{{ recipe.like_num }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -277,7 +277,7 @@
                                     {% endif %}
                                     <div class="like-div">
                                         <span class="like-text">추천</span>
-                                        <span class="like-num">12</span>
+                                        <span class="like-num">{{ recipe.like_num }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -325,7 +325,7 @@
                                     {% endif %}
                                     <div class="like-div">
                                         <span class="like-text">추천</span>
-                                        <span class="like-num">12</span>
+                                        <span class="like-num">{{ recipe.like_num }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -375,11 +375,8 @@
 
                                 <div class="like-div">
                                     <span class="like-text">추천</span>
-                                    {% if recipe.id == like_all.id %}
-                                    <span class="like-num">{{ like_all.like_num }}</span>
-                                    {% else %}
-                                        <p>오류입니다</p>
-                                    {% endif %}
+                                    <span class="like-num">{{ recipe.like_num }}</span>
+
                                 </div>
                             </div>
                         </div>
