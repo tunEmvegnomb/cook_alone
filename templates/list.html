@@ -222,7 +222,11 @@
                                 ><span class="card-title">{{ recipe.title }}</span></a
                                 >
                                 <div class="card-bottom-row">
-                                    <span class="card-text">황영상</span>
+                                    {% if recipe.author is None %}
+                                        <span class="card-text"> 더 맛있는 레시피</span>
+                                    {% else %}
+                                        <span class="card-text">{{ recipe.author }}</span>
+                                    {% endif %}
                                     <div class="like-div">
                                         <span class="like-text">추천</span>
                                         <span class="like-num">12</span>
@@ -266,7 +270,11 @@
                                 ><span class="card-title">{{ recipe.title }}</span></a
                                 >
                                 <div class="card-bottom-row">
-                                    <span class="card-text">황영상</span>
+                                    {% if recipe.author is None %}
+                                        <span class="card-text"> 더 맛있는 레시피</span>
+                                    {% else %}
+                                        <span class="card-text">{{ recipe.author }}</span>
+                                    {% endif %}
                                     <div class="like-div">
                                         <span class="like-text">추천</span>
                                         <span class="like-num">12</span>
@@ -310,7 +318,11 @@
                                 ><span class="card-title">{{ recipe.title }}</span></a
                                 >
                                 <div class="card-bottom-row">
-                                    <span class="card-text">황영상</span>
+                                    {% if recipe.author is None %}
+                                        <span class="card-text"> 더 맛있는 레시피</span>
+                                    {% else %}
+                                        <span class="card-text">{{ recipe.author }}</span>
+                                    {% endif %}
                                     <div class="like-div">
                                         <span class="like-text">추천</span>
                                         <span class="like-num">12</span>
@@ -355,10 +367,15 @@
                                 <span class="card-title">{{ recipe.title }}</span>
                             </a>
                             <div class="card-bottom-row">
-                                <span class="card-text">황영상</span>
+                                {% if recipe.author is None %}
+                                    <span class="card-text"> 더 맛있는 레시피</span>
+                                {% else %}
+                                    <span class="card-text">{{ recipe.author }}</span>
+                                {% endif %}
+
                                 <div class="like-div">
                                     <span class="like-text">추천</span>
-                                    <span class="like-num">{{  }}</span>
+                                    <span class="like-num">{{ like_count.id }}</span>
                                 </div>
                             </div>
                         </div>

@@ -22,19 +22,25 @@ def view_main(request):
     target_reco = int(target_reco.strip('()').split(',')[0]) + 1
     target_reco = Recipe.objects.get(id=target_reco)
     # target_reco = Recipe.objects.get(id=target_reco)
-    print(f'그래서 레시피는 뭔데? ->{target_reco}')
+    # print(f'그래서 레시피는 뭔데? ->{target_reco}')
     reco_ing = target_reco.ingredient.split('>')
     del reco_ing[-1]
-    print(reco_ing)
+    # print(reco_ing)
     return render(request,'main.html', {'reco': target_reco, 'reco_ing':reco_ing})
 
 
 def view_search(request):
 
     # recipe = Recipe.objects.all()
+    total = Recipe.objects.count()
     all_recipe = Recipe.objects.all().order_by('-id')
-    # likenum = LikeModel.objects.filter(like_recipe_id="1959").count()
-    # print(likenum)
+    # like_count ={}
+    # for a in range(total):
+    #     likenum = LikeModel.objects.filter(like_recipe_id=1957).count()
+    #     print(likenum)
+    #     like_count[id]
+    # likenum = LikeModel.objects.filter(like_recipe_id=1957).count()
+
 
 
     timecost = ["10분", "20분", "30분", "60분"]
@@ -43,6 +49,7 @@ def view_search(request):
         'recipes': all_recipe,
         'timecost': timecost,
         'difficulty': difficulty,
+        # 'like_count' : like_count,
     }
 
     if request.method == 'GET':
@@ -51,7 +58,7 @@ def view_search(request):
         searched = request.POST.get('searched', '')
 
         search_list = []
-        total = Recipe.objects.count()
+
         for i in range(total):
             title = Recipe.objects.all().values()[i]['title'] #제목 꺼내오기
 
