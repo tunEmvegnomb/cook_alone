@@ -16,13 +16,16 @@ def home(request):
         return redirect('/signin')
 
 def view_main(request):
-    target_reco = RecommendModel.objects.get(id=1)
+    target_reco = RecommendModel.objects.get(id=358)
     target_reco = target_reco.reco1
     target_reco = int(target_reco.strip('()').split(',')[0]) + 1
     target_reco = Recipe.objects.get(id=target_reco)
     # target_reco = Recipe.objects.get(id=target_reco)
     print(f'그래서 레시피는 뭔데? ->{target_reco}')
-    return render(request,'main.html', {'reco': target_reco})
+    reco_ing = target_reco.ingredient.split('>')
+    del reco_ing[-1]
+    print(reco_ing)
+    return render(request,'main.html', {'reco': target_reco, 'reco_ing':reco_ing})
 
 
 def view_search(request):

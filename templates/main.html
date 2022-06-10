@@ -72,40 +72,30 @@
         <div>
             <img src="\static\image\source\ONE-POP-1.png" alt="이미지" class="random-food"/>
             <div class="random-food-recipe">
-                <img src="\static\image\source\logo.png" alt="이미지"/>
+                <img style="width: 600px" src={{ reco.img_url }} alt="이미지"/>
                 <div>
                     <div>
-                        <h2 style="font-weight: 900;">추천 레시피 이름</h2>
+                        <h2 style="font-weight: 900;">{{ reco.title }}</h2>
                         <br>
                         <div class="random-food-recipe-difficulty">
                             <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
                                 <img src="\static\image\source\time.png" alt="이미지"
                                      style="width: 50px; height: 50px; margin-bottom: 10px"/>
-                                <p style="font-weight: 500;">5분 이내</p>
+                                <p style="font-weight: 500;">{{ reco.timecost }}</p>
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
                                 <img src="\static\image\source\star.png" alt="이미지"
                                      style="width: 50px; height: 50px; margin-bottom: 10px"/>
-                                <p style="font-weight: 500;">사람이면 제조 가능</p>
+                                <p style="font-weight: 500;">{{ reco.difficulty }}</p>
                             </div>
                         </div>
                         <div>
                             <p style="font-weight: 600;">최소한 이건 준비하자!</p>
                             <div class="ingredient">
                                 <ul>
-                                    <li class="ingredient-li">1번 재료</li>
-                                    <li class="ingredient-li">1번 재료</li>
-                                    <li class="ingredient-li">1번 재료</li>
-                                </ul>
-                                <ul>
-                                    <li class="ingredient-li">1번 재료</li>
-                                    <li class="ingredient-li">1번 재료</li>
-                                    <li class="ingredient-li">1번 재료</li>
-                                </ul>
-                                <ul>
-                                    <li class="ingredient-li">1번 재료</li>
-                                    <li class="ingredient-li">1번 재료</li>
-                                    <li class="ingredient-li">1번 재료</li>
+                                    {% for ing in reco_ing %}
+                                    <li class="ingredient-li">{{ ing }}</li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
