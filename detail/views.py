@@ -84,3 +84,6 @@ def comment_update_end(request, id):
         print(all_comment.comment_content)
         return redirect(f'/detail/{target_recipe}')
 
+
+
+###풀 리퀘스트가 안되서 혹시 몰라 낙서합니다!!ㅎㅎ
