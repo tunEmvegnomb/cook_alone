@@ -16,7 +16,7 @@ def home(request):
         return redirect('/signin')
 
 def view_main(request):
-    target_reco = RecommendModel.objects.get(id=358)
+    target_reco = RecommendModel.objects.get(id=35)
     target_reco = target_reco.reco1
     target_reco = int(target_reco.strip('()').split(',')[0]) + 1
     target_reco = Recipe.objects.get(id=target_reco)
