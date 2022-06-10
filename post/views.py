@@ -19,7 +19,7 @@ def view_main(request):
 
 
 def view_search(request):
-    # total_recipe = Recipe.objects.count()
+
     # recipe = Recipe.objects.all()
     all_recipe = Recipe.objects.all().order_by('-id')
 
@@ -37,8 +37,10 @@ def view_search(request):
         searched = request.POST.get('searched', '')
 
         search_list= []
-        for i in range(all_recipe):
+        total = Recipe.objects.count()
+        for i in range(total):
             title = Recipe.objects.all().values()[i]['title'] #제목 꺼내오기
+
             if searched in title:#타이틀에 내가 원하는 이름이 있다면
                 search_list.append(Recipe.objects.all().values()[i])#내가 원하는 데이터 만으로 쿼리셋으로 만든다
 
