@@ -39,9 +39,25 @@ def view_search(request):
     total = Recipe.objects.count()
     # recipes = Recipe.objects.all()
     all_recipes = Recipe.objects.get_queryset().order_by('-id')
+
+    # <<<--- 페이지네이션 --- #
     paginator = Paginator(all_recipes, 15)
     page_number = request.GET.get('page')
     p_recipe = paginator.page(page_number).object_list
+    page_obj = paginator.page(page_number)
+    # 페이지 인덱스 번호 구하기
+    page_index = []
+    page_digit = len(str(page_obj.number-1))
+    if page_digit == 1:
+        page_firstNum = 0
+    else:
+        page_firstNum = int(str(page_obj.number - 1)[0])
+    for page in range(1, 11):
+        page = page_firstNum * 10 + page
+        page_index.append(page)
+
+    # --- 페이지네이션 --->>> #
+
     all_recipe = list(p_recipe.values('id', 'title', 'img_url', 'img_file', 'author_id'))
     # !!카드 속 좋아요, 작성자 보이기!!
     # for a in range(total):
@@ -56,7 +72,7 @@ def view_search(request):
             author = "혼자서도 잘해요리"
         all_recipe[index]['like_num'] = num
         all_recipe[index]['author'] = author
-    all_recipe.reverse()
+    # all_recipe.reverse()
 
     # !!최신순, 인기순 필터 만들기!!
     like_sort_list = sorted(all_recipe, key=lambda d: d['like_num'])
@@ -69,9 +85,13 @@ def view_search(request):
         'timecost': timecost,
         'difficulty': difficulty,
         'like_sort_list': like_sort_list,
+        'page_obj': page_obj,
+        'page_index':page_index
     }
-    print(f'페이지->{page_number}, 리스트->{all_recipes}')
+    # print(f'페이지->{page_number}, 리스트->{all_recipes}')
+
     if request.method == 'GET':
+        print(f'doc-->{doc}')
         return render(request, 'list.html', doc)
     elif request.method == 'POST':
         searched = request.POST.get('searched', '')
@@ -86,7 +106,7 @@ def view_search(request):
                 search_list.append(Recipe.objects.all().values()[i])  # 내가 원하는 데이터 만으로 쿼리셋으로 만든다
         doc['searched'] = searched  # 앞에서 선언해준 doc에 새로 만든 키값을 추가한다
         doc['search_list'] = search_list
-        return render(request, 'list.html', doc)
+        return render(request, 'list.html', doc, page_obj)
 
 
 # !!필터기능 만들기!!
