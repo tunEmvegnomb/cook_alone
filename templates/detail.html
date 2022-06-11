@@ -26,7 +26,6 @@
     <link rel="stylesheet" href="/static/css/detail.css/">
 
 
-
     <title>상세 레시피 페이지</title>
 
 </head>
@@ -34,7 +33,7 @@
 <nav class="naviBar">
     <ul>
         <li><a class="logoLink" href="/"><img class="logoIcon" src="/static/image/source/logo.png"></a></li>
-        <li><a class="menuLink" href="/search">전체 레시피 보기</a></li>
+        <li><a class="menuLink" aria-current="page" href="/search/?page=1">전체 레시피</a></li>
         <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
         <li><a class="menuLink" href="/write">나만의 레시피</a></li>
         <li><a class="menuLink" href="/myrecipe/{{ user.id }}">마이페이지</a></li>
@@ -43,20 +42,20 @@
             <li> {{ user }} 님 반갑습니다</li>
             <li><a class="menuLink" href="/logout"> 로그아웃 </a></li>
         {% else %}
-          <li>
-              <a class="myPageLink" href="/login"
-              ><img src="/static/image/source/myPageIcon.png" class="loginIcon"
-              /></a>
-          </li>
+            <li>
+                <a class="myPageLink" href="/login"
+                ><img src="/static/image/source/myPageIcon.png" class="loginIcon"
+                /></a>
+            </li>
         {% endif %}
     </ul>
 </nav>
-  
+
 <div class="wrap">
     <div class="detailWrap">
         <div class="detailImgWrap" id="imgWrap">
             <!--                레시피 이미지 들어가는 부분-->
-            <img  src="{{ recipe.img_url }}" style="width: 500px; height: auto">
+            <img src="{{ recipe.img_url }}" style="width: 500px; height: auto">
             <h3 style="margin: 20px 0;">{{ recipe.title }}--{{ recipe.id }}</h3>
             {% if not like_status %}
                 <form method="post" action="/detail/like/{{ recipe.id }}">
@@ -78,6 +77,7 @@
                     <li class="recipeSort current" data-tab="tab-1">레시피</li>
                     <li class="recipeSort" data-tab="tab-2">조리과정</li>
                     <li class="recipeSort" data-tab="tab-3">리뷰</li>
+                    <li class="recipeSort" data-tab="tab-4">추천레시피</li>
                 </ul>
             </div>
             <div class="contentWrap">
@@ -146,6 +146,24 @@
                                     </div>
                                 {% endfor %}
                             </div>
+                        </span>
+                    </div>
+                </div>
+                <div id="tab-4" class="tabContent">
+                    <div>
+                        <span class="reviewTitle">📌 이 레시피와 비슷한 레시피!
+
+                        <hr class="line">
+                            <div class="row row-cols-1  card-group">
+                                <!-- 레시피 List 들어가는 부분-->
+                                {% for reco in reco_list %}
+                                    <div class="reviewListWrap recoWrap" id="reviewList">
+                                            <img src={{ reco.img_url }} class="recoImg">
+                                            <p><a href="/detail/{{ reco.id }}">{{ reco.title|slice:10 }}</a></p>
+                                </div>
+                                {% endfor %}
+                            </div>
+
                         </span>
                     </div>
                 </div>
