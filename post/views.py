@@ -39,10 +39,25 @@ def view_search(request):
     total = Recipe.objects.count()
     # recipes = Recipe.objects.all()
     all_recipes = Recipe.objects.get_queryset().order_by('-id')
+
+    # <<<--- 페이지네이션 --- #
     paginator = Paginator(all_recipes, 15)
     page_number = request.GET.get('page')
     p_recipe = paginator.page(page_number).object_list
     page_obj = paginator.page(page_number)
+    # 페이지 인덱스 번호 구하기
+    page_index = []
+    page_digit = len(str(page_obj.number-1))
+    if page_digit == 1:
+        page_firstNum = 0
+    else:
+        page_firstNum = int(str(page_obj.number - 1)[0])
+    for page in range(1, 11):
+        page = page_firstNum * 10 + page
+        page_index.append(page)
+
+    # --- 페이지네이션 --->>> #
+
     all_recipe = list(p_recipe.values('id', 'title', 'img_url', 'img_file', 'author_id'))
     # !!카드 속 좋아요, 작성자 보이기!!
     # for a in range(total):
@@ -70,7 +85,8 @@ def view_search(request):
         'timecost': timecost,
         'difficulty': difficulty,
         'like_sort_list': like_sort_list,
-        'page_obj': page_obj
+        'page_obj': page_obj,
+        'page_index':page_index
     }
     # print(f'페이지->{page_number}, 리스트->{all_recipes}')
 

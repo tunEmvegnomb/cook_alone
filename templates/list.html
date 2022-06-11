@@ -439,7 +439,7 @@
             <a href="?page=1"> ◁ </a>
             <a href="?page={{ page_obj.previous_page_number }}"> < </a>
         {% endif %}
-        {% for p in page_obj.paginator.page_range  %}
+        {% for p in page_index %}
             <a href="?page={{ p }}">{{ p }}</a>
         {% endfor %}
         {% if page_obj.has_next %}
