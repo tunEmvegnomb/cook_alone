@@ -22,13 +22,27 @@
     <style>
         body {
             font-family: 'Gowun Batang', serif;
-            background-image: url("/static/image/source/asparagus.jpg");
+            background-image: url("/static/image/source/asparagus3.jpg");
             background-size: contain;
             background-repeat: no-repeat;
         }
 
         title {
             color: white;
+
+        }
+        a{
+            color:gray;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        button{
+            background-color: transparent;
+            border: none;
+        }
+        button:hover{
+            color: #63a355;
+            font-weight: bold;
         }
 
         .cardImage {
@@ -115,7 +129,8 @@
         }
 
         .footer_paginator a {
-            font-size: 30px;
+            font-size: 1rem;
+            font-weight: bold;
             margin: 5px;
         }
 
@@ -140,7 +155,7 @@
 
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title style="color:white; font-weight: bold">전세계 1인 가구를 위한 레시피</title>
+
     <link rel="shortcut icon" href="/static/img/cook_hat.png"/>
 </head>
 
@@ -180,9 +195,10 @@
     <div class="list-title">
         <img src=""/>
         <img src=""/>
-        <span style="left:-150px">전세계 1인 가구를 위한 레시피</span>
+        <title style="left:-150px">전세계 1인 가구를 위한 레시피</title>
         <br><br><br><br>
     </div>
+    <div style="height: 150px"></div>
     {% if searched %}
         <h1>{{ searched }}</h1>
     {% else %}
@@ -434,7 +450,7 @@
     {#    </div>#}
 </main>
 <footer>
-    <div class="footer_paginator">
+    <div class="footer_paginator" >
         {% if page_obj.has_previous %}
             <a href="?page=1"> ◁ </a>
             <a href="?page={{ page_obj.previous_page_number }}"> < </a>
