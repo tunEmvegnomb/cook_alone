@@ -19,10 +19,13 @@ def home(request):
 
 
 def view_main(request):
-    target_reco = RecommendModel.objects.get(id=request.session['latestRecipe'])
-    print(f'세션 잘 가져오셨어요? ->{target_reco}')
+    try:
+        target_reco = RecommendModel.objects.get(id=request.session['latestRecipe'])
+    except:
+        target_reco = RecommendModel.objects.get(id=1)
     target_reco = target_reco.reco1
     target_reco = int(target_reco.strip('()').split(',')[0]) + 1
+    print(f'세션 잘 가져오셨어요? ->{target_reco}')
     target_reco = Recipe.objects.get(id=target_reco)
     # target_reco = Recipe.objects.get(id=target_reco)
     print(f'그래서 레시피는 뭔데? ->{target_reco}')

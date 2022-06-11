@@ -12,7 +12,10 @@ def view_detail(request, id):
     target_like = LikeModel.objects.filter(like_recipe=id)
     all_comment = CommentModel.objects.filter(comment_recipe=id).order_by('-created_at')
     reco_list = RecommendModel.objects.get(id=id)
-    request.session['latestRecipe'] = str(target_recipe.id)
+    try:
+        request.session['latestRecipe'] = str(target_recipe.id)
+    except:
+        request.session['latestRecipe'] = 1
     print(request.session['latestRecipe'])
 
     # 타겟 재료 정제
