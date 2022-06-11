@@ -249,7 +249,7 @@ body {
     color: #3A3845;
     display: inline-block;
     font-size: 20px;
-    margin: 0 60px 0 70px;
+    margin: 0 25px 0 70px;
     padding-left: 10px;
     padding-right: 10px;
     width: 130px;
@@ -282,7 +282,8 @@ body {
     padding: 60px 70px 60px 70px;
     box-shadow: rgba(193,193,193,0.92) 0 2pt 2pt -0.5pt;
     background-color: #c3d391;
-    width:500px;
+    width:980px;
+    box-sizing: border-box;
 }
 
 
@@ -573,4 +574,31 @@ body {
     width: 30px;
 }
 
+.recoCol {
+    display: flex;
+    flex-direction: row;
+}
 
+.recoWrap {
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 10px;
+
+}
+
+.recoImg {
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+.contentWrap {
+    width: 982px;
+}
+
+.card-group {
+    justify-content: space-around;
+}
