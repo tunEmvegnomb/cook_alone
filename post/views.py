@@ -42,6 +42,7 @@ def view_search(request):
     paginator = Paginator(all_recipes, 15)
     page_number = request.GET.get('page')
     p_recipe = paginator.page(page_number).object_list
+    page_obj = paginator.page(page_number)
     all_recipe = list(p_recipe.values('id', 'title', 'img_url', 'img_file', 'author_id'))
     # !!카드 속 좋아요, 작성자 보이기!!
     # for a in range(total):
@@ -69,6 +70,7 @@ def view_search(request):
         'timecost': timecost,
         'difficulty': difficulty,
         'like_sort_list': like_sort_list,
+        'page_obj': page_obj
     }
     # print(f'페이지->{page_number}, 리스트->{all_recipes}')
 
@@ -88,7 +90,7 @@ def view_search(request):
                 search_list.append(Recipe.objects.all().values()[i])  # 내가 원하는 데이터 만으로 쿼리셋으로 만든다
         doc['searched'] = searched  # 앞에서 선언해준 doc에 새로 만든 키값을 추가한다
         doc['search_list'] = search_list
-        return render(request, 'list.html', doc)
+        return render(request, 'list.html', doc, page_obj)
 
 
 # !!필터기능 만들기!!
