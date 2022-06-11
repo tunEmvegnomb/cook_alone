@@ -20,32 +20,67 @@
     <!-- style.css 파일을 같은 폴더에 만들고, head 태그에서 불러오기 -->
     <link rel="stylesheet" type="text/css" href="/static/css/upload.css">
     <script src="\static\js\make_recipe.js"></script>
+    <style>
+        body {
+            font-family: 'Gowun Batang', serif;
+            background-image: url("/static/image/source/lime.jpg");
+            background-size: cover;
+            background-position: center;
+            height: 1500px;
+        }
+        .nav-link{
+            color:white;
+            font-size: 1rem;
+        }
+        .navbar-brand{
+            color:white;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
 <!--    여기서부터 네비게이션바-->
-<nav class="naviBar">
-    <ul>
-        <li><a class="logoLink" href="/"><img class="logoIcon" src="/static/image/source/logo.png"></a></li>
-        <li><a class="menuLink" href="/search/">전체 레시피 보기</a></li>
-        <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
-        <li><a class="menuLink" href="/write">나만의 레시피</a></li>
-        <li><a class="menuLink" href="/myrecipe/{{ user.id }}">마이페이지</a></li>
-{#        <li>#}
-{#            <a class="myPageLink" href="/login"#}
-{#            ><img src="/static/image/source/myPageIcon.png" class="loginIcon"#}
-{#            /></a>#}
-{#        </li>#}
-        {% if user.is_authenticated %}
-            <li> {{ user }} 님 반갑습니다</li>
-            <li><a class="menuLink" href="/logout"> 로그아웃 </a></li>
-        {% endif %}
-    </ul>
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid" >
+        <a class="navbar-brand" href="/">혼자서도 잘해요리</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" >
+                <a class="nav-link" aria-current="page" href="/search">전체 레시피</a>
+                <a class="nav-link" href="/write">나만의 레시피</a>
+                <a class="nav-link" href="/myrecipe/{{ user.id }}">마이페이지</a>
+
+            </div>
+        </div>
+    </div>
+    <div>
+
+        <div class="navbar-nav" style="width:300px" >
+            {% if user.is_authenticated %}
+            <a class="nav-link">{{ user }} 님 반갑습니다</a>
+            <a class="nav-link" href="/logout">로그아웃</a>
+            {% else %}
+            <a class="myPageLink" href="/login">
+                <img src="/static/image/source/myPageIcon.png" class="loginIcon"/>
+            </a>
+            {% endif %}
+        </div>
+    </div>
 </nav>
 <!--실제 컨텐츠 작성-->
 <div class="wrap">
     <!--여기서부터 입력 창-->
-    <div>
+    <div class="list-title">
+        <img src=""/>
+        <img src=""/>
+
+        <br><br><br><br><br><br>
+    </div>
+    <div style="background-color: whitesmoke; width: 710px; margin: 0 auto; border-radius:4px;">
         <form action="/write/" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 {#            <img src="" alt="이미지" class="random-food"/>#}
