@@ -35,7 +35,7 @@
 .mypage-menubar {
   margin: 80px 0;
   padding: 20px 30px;
-  border: 3px solid var(--orange);
+  border: 3px solid;
   border-radius: 15px;
 }
 
@@ -50,13 +50,11 @@
   font-size: 25px;
 }
 
-.mypage-menu a:hover {
-  color: var(--default);
-}
+
 
 .mypage-menubar .current a {
   text-decoration: underline;
-  color: var(--default);
+
   font-weight: 500;
 }
 
@@ -77,7 +75,7 @@
 }
 
 .mypage-sec-col .new_recipe-btn {
-  background-color: var(--bluegreen);
+
   border: none;
   border-radius: 30px;
   color: white;
@@ -98,7 +96,7 @@
 .myrecipe-item {
   width: 170px;
   height: 160px;
-  border: 1px solid var(--default);
+
   border-radius: 23px;
   padding: 14px;
   font-size: 20px;
@@ -121,12 +119,10 @@
   overflow-wrap: normal;
   line-height: 120%;
   text-decoration: none;
-  color: var(--default);
+
 }
 
-.myrecipe-item i {
-  color: var(--default);
-}
+
 
 .myrecipe-title:hover,
 .myrecipe-update:hover,

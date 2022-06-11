@@ -71,7 +71,8 @@ def view_search(request):
             title = Recipe.objects.all().values()[i]['title'] #제목 꺼내오기
 
             if searched in title:#타이틀에 내가 원하는 이름이 있다면
-                search_list.append(Recipe.objects.all().values()[i])#내가 원하는 데이터 만으로 쿼리셋으로 만든다
+                search_list.append(Recipe.objects.all().values()[i])
+                #내가 원하는 데이터 만으로 쿼리셋으로 만든다
         doc['searched'] = searched #앞에서 선언해준 doc에 새로 만든 키값을 추가한다
         doc['search_list'] = search_list
         return render(request, 'list.html', doc)
