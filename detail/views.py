@@ -12,7 +12,10 @@ def view_detail(request, id):
     target_recipe = Recipe.objects.get(id=id)
     target_like = LikeModel.objects.filter(like_recipe=id)
     all_comment = CommentModel.objects.filter(comment_recipe=id).order_by('-created_at')
-    target_reco = RecommendModel.objects.get(id=id)
+    try:
+        target_reco = RecommendModel.objects.get(id=id)
+    except:
+        target_reco = RecommendModel.objects.get(id=100)
     reco_list = []
     reco_list.append(int(target_reco.reco1.strip('()').split(',')[0]) + 1)
     reco_list.append(int(target_reco.reco2.strip('()').split(',')[0]) + 1)
