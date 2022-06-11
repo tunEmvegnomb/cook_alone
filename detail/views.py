@@ -4,12 +4,14 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .models import CommentModel
 from post.models import Recipe
+from recommend.models import RecommendModel
 
 # Create your views here.
 def view_detail(request, id):
     target_recipe = Recipe.objects.get(id=id)
     target_like = LikeModel.objects.filter(like_recipe=id)
     all_comment = CommentModel.objects.filter(comment_recipe=id).order_by('-created_at')
+    reco_list = RecommendModel.objects.get(id=id)
 
     # 타겟 재료 정제
     target_ing = target_recipe.ingredient
@@ -25,7 +27,14 @@ def view_detail(request, id):
         like_status = True
     else:
         like_status = False
-    return render(request, 'detail.html', {'recipe': target_recipe, 'like_status': like_status, 'comment':all_comment, 'ing_list': target_ing, 'cookstep_list':target_step})
+    return render(request, 'detail.html', {
+        'recipe': target_recipe,
+        'like_status': like_status,
+        'comment':all_comment,
+        'ing_list': target_ing,
+        'cookstep_list':target_step,
+        'reco_list': reco_list
+    })
 
 @login_required
 def like_post(request, id):
