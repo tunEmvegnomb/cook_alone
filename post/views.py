@@ -3,8 +3,8 @@ from detail.models import LikeModel
 from post.models import Recipe
 from recommend.models import RecommendModel
 from user.models import UserModel
-import pprint
 from django.core.paginator import Paginator
+from django.shortcuts import render,redirect
 
 
 # Create your views here.
