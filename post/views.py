@@ -1,4 +1,3 @@
-from django.shortcuts import render, redirect
 from .models import Recipe, Timecate, Diffcate
 from detail.models import LikeModel
 from post.models import Recipe

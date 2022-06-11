@@ -22,6 +22,9 @@
     <style>
         body {
             font-family: 'Gowun Batang', serif;
+            background-image: url("/static/image/source/background3.jpg");
+            background-size: contain;
+            background-repeat: no-repeat;
         }
 
         .cardImage {
@@ -71,6 +74,12 @@
         .like-div {
             float: left;
         }
+        .navbar navbar-expand-lg{
+            background-image: url("/static/image/source/top-view-1248955.jpg");
+        }
+        .wrap{
+            background-color: transparent;
+        }
 
     </style>
     <script>
@@ -98,25 +107,35 @@
 </head>
 
 <body>
-<nav class="naviBar">
-    <ul>
-        <li><a class="logoLink" href="/"><img class="logoIcon" src="/static/image/source/logo.png"></a></li>
-        <li><a class="menuLink" href="/search/">전체 레시피 보기</a></li>
-        <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
-        <li><a class="menuLink" href="/write">나만의 레시피</a></li>
-        <li><a class="menuLink" href="/myrecipe/{{ user.id }}">마이페이지</a></li>
+<nav class="navbar navbar-expand-lg" style="background-image: url("/static/image/source/top-view-1248955.jpg")">
+    <div class="container-fluid" >
+        <a class="navbar-brand" href="/">혼자서도 잘해요리</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" >
+                <a class="nav-link" aria-current="page" href="/search">전체 레시피</a>
+                <a class="nav-link" href="/write">나만의 레시피</a>
+                <a class="nav-link" href="/myrecipe/{{ user.id }}">마이페이지</a>
 
-        {% if user.is_authenticated %}
-            <li> {{ user }} 님 반갑습니다</li>
-            <li><a class="menuLink" href="/logout"> 로그아웃 </a></li>
-        {% else %}
-            <li>
-                <a class="myPageLink" href="/login"
-                ><img src="/static/image/source/myPageIcon.png" class="loginIcon"
-                /></a>
-            </li>
-        {% endif %}
-    </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+
+        <div class="navbar-nav" style="width:300px" >
+            {% if user.is_authenticated %}
+            <a class="nav-link">{{ user }} 님 반갑습니다</a>
+            <a class="nav-link" href="/logout">로그아웃</a>
+            {% else %}
+            <a class="myPageLink" href="/login">
+                <img src="/static/image/source/myPageIcon.png" class="loginIcon"/>
+            </a>
+            {% endif %}
+        </div>
+    </div>
 </nav>
 <main class="wrap">
     <div class="list-title">
@@ -186,10 +205,11 @@
                         <div class="card-img-div">
                             <a href="/detail/{{ recipe.id }}">
                                 <img
-                                        src=f"{{ recipe.img_url }}"
-                                        class="card-img-top"
+                                        src={{ recipe.img_url }}
+                                                class="card-img-top"
                                         alt="..."
-                                        style="width: 320px; height: 240px; object-fit: cover"/>
+                                        style="width: 320px; height: 240px"
+                                />
 
                             </a>
                         </div>
