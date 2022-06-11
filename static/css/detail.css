@@ -221,15 +221,12 @@ body {
 
 .imforWrap {
     background-color: white;
-    border-top: #EDEDED solid 1pt;
+    margin:0 auto;
     padding: 250px 30px 30px 30px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-radius: 4px;
+
 }
 
-.container {
-    padding: 0 30px 0 30px;
-}
 
 .sortBar {
     position: relative;
@@ -248,9 +245,7 @@ body {
 }
 
 .recipeSort {
-    text-decoration: none;
-    outline: 0;
-    border: 0;
+
     color: #3A3845;
     display: inline-block;
     font-size: 20px;
@@ -285,10 +280,11 @@ body {
 .tabContent {
     display: none;
     padding: 60px 70px 60px 70px;
-    border-radius: 20px;
     box-shadow: rgba(193,193,193,0.92) 0 2pt 2pt -0.5pt;
-    background-color: #FFF8F5;
+    background-color: #c3d391;
+    width:500px;
 }
+
 
 .tabContent.current {
     display: inherit;
