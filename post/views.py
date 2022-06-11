@@ -56,7 +56,7 @@ def view_search(request):
             author = "혼자서도 잘해요리"
         all_recipe[index]['like_num'] = num
         all_recipe[index]['author'] = author
-    all_recipe.reverse()
+    # all_recipe.reverse()
 
     # !!최신순, 인기순 필터 만들기!!
     like_sort_list = sorted(all_recipe, key=lambda d: d['like_num'])

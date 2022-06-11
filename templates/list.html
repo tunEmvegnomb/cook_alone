@@ -22,11 +22,13 @@
     <style>
         body {
             font-family: 'Gowun Batang', serif;
-            background-image: url("/static/image/source/background3.jpg");
+            background-image: url("/static/image/source/asparagus.jpg");
             background-size: contain;
             background-repeat: no-repeat;
         }
-
+        title{
+            color:white;
+        }
         .cardImage {
             background-size: cover;
             background-position: center;
@@ -82,6 +84,14 @@
         .wrap {
             background-color: transparent;
         }
+        .nav-link{
+            color:white;
+            font-size: 1rem;
+        }
+        .navbar-brand{
+            color:white;
+            font-weight: bold;
+        }
 
         .footer_paginator {
             background-color: whitesmoke;
@@ -125,13 +135,14 @@
 
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>전세계 1인 가구를 위한 레시피</title>
+    <title style="color:white; font-weight: bold">전세계 1인 가구를 위한 레시피</title>
     <link rel="shortcut icon" href="/static/img/cook_hat.png"/>
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg" style="background-image: url('/static/image/source/top-view-1248955.jpg')">
-    <div class="container-fluid">
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid" >
         <a class="navbar-brand" href="/">혼자서도 잘해요리</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -420,16 +431,16 @@
 <footer>
     <div class="footer_paginator">
         <a href="#"> < </a>
-        <a href="#"> 1 </a>
-        <a href="#"> 2 </a>
-        <a href="#"> 3 </a>
-        <a href="#"> 4 </a>
-        <a href="#"> 5 </a>
-        <a href="#"> 6 </a>
-        <a href="#"> 7 </a>
-        <a href="#"> 8 </a>
-        <a href="#"> 9 </a>
-        <a href="#"> 10 </a>
+        <a href="/search/?page=1"> 1 </a>
+        <a href="/search/?page=2"> 2 </a>
+        <a href="/search/?page=3"> 3 </a>
+        <a href="/search/?page=4"> 4 </a>
+        <a href="/search/?page=5"> 5 </a>
+        <a href="/search/?page=6"> 6 </a>
+        <a href="/search/?page=7"> 7 </a>
+        <a href="/search/?page=8"> 8 </a>
+        <a href="/search/?page=9"> 9 </a>
+        <a href="/search/?page=10"> 10 </a>
         <a href="#"> > </a>
     </div>
 </footer>
