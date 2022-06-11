@@ -24,7 +24,8 @@
 </head>
 
 <body>
-<nav class="naviBar">
+<div class="head-div">
+    <nav class="naviBar">
     <ul>
         <li><a class="logoLink" href="/"><img class="logoIcon" src="/static/image/source/logo.png"></a></li>
         <li><a class="menuLink" aria-current="page" href="/search/?page=1">전체 레시피</a></li>
@@ -42,6 +43,8 @@
         {% endif %}
     </ul>
 </nav>
+</div>
+
 <main class="wrap main-col signup-main">
     <h1 class="signup-title">회원가입</h1>
     <form class="form-area" method="post" action="/signup/">
