@@ -70,8 +70,10 @@ def view_search(request):
         'difficulty': difficulty,
         'like_sort_list': like_sort_list,
     }
-    print(f'페이지->{page_number}, 리스트->{all_recipes}')
+    # print(f'페이지->{page_number}, 리스트->{all_recipes}')
+
     if request.method == 'GET':
+        print(f'doc-->{doc}')
         return render(request, 'list.html', doc)
     elif request.method == 'POST':
         searched = request.POST.get('searched', '')

@@ -107,7 +107,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg" style="background-image: url("/static/image/source/top-view-1248955.jpg")">
+<nav class="navbar navbar-expand-lg" style="background-image: url('/static/image/source/top-view-1248955.jpg')">
     <div class="container-fluid" >
         <a class="navbar-brand" href="/">혼자서도 잘해요리</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -345,55 +345,71 @@
                 </div>
             </div>
         {% endfor %}
-        {% for recipe in like_sort_list %}
-            <div class="col_like_sort">
-                <div class="card">
-                    <div class="card-img-div">
-                        <a href="/detail/{{ recipe.id }}">
-                            {% if recipe.img_url %}
-                                <img
-                                        src={{ recipe.img_url }}
-                                                class="card-img-top"
-                                        alt="..."
-                                        style="width: 320px; height: 240px"
-                                />
-                            {% else %}
-                                <img
-                                    src="/media/{{ recipe.img_file }}"
-                                            class="card-img-top"
-                                    alt="..."
-                                    style="width: 320px; height: 240px"
-                            />
-                            {% endif %}
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-info">
-                            <a href="/detail/{{ recipe.id }}" class="recipe-link">
-                                <span class="card-title">{{ recipe.title }}</span>
-                            </a>
-                            <div class="card-bottom-row">
-                                <span class="card-text">{{ recipe.author }}</span>
-                                <div class="like-div">
-                                    <span class="like-text">추천</span>
-                                    <span class="like-num">{{ recipe.like_num }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-like">
-                            <i class="fa-regular fa-thumbs-up like-icon"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+{#        {% for recipe in like_sort_list %}#}
+{#            <div class="col_like_sort">#}
+{#                <div class="card">#}
+{#                    <div class="card-img-div">#}
+{#                        <a href="/detail/{{ recipe.id }}">#}
+{#                            {% if recipe.img_url %}#}
+{#                                <img#}
+{#                                        src={{ recipe.img_url }}#}
+{#                                                class="card-img-top"#}
+{#                                        alt="..."#}
+{#                                        style="width: 320px; height: 240px"#}
+{#                                />#}
+{#                            {% else %}#}
+{#                                <img#}
+{#                                    src="/media/{{ recipe.img_file }}"#}
+{#                                            class="card-img-top"#}
+{#                                    alt="..."#}
+{#                                    style="width: 320px; height: 240px"#}
+{#                            />#}
+{#                            {% endif %}#}
+{#                        </a>#}
+{#                    </div>#}
+{#                    <div class="card-body">#}
+{#                        <div class="card-info">#}
+{#                            <a href="/detail/{{ recipe.id }}" class="recipe-link">#}
+{#                                <span class="card-title">{{ recipe.title }}</span>#}
+{#                            </a>#}
+{#                            <div class="card-bottom-row">#}
+{#                                <span class="card-text">{{ recipe.author }}</span>#}
+{#                                <div class="like-div">#}
+{#                                    <span class="like-text">추천</span>#}
+{#                                    <span class="like-num">{{ recipe.like_num }}</span>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="card-like">#}
+{#                            <i class="fa-regular fa-thumbs-up like-icon"></i>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endfor %}#}
     </div>
-    <div class="d-flex justify-content-center">
-        <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-    </div>
+{#    <div class="d-flex justify-content-center">#}
+{#        <div class="spinner-border" role="status">#}
+{#            <span class="visually-hidden">Loading...</span>#}
+{#        </div>#}
+{#    </div>#}
 </main>
+<footer>
+    <div class="pagi">
+        <a href="#"> < </a>
+        <a href="#"> 1 </a>
+        <a href="#"> 2 </a>
+        <a href="#"> 3 </a>
+        <a href="#"> 4 </a>
+        <a href="#"> 5 </a>
+        <a href="#"> 6 </a>
+        <a href="#"> 7 </a>
+        <a href="#"> 8 </a>
+        <a href="#"> 9 </a>
+        <a href="#"> 10 </a>
+        <a href="#"> > </a>
+    </div>
+</footer>
 <script>
     {#const title_input= document.getElementById("title_input");//검색창 내용물#}
     {##}
