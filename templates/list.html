@@ -22,13 +22,27 @@
     <style>
         body {
             font-family: 'Gowun Batang', serif;
-            background-image: url("/static/image/source/asparagus.jpg");
+            background-image: url("/static/image/source/asparagus3.jpg");
             background-size: contain;
             background-repeat: no-repeat;
         }
 
         title {
             color: white;
+
+        }
+        a{
+            color:gray;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        button{
+            background-color: transparent;
+            border: none;
+        }
+        button:hover{
+            color: #63a355;
+            font-weight: bold;
         }
 
         .cardImage {
@@ -115,7 +129,8 @@
         }
 
         .footer_paginator a {
-            font-size: 30px;
+            font-size: 1rem;
+            font-weight: bold;
             margin: 5px;
         }
 
@@ -140,7 +155,7 @@
 
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title style="color:white; font-weight: bold">전세계 1인 가구를 위한 레시피</title>
+
     <link rel="shortcut icon" href="/static/img/cook_hat.png"/>
 </head>
 
@@ -180,9 +195,10 @@
     <div class="list-title">
         <img src=""/>
         <img src=""/>
-        <span style="left:-150px">전세계 1인 가구를 위한 레시피</span>
+        <title style="left:-150px">전세계 1인 가구를 위한 레시피</title>
         <br><br><br><br>
     </div>
+    <div style="height: 150px"></div>
     {% if searched %}
         <h1>{{ searched }}</h1>
     {% else %}
@@ -190,7 +206,7 @@
     {% endif %}
     <!--------------------서치바----------------------->
 
-    <form action="/search/" method="post">
+    <form action="/search/searching/" method="post">
         {% csrf_token %}
         <div class="mb-3">
             <input class="form-control" type="text" name="searched">
@@ -223,125 +239,128 @@
                         {% csrf_token %}
                         <button id="{{ filter }}" class="filter-value" name="difficulty"
                                 value={{ filter }} type="submit">{{ filter }}</button>
+                        </form>
                     {% endfor %}
-                    </form>
-
                 </div>
             </div>
         </div>
     </div>
     <div id="searchInfo"></div>
     <div class="list-sort">
-        <button class="sortByDate">최신순</button>
-        <button class="sortByLike">인기순</button>
+        <form action="/search/filter/" method="post">
+            {% csrf_token %}
+            <button name ="most_filter" value="most_recent" class="sortByDate" type="submit">최신순</button>
+            <button name ="most_filter" value="most_popular"  class="sortByLike" type="submit">인기순</button>
+        </form>
+
     </div>
     <!--------------------필터----------------------->
     <div class="row row-cols-1 row-cols-md-3 g-4 card-group">
-        {% if searched %}
-            {% for recipe in search_list %}
-                <div class="col">
-                    <div class="card">
-                        <div class="card-img-div">
-                            <a href="/detail/{{ recipe.id }}">
-                                <img
-                                        src={{ recipe.img_url }}
-                                                class="card-img-top"
-                                        alt="..."
-                                        style="width: 320px; height: 240px"
-                                />
-
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-info">
-                                <a href="/detail/{{ recipe.id }}" class="recipe-link"
-                                ><span class="card-title">{{ recipe.title }}</span></a
-                                >
-                                <div class="card-bottom-row">
-                                    <span class="card-text">{{ recipe.author }}</span>
-                                    <div class="like-div">
-                                        <span class="like-text">추천</span>
-                                        <span class="like-num">{{ recipe.like_num }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-like">
-                                <i class="fa-regular fa-thumbs-up like-icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        {% elif timecost %}
-            {% for recipe in filter_value %}
-                <div class="col">
-                    <div class="card">
-                        <div class="card-img-div">
-                            <a href="/detail/{{ recipe.id }}">
-                                <img
-                                        src={{ recipe.img_url }}
-                                                class="card-img-top"
-                                        alt="..."
-                                        style="width: 320px; height: 240px"
-                                />
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-info">
-                                <a href="/detail/{{ recipe.id }}" class="recipe-link"
-                                ><span class="card-title">{{ recipe.title }}</span></a
-                                >
-                                <div class="card-bottom-row">
-                                    <span class="card-text">{{ recipe.author }}</span>
-                                    <div class="like-div">
-                                        <span class="like-text">추천</span>
-                                        <span class="like-num">{{ recipe.like_num }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-like">
-                                <i class="fa-regular fa-thumbs-up like-icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        {% elif difficulty %}
-            {% for recipe in filter_value %}
-                <div class="col">
-                    <div class="card">
-                        <div class="card-img-div">
-                            <a href="/detail/{{ recipe.id }}">
-                                <img
-                                        src={{ recipe.img_url }}
-                                                class="card-img-top"
-                                        alt="..."
-                                        style="width: 320px; height: 240px"
-                                />
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-info">
-                                <a href="/detail/{{ recipe.id }}" class="recipe-link"
-                                ><span class="card-title">{{ recipe.title }}</span></a
-                                >
-                                <div class="card-bottom-row">
-                                    <span class="card-text">{{ recipe.author }}</span>
-                                    <div class="like-div">
-                                        <span class="like-text">추천</span>
-                                        <span class="like-num">{{ recipe.like_num }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-like">
-                                <i class="fa-regular fa-thumbs-up like-icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        {% else %}
-        {% endif %}
+{#        {% if searched %}#}
+{#            {% for recipe in search_list %}#}
+{#                <div class="col">#}
+{#                    <div class="card">#}
+{#                        <div class="card-img-div">#}
+{#                            <a href="/detail/{{ recipe.id }}">#}
+{#                                <img#}
+{#                                        src={{ recipe.img_url }}#}
+{#                                                class="card-img-top"#}
+{#                                        alt="..."#}
+{#                                        style="width: 320px; height: 240px"#}
+{#                                />#}
+{##}
+{#                            </a>#}
+{#                        </div>#}
+{#                        <div class="card-body">#}
+{#                            <div class="card-info">#}
+{#                                <a href="/detail/{{ recipe.id }}" class="recipe-link"#}
+{#                                ><span class="card-title">{{ recipe.title }}</span></a#}
+{#                                >#}
+{#                                <div class="card-bottom-row">#}
+{#                                    <span class="card-text">{{ recipe.author }}</span>#}
+{#                                    <div class="like-div">#}
+{#                                        <span class="like-text">추천</span>#}
+{#                                        <span class="like-num">{{ recipe.like_num }}</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="card-like">#}
+{#                                <i class="fa-regular fa-thumbs-up like-icon"></i>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        {% elif timecost %}#}
+{#            {% for recipe in filter_value %}#}
+{#                <div class="col">#}
+{#                    <div class="card">#}
+{#                        <div class="card-img-div">#}
+{#                            <a href="/detail/{{ recipe.id }}">#}
+{#                                <img#}
+{#                                        src={{ recipe.img_url }}#}
+{#                                                class="card-img-top"#}
+{#                                        alt="..."#}
+{#                                        style="width: 320px; height: 240px"#}
+{#                                />#}
+{#                            </a>#}
+{#                        </div>#}
+{#                        <div class="card-body">#}
+{#                            <div class="card-info">#}
+{#                                <a href="/detail/{{ recipe.id }}" class="recipe-link"#}
+{#                                ><span class="card-title">{{ recipe.title }}</span></a#}
+{#                                >#}
+{#                                <div class="card-bottom-row">#}
+{#                                    <span class="card-text">{{ recipe.author }}</span>#}
+{#                                    <div class="like-div">#}
+{#                                        <span class="like-text">추천</span>#}
+{#                                        <span class="like-num">{{ recipe.like_num }}</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="card-like">#}
+{#                                <i class="fa-regular fa-thumbs-up like-icon"></i>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        {% elif difficulty %}#}
+{#            {% for recipe in filter_value %}#}
+{#                <div class="col">#}
+{#                    <div class="card">#}
+{#                        <div class="card-img-div">#}
+{#                            <a href="/detail/{{ recipe.id }}">#}
+{#                                <img#}
+{#                                        src={{ recipe.img_url }}#}
+{#                                                class="card-img-top"#}
+{#                                        alt="..."#}
+{#                                        style="width: 320px; height: 240px"#}
+{#                                />#}
+{#                            </a>#}
+{#                        </div>#}
+{#                        <div class="card-body">#}
+{#                            <div class="card-info">#}
+{#                                <a href="/detail/{{ recipe.id }}" class="recipe-link"#}
+{#                                ><span class="card-title">{{ recipe.title }}</span></a#}
+{#                                >#}
+{#                                <div class="card-bottom-row">#}
+{#                                    <span class="card-text">{{ recipe.author }}</span>#}
+{#                                    <div class="like-div">#}
+{#                                        <span class="like-text">추천</span>#}
+{#                                        <span class="like-num">{{ recipe.like_num }}</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="card-like">#}
+{#                                <i class="fa-regular fa-thumbs-up like-icon"></i>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        {% else %}#}
+{#        {% endif %}#}
         {% for recipe in recipes %}
             <div class="col_normal_recipes">
                 <div class="card">
@@ -434,7 +453,8 @@
     {#    </div>#}
 </main>
 <footer>
-    <div class="footer_paginator">
+    <div class="footer_paginator" >
+    여기에 아무거나 써보자
         {% if page_obj.has_previous %}
             <a href="?page=1"> ◁ </a>
             <a href="?page={{ page_obj.previous_page_number }}"> < </a>
@@ -446,7 +466,7 @@
             <a href="?page={{ page_obj.next_page_number }}"> > </a>
             <a href="?page={{ page_obj.paginator.num_pages }}"> ▷ </a>
         {% endif %}
-
+여기가 끝이다
     </div>
 </footer>
 <script>

@@ -8,7 +8,7 @@ from django.shortcuts import render,redirect
 
 
 # Create your views here.
-
+# def pagenating(request_list):
 
 def home(request):
     user = request.user.is_authenticated
@@ -23,6 +23,8 @@ def view_main(request):
         target_reco = RecommendModel.objects.get(id=request.session['latestRecipe'])
     except:
         target_reco = RecommendModel.objects.get(id=1)
+der(request, 'main.html', {'reco': target_reco, 'reco_ing': reco_ing})
+
     reco_main = int((target_reco.reco1.strip('()').split(',')[0])) + 1
     reco_main = Recipe.objects.get(id=reco_main)
     reco_list = []
@@ -38,19 +40,85 @@ def view_main(request):
     return render(request, 'main.html', {'reco_main': reco_main, 'reco_recipes': reco_recipes})
 
 
+
 def view_search(request):
     total = Recipe.objects.count()
     # recipes = Recipe.objects.all()
+    # print(total)
+    print(request.session['filter_name'])
+    print(request.session['filter_type'])
+
+
+
+
+    #경수의 수1. 일반적인 경우의 수
     all_recipes = Recipe.objects.get_queryset().order_by('-id')
 
+    all_recipe = list(all_recipes.values('id', 'title', 'img_url', 'img_file', 'author_id'))
+    # !!카드 속 좋아요, 작성자 보이기!!
+    # for a in range(total):
+    for index, recipe in enumerate(all_recipe):
+        # print(f'index->{index}, recipe->{recipe}')
+        num = LikeModel.objects.filter(like_recipe_id=index).count()
+        # if index <=total:
+        all_recipe[total-index-1]['like_num'] = num
+
+    # print(all_recipe)
+
+        # id = all_recipe[index]['author_id']
+        # try:
+        #     author = UserModel.objects.get(id=id)
+        #     author = str(author)
+        # except:
+        #     author = "혼자서도 잘해요리"
+        # all_recipe[index]['author'] = author
+    if request.session['filter_type'] == "filters":
+
+
+        if request.session['filter_name']== "10분":
+            filter_value = Recipe.objects.filter(difficulty="10분 이내").values()
+        elif request.session['filter_name'] == "20분":
+            filter_value = Recipe.objects.filter(difficulty="20분 이내").values()
+        elif request.session['filter_name'] == "30분":
+            filter_value = Recipe.objects.filter(difficulty="30분 이내").values()
+        elif request.session['filter_name'] == "60분":
+            filter_value = Recipe.objects.filter(difficulty="60분 이내").values()
+        elif request.session['filter_name'] == "상":
+            filter_value = Recipe.objects.filter(timecost="중급").values()
+        elif request.session['filter_name'] == "중":
+            filter_value = Recipe.objects.filter(timecost="초급").values()
+        elif request.session['filter_name'] == "하":
+            filter_value = Recipe.objects.filter(timecost="아무나").values()
+        elif request.session['filter_name'] == "most_popular":
+            filter_value = sorted(all_recipe, key=lambda d: d['like_num'])
+            filter_value.reverse()
+            print(filter_value[2])
+            # all_recipe = list(all_recipes.values('id', 'title', 'img_url', 'img_file', 'author_id'))
+            # for i in all_recipe:
+            #
+        elif request.session['filter_name'] == "most_recent":
+            filter_value = all_recipe
+        #필터를 사용했을때의 결과값
+        using_recipes =filter_value
+    elif request.session['filter_type'] == "searched":
+        using_recipes = Recipe.objects.filter(title__contains=request.session['filter_name'])
+
+    else:
+        using_recipes = all_recipe
+    name= request.session['filter_name']
+    print(f'using2->{name}')
+    print(f'using2->{using_recipes[0]}')
+
     # <<<--- 페이지네이션 --- #
-    paginator = Paginator(all_recipes, 15)
+    paginator = Paginator(using_recipes, 15)
     page_number = request.GET.get('page')
     p_recipe = paginator.page(page_number).object_list
     page_obj = paginator.page(page_number)
+    print(page_obj)
     # 페이지 인덱스 번호 구하기
     page_index = []
     page_digit = len(str(page_obj.number-1))
+    print(page_digit)
     if page_digit == 1:
         page_firstNum = 0
     else:
@@ -61,55 +129,46 @@ def view_search(request):
 
     # --- 페이지네이션 --->>> #
 
-    all_recipe = list(p_recipe.values('id', 'title', 'img_url', 'img_file', 'author_id'))
-    # !!카드 속 좋아요, 작성자 보이기!!
-    # for a in range(total):
-    for index, recipe in enumerate(all_recipe):
-        # print(f'index->{index}, recipe->{recipe}')
-        num = LikeModel.objects.filter(like_recipe_id=index).count()
-        id = all_recipe[index]['author_id']
-        try:
-            author = UserModel.objects.get(id=id)
-            author = str(author)
-        except:
-            author = "혼자서도 잘해요리"
-        all_recipe[index]['like_num'] = num
-        all_recipe[index]['author'] = author
+
     # all_recipe.reverse()
 
     # !!최신순, 인기순 필터 만들기!!
-    like_sort_list = sorted(all_recipe, key=lambda d: d['like_num'])
-    like_sort_list.reverse()
+    # like_sort_list = sorted(all_recipe, key=lambda d: d['like_num'])
+    # like_sort_list.reverse()
 
     timecost = ["10분", "20분", "30분", "60분"]
     difficulty = ["상", "중", "하"]
     doc = {
-        'recipes': all_recipe,
+        'recipes': using_recipes,
         'timecost': timecost,
         'difficulty': difficulty,
-        'like_sort_list': like_sort_list,
+        # 'like_sort_list': like_sort_list,
         'page_obj': page_obj,
         'page_index':page_index
     }
     # print(f'페이지->{page_number}, 리스트->{all_recipes}')
 
     if request.method == 'GET':
-        print(f'doc-->{doc}')
+        # print(f'doc-->{doc}')
         return render(request, 'list.html', doc)
-    elif request.method == 'POST':
+
+
+# !!서치기능 새로 만들기ㅜㅜㅜ!!
+def searching(request):
+    if request.method == 'POST':
         searched = request.POST.get('searched', '')
-
         search_list = []
-
-        # !!검색기능 만들기!!
+        #!!검색기능 만들기!!
+        total = Recipe.objects.count()
         for i in range(total):
             title = Recipe.objects.all().values()[i]['title']  # 제목 꺼내오기
 
             if searched in title:  # 타이틀에 내가 원하는 이름이 있다면
                 search_list.append(Recipe.objects.all().values()[i])  # 내가 원하는 데이터 만으로 쿼리셋으로 만든다
-        doc['searched'] = searched  # 앞에서 선언해준 doc에 새로 만든 키값을 추가한다
-        doc['search_list'] = search_list
-        return render(request, 'list.html', doc, page_obj)
+        request.session['filter_name'] = searched
+        request.session['filter_type'] = "searched"
+
+        return redirect('/search/?page=1')
 
 
 # !!필터기능 만들기!!
@@ -117,43 +176,13 @@ def view_filter(request):
     if request.method == 'POST':
         timecost_value = request.POST.get('timecost', '')
         difficulty_value = request.POST.get('difficulty', '')
+        mostfilter_value = request.POST.get('most_filter', '')
 
-        recipe = Recipe.objects.all()
-        all_recipe = Recipe.objects.all()
+        request.session['filter_name'] = timecost_value or difficulty_value or mostfilter_value
+        request.session['filter_type'] = "filters"
+        print(request.session['filter_name'])##most_popular
 
-        ten_min = Recipe.objects.filter(difficulty="10분 이내").values()
-        twenty_min = Recipe.objects.filter(difficulty="20분 이내").values()
-        thirty_min = Recipe.objects.filter(difficulty="30분 이내").values()
-        sixty_min = Recipe.objects.filter(difficulty="60분 이내").values()
-        difficult = Recipe.objects.filter(timecost="중급").values()
-        soso = Recipe.objects.filter(timecost="초급").values()
-        easy = Recipe.objects.filter(timecost="아무나").values()
-
-        timecost = ["10분", "20분", "30분", "60분"]
-        difficulty = ["상", "중", "하"]
-
-        if timecost_value == "10분":
-            filter_value = ten_min
-        elif timecost_value == "20분":
-            filter_value = twenty_min
-        elif timecost_value == "30분":
-            filter_value = thirty_min
-        elif timecost_value == "60분":
-            filter_value = sixty_min
-        elif difficulty_value == "상":
-            filter_value = difficult
-        elif difficulty_value == "중":
-            filter_value = soso
-        elif difficulty_value == "하":
-            filter_value = easy
-        doc = {
-            'recipes': all_recipe,
-            'new_recipe': recipe,
-            'timecost': timecost,
-            'difficulty': difficulty,
-            'filter_value': filter_value
-        }
-        return render(request, 'list.html', doc)
+        return redirect('/search/?page=1')
 
 
 def upload_recipes(request):
