@@ -25,19 +25,23 @@ def view_main(request):
         target_reco = RecommendModel.objects.get(id=1)
     target_reco = target_reco.reco1
     target_reco = int(target_reco.strip('()').split(',')[0]) + 1
-    print(f'세션 잘 가져오셨어요? ->{target_reco}')
+    # print(f'세션 잘 가져오셨어요? ->{target_reco}')
     target_reco = Recipe.objects.get(id=target_reco)
     # target_reco = Recipe.objects.get(id=target_reco)
-    print(f'그래서 레시피는 뭔데? ->{target_reco}')
+    # print(f'그래서 레시피는 뭔데? ->{target_reco}')
     reco_ing = target_reco.ingredient.split('>')
     del reco_ing[-1]
-    print(reco_ing)
+    # print(reco_ing)
     return render(request, 'main.html', {'reco': target_reco, 'reco_ing': reco_ing})
 
 
 def view_search(request):
     total = Recipe.objects.count()
     # recipes = Recipe.objects.all()
+    # print(total)
+    print(request.session['filter_name'])
+    print(request.session['filter_type'])
+
 
 
 
@@ -48,17 +52,22 @@ def view_search(request):
     # !!카드 속 좋아요, 작성자 보이기!!
     # for a in range(total):
     for index, recipe in enumerate(all_recipe):
-        # print(f'index->{index}, recipe->{recipe}'
+        # print(f'index->{index}, recipe->{recipe}')
         num = LikeModel.objects.filter(like_recipe_id=index).count()
-        id = all_recipe[index]['author_id']
-        try:
-            author = UserModel.objects.get(id=id)
-            author = str(author)
-        except:
-            author = "혼자서도 잘해요리"
-        all_recipe[index]['like_num'] = num
-        all_recipe[index]['author'] = author
+        # if index <=total:
+        all_recipe[total-index-1]['like_num'] = num
+
+    # print(all_recipe)
+
+        # id = all_recipe[index]['author_id']
+        # try:
+        #     author = UserModel.objects.get(id=id)
+        #     author = str(author)
+        # except:
+        #     author = "혼자서도 잘해요리"
+        # all_recipe[index]['author'] = author
     if request.session['filter_type'] == "filters":
+
 
         if request.session['filter_name']== "10분":
             filter_value = Recipe.objects.filter(difficulty="10분 이내").values()
@@ -75,24 +84,35 @@ def view_search(request):
         elif request.session['filter_name'] == "하":
             filter_value = Recipe.objects.filter(timecost="아무나").values()
         elif request.session['filter_name'] == "most_popular":
-            filter_value = all_recipe
+            filter_value = sorted(all_recipe, key=lambda d: d['like_num'])
+            filter_value.reverse()
+            print(filter_value[2])
             # all_recipe = list(all_recipes.values('id', 'title', 'img_url', 'img_file', 'author_id'))
             # for i in all_recipe:
             #
-            #     filter_value = sorted(all_recipe, key=lambda d: d['like_num'])
+        elif request.session['filter_name'] == "most_recent":
+            filter_value = all_recipe
         #필터를 사용했을때의 결과값
         using_recipes =filter_value
+    elif request.session['filter_type'] == "searched":
+        using_recipes = Recipe.objects.filter(title__contains=request.session['filter_name'])
+
     else:
         using_recipes = all_recipe
+    name= request.session['filter_name']
+    print(f'using2->{name}')
+    print(f'using2->{using_recipes[0]}')
 
     # <<<--- 페이지네이션 --- #
     paginator = Paginator(using_recipes, 15)
     page_number = request.GET.get('page')
     p_recipe = paginator.page(page_number).object_list
     page_obj = paginator.page(page_number)
+    print(page_obj)
     # 페이지 인덱스 번호 구하기
     page_index = []
     page_digit = len(str(page_obj.number-1))
+    print(page_digit)
     if page_digit == 1:
         page_firstNum = 0
     else:
@@ -113,7 +133,7 @@ def view_search(request):
     timecost = ["10분", "20분", "30분", "60분"]
     difficulty = ["상", "중", "하"]
     doc = {
-        'recipes': all_recipe,
+        'recipes': using_recipes,
         'timecost': timecost,
         'difficulty': difficulty,
         # 'like_sort_list': like_sort_list,
@@ -123,30 +143,26 @@ def view_search(request):
     # print(f'페이지->{page_number}, 리스트->{all_recipes}')
 
     if request.method == 'GET':
-        print(f'doc-->{doc}')
+        # print(f'doc-->{doc}')
         return render(request, 'list.html', doc)
-    elif request.method == 'POST':
+
+
+# !!서치기능 새로 만들기ㅜㅜㅜ!!
+def searching(request):
+    if request.method == 'POST':
         searched = request.POST.get('searched', '')
-
-
         search_list = []
-
         #!!검색기능 만들기!!
+        total = Recipe.objects.count()
         for i in range(total):
             title = Recipe.objects.all().values()[i]['title']  # 제목 꺼내오기
 
             if searched in title:  # 타이틀에 내가 원하는 이름이 있다면
                 search_list.append(Recipe.objects.all().values()[i])  # 내가 원하는 데이터 만으로 쿼리셋으로 만든다
-        # doc['searched'] = searched  # 앞에서 선언해준 doc에 새로 만든 키값을 추가한다
-        # doc['search_list'] = search_list
         request.session['filter_name'] = searched
         request.session['filter_type'] = "searched"
-        request.session['filter_value'] = search_list
-        print(request.session['filter_name'])
-        print(request.session['filter_type'])
-        print(request.session['filter_value'])
 
-        return redirect('/search')
+        return redirect('/search/?page=1')
 
 
 # !!필터기능 만들기!!

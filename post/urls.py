@@ -10,6 +10,7 @@ urlpatterns =[
     path('search/', views.view_search, name='search'),
     path('write/', views.upload_recipes, name='upload_recipes'),
     path('search/filter/',views.view_filter, name='view_filter'),
+    path('search/searching/',views.searching, name='searching'),
 
 ]
 
