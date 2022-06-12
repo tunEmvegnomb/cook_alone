@@ -79,7 +79,7 @@ def view_search(request):
             using_recipes =filter_value
         # 경우의 수 2=> 서치바를 사용했는가?
         elif request.session['filter_type'] == "searched":
-            using_recipes = Recipe.objects.filter(title__contains=request.session['filter_name'])
+            using_recipes = Recipe.objects.filter(title__contains=request.session['filter_name']) or Recipe.objects.filter(user__author__contains=request.session['filter_name'])
     # 경우의 수 3=> 둘 다 아닐때에는 기존의 all_recipe를 반환
     except:
         using_recipes = all_recipe
@@ -89,11 +89,9 @@ def view_search(request):
     page_number = request.GET.get('page')
     p_recipe = paginator.page(page_number).object_list
     page_obj = paginator.page(page_number)
-    print(page_obj)
     # 페이지 인덱스 번호 구하기
     page_index = []
     page_digit = len(str(page_obj.number-1))
-    print(page_digit)
     if page_digit == 1:
         page_firstNum = 0
     else:
@@ -110,7 +108,6 @@ def view_search(request):
         'recipes': p_recipe,
         'timecost': timecost,
         'difficulty': difficulty,
-        # 'like_sort_list': like_sort_list,
         'page_obj': page_obj,
         'page_index':page_index
     }
