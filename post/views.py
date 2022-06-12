@@ -23,16 +23,19 @@ def view_main(request):
         target_reco = RecommendModel.objects.get(id=request.session['latestRecipe'])
     except:
         target_reco = RecommendModel.objects.get(id=1)
-    target_reco = target_reco.reco1
-    target_reco = int(target_reco.strip('()').split(',')[0]) + 1
-    print(f'세션 잘 가져오셨어요? ->{target_reco}')
-    target_reco = Recipe.objects.get(id=target_reco)
-    # target_reco = Recipe.objects.get(id=target_reco)
-    print(f'그래서 레시피는 뭔데? ->{target_reco}')
-    reco_ing = target_reco.ingredient.split('>')
-    del reco_ing[-1]
-    print(reco_ing)
-    return render(request, 'main.html', {'reco': target_reco, 'reco_ing': reco_ing})
+    reco_main = int((target_reco.reco1.strip('()').split(',')[0])) + 1
+    reco_main = Recipe.objects.get(id=reco_main)
+    reco_list = []
+    reco_list.append(int(target_reco.reco2.strip('()').split(',')[0]) + 1)
+    reco_list.append(int(target_reco.reco3.strip('()').split(',')[0]) + 1)
+    reco_list.append(int(target_reco.reco4.strip('()').split(',')[0]) + 1)
+    reco_list.append(int(target_reco.reco5.strip('()').split(',')[0]) + 1)
+    reco_recipes = []
+    for reco_num in reco_list:
+        reco_recipe = Recipe.objects.get(id=reco_num)
+        reco_recipes.append(reco_recipe)
+    print(f'reco_recipes->{reco_recipes}')
+    return render(request, 'main.html', {'reco_main': reco_main, 'reco_recipes': reco_recipes})
 
 
 def view_search(request):
