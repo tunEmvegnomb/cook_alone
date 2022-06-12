@@ -239,17 +239,20 @@
                         {% csrf_token %}
                         <button id="{{ filter }}" class="filter-value" name="difficulty"
                                 value={{ filter }} type="submit">{{ filter }}</button>
+                        </form>
                     {% endfor %}
-                    </form>
-
                 </div>
             </div>
         </div>
     </div>
     <div id="searchInfo"></div>
     <div class="list-sort">
-        <button class="sortByDate">최신순</button>
-        <button class="sortByLike">인기순</button>
+        <form action="/search/filter/" method="post">
+            {% csrf_token %}
+            <button name ="most_filter" value="most_recent" class="sortByDate" type="submit">최신순</button>
+            <button name ="most_filter" value="most_popular"  class="sortByLike" type="submit">인기순</button>
+        </form>
+
     </div>
     <!--------------------필터----------------------->
     <div class="row row-cols-1 row-cols-md-3 g-4 card-group">
