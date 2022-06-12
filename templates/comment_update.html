@@ -30,7 +30,7 @@
         <form action="/detail/comment/update_end/{{ all_comment.id }}" method="post">
             {% csrf_token %}
             <div class="comment_update">
-                <input type="text" class="comment_update" id="comment_update"
+                <input type="text" class="comment_update" id="comment_update" size="80"
                        name="comment_update" value="{{ all_comment.comment_content }}">
                 <button type="submit" class="comment_update_Btn" id="comment_update_Btn">수정</button>
             </div>
