@@ -57,6 +57,7 @@ def view_search(request):
         if request.session['filter_type'] == "filters":
             if request.session['filter_name'] == "10분":
                 filter_value = Recipe.objects.filter(timecost="10분 이내").values()
+
             elif request.session['filter_name'] == "20분":
                 filter_value = Recipe.objects.filter(timecost="20분 이내").values()
             elif request.session['filter_name'] == "30분":
@@ -75,14 +76,15 @@ def view_search(request):
 
             elif request.session['filter_name'] == "most_recent":
                 filter_value = all_recipe
-            #필터를 사용했을때의 결과값
+            ###필터를 사용했을때의 결과값####
             using_recipes =filter_value
         # 경우의 수 2=> 서치바를 사용했는가?
         elif request.session['filter_type'] == "searched":
-            using_recipes = Recipe.objects.filter(title__contains=request.session['filter_name']) or Recipe.objects.filter(user__author__contains=request.session['filter_name'])
+            using_recipes = Recipe.objects.filter(title__contains=request.session['filter_name']) or Recipe.objects.filter(author__username__contains=request.session['filter_name'])
     # 경우의 수 3=> 둘 다 아닐때에는 기존의 all_recipe를 반환
     except:
         using_recipes = all_recipe
+
 
     # <<<--- 페이지네이션 --- #
     paginator = Paginator(using_recipes, 15)
