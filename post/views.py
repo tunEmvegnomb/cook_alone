@@ -43,40 +43,19 @@ def view_main(request):
 
 def view_search(request):
     total = Recipe.objects.count()
-    # recipes = Recipe.objects.all()
-    # print(total)
-    # print(request.session['filter_name'])
-    # print(request.session['filter_type'])
-
-
-
-
-    #경수의 수1. 일반적인 경우의 수
     all_recipes = Recipe.objects.get_queryset().order_by('-id')
-
     all_recipe = list(all_recipes.values('id', 'title', 'img_url', 'img_file', 'author_id'))
-    # !!카드 속 좋아요, 작성자 보이기!!
-    # for a in range(total):
+
+
+    #좋아요수 보여야 하니까 all_recipe에 like_num넣기
     for index, recipe in enumerate(all_recipe):
-        # print(f'index->{index}, recipe->{recipe}')
         num = LikeModel.objects.filter(like_recipe_id=index).count()
-        # if index <=total:
         all_recipe[total-index-1]['like_num'] = num
 
-    # print(all_recipe)
-
-        # id = all_recipe[index]['author_id']
-        # try:
-        #     author = UserModel.objects.get(id=id)
-        #     author = str(author)
-        # except:
-        #     author = "혼자서도 잘해요리"
-        # all_recipe[index]['author'] = author
-    try:
+    try: #세션이 들어온게 있는지 try
+        #경우의 수 1=> 필터를 사용했는가?
         if request.session['filter_type'] == "filters":
-
-
-            if request.session['filter_name']== "10분":
+            if request.session['filter_name'] == "10분":
                 filter_value = Recipe.objects.filter(timecost="10분 이내").values()
             elif request.session['filter_name'] == "20분":
                 filter_value = Recipe.objects.filter(timecost="20분 이내").values()
@@ -93,17 +72,15 @@ def view_search(request):
             elif request.session['filter_name'] == "most_popular":
                 filter_value = sorted(all_recipe, key=lambda d: d['like_num'])
                 filter_value.reverse()
-                print(filter_value[2])
-                # all_recipe = list(all_recipes.values('id', 'title', 'img_url', 'img_file', 'author_id'))
-                # for i in all_recipe:
-                #
+
             elif request.session['filter_name'] == "most_recent":
                 filter_value = all_recipe
             #필터를 사용했을때의 결과값
             using_recipes =filter_value
+        # 경우의 수 2=> 서치바를 사용했는가?
         elif request.session['filter_type'] == "searched":
             using_recipes = Recipe.objects.filter(title__contains=request.session['filter_name'])
-
+    # 경우의 수 3=> 둘 다 아닐때에는 기존의 all_recipe를 반환
     except:
         using_recipes = all_recipe
 
@@ -127,13 +104,6 @@ def view_search(request):
 
     # --- 페이지네이션 --->>> #
 
-
-    # all_recipe.reverse()
-
-    # !!최신순, 인기순 필터 만들기!!
-    # like_sort_list = sorted(all_recipe, key=lambda d: d['like_num'])
-    # like_sort_list.reverse()
-
     timecost = ["10분", "20분", "30분", "60분"]
     difficulty = ["상", "중", "하"]
     doc = {
@@ -144,10 +114,8 @@ def view_search(request):
         'page_obj': page_obj,
         'page_index':page_index
     }
-    # print(f'페이지->{page_number}, 리스트->{all_recipes}')
 
     if request.method == 'GET':
-        # print(f'doc-->{doc}')
         return render(request, 'list.html', doc)
 
 
@@ -155,14 +123,7 @@ def view_search(request):
 def searching(request):
     if request.method == 'POST':
         searched = request.POST.get('searched', '')
-        search_list = []
-        #!!검색기능 만들기!!
-        total = Recipe.objects.count()
-        for i in range(total):
-            title = Recipe.objects.all().values()[i]['title']  # 제목 꺼내오기
 
-            if searched in title:  # 타이틀에 내가 원하는 이름이 있다면
-                search_list.append(Recipe.objects.all().values()[i])  # 내가 원하는 데이터 만으로 쿼리셋으로 만든다
         request.session['filter_name'] = searched
         request.session['filter_type'] = "searched"
 
@@ -178,7 +139,6 @@ def view_filter(request):
 
         request.session['filter_name'] = timecost_value or difficulty_value or mostfilter_value
         request.session['filter_type'] = "filters"
-        print(request.session['filter_name'])##most_popular
 
         return redirect('/search/?page=1')
 
