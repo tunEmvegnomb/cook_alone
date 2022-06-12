@@ -23,7 +23,7 @@ def view_main(request):
         target_reco = RecommendModel.objects.get(id=request.session['latestRecipe'])
     except:
         target_reco = RecommendModel.objects.get(id=1)
-der(request, 'main.html', {'reco': target_reco, 'reco_ing': reco_ing})
+
 
     reco_main = int((target_reco.reco1.strip('()').split(',')[0])) + 1
     reco_main = Recipe.objects.get(id=reco_main)
@@ -45,8 +45,8 @@ def view_search(request):
     total = Recipe.objects.count()
     # recipes = Recipe.objects.all()
     # print(total)
-    print(request.session['filter_name'])
-    print(request.session['filter_type'])
+    # print(request.session['filter_name'])
+    # print(request.session['filter_type'])
 
 
 
@@ -77,19 +77,19 @@ def view_search(request):
 
 
             if request.session['filter_name']== "10분":
-                filter_value = Recipe.objects.filter(difficulty="10분 이내").values()
+                filter_value = Recipe.objects.filter(timecost="10분 이내").values()
             elif request.session['filter_name'] == "20분":
-                filter_value = Recipe.objects.filter(difficulty="20분 이내").values()
+                filter_value = Recipe.objects.filter(timecost="20분 이내").values()
             elif request.session['filter_name'] == "30분":
-                filter_value = Recipe.objects.filter(difficulty="30분 이내").values()
+                filter_value = Recipe.objects.filter(timecost="30분 이내").values()
             elif request.session['filter_name'] == "60분":
-                filter_value = Recipe.objects.filter(difficulty="60분 이내").values()
+                filter_value = Recipe.objects.filter(timecost="60분 이내").values()
             elif request.session['filter_name'] == "상":
-                filter_value = Recipe.objects.filter(timecost="중급").values()
+                filter_value = Recipe.objects.filter(difficulty="중급").values()
             elif request.session['filter_name'] == "중":
-                filter_value = Recipe.objects.filter(timecost="초급").values()
+                filter_value = Recipe.objects.filter(difficulty="초급").values()
             elif request.session['filter_name'] == "하":
-                filter_value = Recipe.objects.filter(timecost="아무나").values()
+                filter_value = Recipe.objects.filter(difficulty="아무나").values()
             elif request.session['filter_name'] == "most_popular":
                 filter_value = sorted(all_recipe, key=lambda d: d['like_num'])
                 filter_value.reverse()
@@ -106,9 +106,6 @@ def view_search(request):
 
     except:
         using_recipes = all_recipe
-    name= request.session['filter_name']
-    print(f'using2->{name}')
-    print(f'using2->{using_recipes[0]}')
 
     # <<<--- 페이지네이션 --- #
     paginator = Paginator(using_recipes, 15)
@@ -140,7 +137,7 @@ def view_search(request):
     timecost = ["10분", "20분", "30분", "60분"]
     difficulty = ["상", "중", "하"]
     doc = {
-        'recipes': using_recipes,
+        'recipes': p_recipe,
         'timecost': timecost,
         'difficulty': difficulty,
         # 'like_sort_list': like_sort_list,
