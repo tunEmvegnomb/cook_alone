@@ -19,10 +19,11 @@
     <link rel="stylesheet" type="text/css" href="\static\css\main.css">
     <script src="\static\js\main.js"></script>
     <style>
-        body{
+        body {
             background-color: #b1be96;
             font-family: 'Gowun Batang', serif;
         }
+
         .page_top {
             height: 100vh;
             background-image: url("/static/image/source/top-view-1248955.jpg");
@@ -37,81 +38,93 @@
             padding: 200px 0;
         }
 
-        .page2{
+        .page2 {
             background-color: #b1be96;
-            height:210px;
-            top:1300px;
+            top: 1152px;
             position: relative;
         }
-        .page2_col{
+
+        .page2_col {
 
             width: 1100px;
             margin: 0 auto;
 
 
         }
-        .navbar navbar-expand-lg bg-light{
+
+        .navbar navbar-expand-lg bg-light {
             background-image: url("/static/image/source/top-view-1248955.jpg");
         }
 
-        .page3{
-            height: 1100px;
+        .page3 {
             background-color: whitesmoke;
-            top:2000px;
-            position:relative
+            top: 1275px;
+            height: 100vh;
+            position: relative
 
         }
 
-        .rec_bar{
-            margin-top: 350px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 500px;
-            width:1400px;
-            background-color: #b1be96;
+        .rec_bar {
+            margin: 105px auto;
+            height: 700px;
+            width: 1400px;
 
-        }
-        .rec_bar_inner{
-            height: 290px;
-            width: 1190px;
-            margin: 105px 105px 0 105px;
-            padding-top: 5px;
-            justify-content: space-between;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: stretch;
+            padding: 0 20px;
+
         }
-        .card{
+
+        .rec_bar_inner {
+            padding-top: 5px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+        }
+
+        .card {
             height: 100%;
 
         }
-        .nav-link{
-            color:white;
+
+        .nav-link {
+            color: white;
             font-size: 1rem;
         }
-        .navbar-brand{
-            color:white;
+
+        .navbar-brand {
+            color: white;
             font-weight: bold;
         }
-        .ingredient-li{
+
+        .ingredient-li {
             list-style-type: none;
         }
+
         .imageDefault {
-            width: 230px; height: 230px;
+            width: 230px;
+            height: 230px;
             background-size: cover;
             background-position: center;
             margin-top: 10px;
         }
+
         .item-center {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
-        .page_icon{
-            width:120px;
-            height:50px;
-            margin:100px auto;
+
+        .page_icon {
+            width: 120px;
+            height: 50px;
+            margin: 100px auto;
             font-size: 2rem;
-            color:whitesmoke
+            color: whitesmoke
         }
     </style>
 </head>
@@ -119,44 +132,44 @@
 <body>
 
 
-<div class="page_top" style="top:0;left:0;position:absolute;width: 100%" >
-<div class="head-div" style="position: fixed;z-index: 1500"></div>
-<nav class="navbar navbar-expand-lg"  style="top:0; left:0;position:fixed;z-index: 2000">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">혼자서도 잘해요리</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav" >
-                <a class="nav-link" aria-current="page" href="/search/?page=1">전체 레시피</a>
-                <a class="nav-link" href="/write">나만의 레시피</a>
-                <a class="nav-link" href="/myrecipe/{{ user.id }}">마이페이지</a>
+<div class="page_top" style="top:0;left:0;position:absolute;width: 100%">
+    <div class="head-div" style="position: fixed;z-index: 1500"></div>
+    <nav class="navbar navbar-expand-lg" style="top:0; left:0;position:fixed;z-index: 2000">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">혼자서도 잘해요리</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" aria-current="page" href="/search/?page=1">전체 레시피</a>
+                    <a class="nav-link" href="/write">나만의 레시피</a>
+                    <a class="nav-link" href="/myrecipe/{{ user.id }}">마이페이지</a>
 
+                </div>
             </div>
         </div>
-    </div>
-    <div>
+        <div>
 
-        <div class="navbar-nav" style="width:300px" >
-            {% if user.is_authenticated %}
-            <a class="nav-link">{{ user }} 님 반갑습니다</a>
-            <a class="nav-link" href="/logout">로그아웃</a>
-            {% else %}
-            <a class="myPageLink" href="/login">
-                <img src="/static/image/source/myPageIcon.png" class="loginIcon"/>
-            </a>
-            {% endif %}
+            <div class="navbar-nav" style="width:300px">
+                {% if user.is_authenticated %}
+                    <a class="nav-link">{{ user }} 님 반갑습니다</a>
+                    <a class="nav-link" href="/logout">로그아웃</a>
+                {% else %}
+                    <a class="myPageLink" href="/login">
+                        <img src="/static/image/source/myPageIcon.png" class="loginIcon"/>
+                    </a>
+                {% endif %}
+            </div>
         </div>
-    </div>
-</nav>
-<div class="head-div" style="position: fixed;z-index: 1500"></div>
+    </nav>
+    <div class="head-div" style="position: fixed;z-index: 1500"></div>
     <div style="width:100% ;height:100vh; background-color: rgb(0,0,0,0.8); position: absolute">
         <h1 style="font-size: 6rem; margin: 200px auto; position: relative">혼자서도 잘해요리</h1>
     </div>
-{#    <div class="page_icon"><a style="display:scroll;position:fixed;top:1300px;right:3px;" rel="nofollow"#}
-{#href="#"><i class="fa fa-angle-down"></i>여기다가 아무말</a></div>#}
+    {#    <div class="page_icon"><a style="display:scroll;position:fixed;top:1300px;right:3px;" rel="nofollow"#}
+    {#href="#"><i class="fa fa-angle-down"></i>여기다가 아무말</a></div>#}
 
 
 </div>
@@ -170,10 +183,12 @@
                     <img src="{{ reco_main.img_url }}" style="width:550px; height:100%; object-fit: cover" alt="...">
                 </div>
                 <div class="col-md-8" style="width: 500px">
-                    <div class="card-body" style="padding-left:50px" >
+                    <div class="card-body" style="padding-left:50px">
                         <div style="height:40px"></div>
                         <h2 style="font-weight: 900;">{{ reco_main.title }}</h2>
-                        <br><hr><br>
+                        <br>
+                        <hr>
+                        <br>
 
                         <div class="random-food-recipe-difficulty">
                             <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
@@ -196,28 +211,29 @@
                             </div>
                         </div>
                     </div>
-                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 
 </div>
 
+</div>
+
 <div class="page3">
-        <div style="height: 40px; background-color: whitesmoke"></div>
+    <div style="height: 40px; background-color: whitesmoke"></div>
 
     <div class="rec_bar">
         <div class="rec_bar_inner">
 
             {% for reco_recipe in reco_recipes %}
-            <div class="card item-center" style="width: 18rem; height:25rem; background-image: url({{ reco_recipe.img_url }}); background-size:cover">
-                <div class="imageDefault" ></div>
-                <div class="card-body">
-                    <p class="card-text"><a href="#">{{ reco_recipe.title|slice:10 }}</a></p>
+                <div class="card item-center"
+                     style="width: 18rem; height:25rem; background-image: url({{ reco_recipe.img_url }}); background-size:cover">
+                    <div class="imageDefault"></div>
+                    <div class="card-body">
+                        <p class="card-text"><a href="#">{{ reco_recipe.title|slice:10 }}</a></p>
+                    </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
 
