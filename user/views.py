@@ -83,3 +83,10 @@ def myrecipe(request, id):
 
         else:
             return render(request, 'signin.html')
+
+@login_required
+def myrecipe_delete(request, id):
+    myrecipe = Recipe.objects.get(id=id)
+    myrecipe_id = myrecipe.author.id
+    myrecipe.delete()
+    return redirect(f'/myrecipe/{myrecipe_id}')

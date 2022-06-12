@@ -151,8 +151,12 @@
                                 <a href="/detail/{{ myrp.id }}">
                                 <div>
                                     {{ myrp.title }}
+                                </div>
+                                <div style="text-align: right; float:left;font-size: 1.2rem;">
+                                    <a href="/myrecipe/delete/{{ myrp.id }}">
+                                        <span class="badge rounded-pill bg-danger" style="color: white">삭제</span>
+                                    </a>
                                 </div><br>
-
                                 </a>
                             {% endfor %}
                         </div>
