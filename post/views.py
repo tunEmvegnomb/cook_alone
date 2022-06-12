@@ -66,38 +66,39 @@ def view_search(request):
         # except:
         #     author = "혼자서도 잘해요리"
         # all_recipe[index]['author'] = author
-    if request.session['filter_type'] == "filters":
+    try:
+        if request.session['filter_type'] == "filters":
 
 
-        if request.session['filter_name']== "10분":
-            filter_value = Recipe.objects.filter(difficulty="10분 이내").values()
-        elif request.session['filter_name'] == "20분":
-            filter_value = Recipe.objects.filter(difficulty="20분 이내").values()
-        elif request.session['filter_name'] == "30분":
-            filter_value = Recipe.objects.filter(difficulty="30분 이내").values()
-        elif request.session['filter_name'] == "60분":
-            filter_value = Recipe.objects.filter(difficulty="60분 이내").values()
-        elif request.session['filter_name'] == "상":
-            filter_value = Recipe.objects.filter(timecost="중급").values()
-        elif request.session['filter_name'] == "중":
-            filter_value = Recipe.objects.filter(timecost="초급").values()
-        elif request.session['filter_name'] == "하":
-            filter_value = Recipe.objects.filter(timecost="아무나").values()
-        elif request.session['filter_name'] == "most_popular":
-            filter_value = sorted(all_recipe, key=lambda d: d['like_num'])
-            filter_value.reverse()
-            print(filter_value[2])
-            # all_recipe = list(all_recipes.values('id', 'title', 'img_url', 'img_file', 'author_id'))
-            # for i in all_recipe:
-            #
-        elif request.session['filter_name'] == "most_recent":
-            filter_value = all_recipe
-        #필터를 사용했을때의 결과값
-        using_recipes =filter_value
-    elif request.session['filter_type'] == "searched":
-        using_recipes = Recipe.objects.filter(title__contains=request.session['filter_name'])
+            if request.session['filter_name']== "10분":
+                filter_value = Recipe.objects.filter(difficulty="10분 이내").values()
+            elif request.session['filter_name'] == "20분":
+                filter_value = Recipe.objects.filter(difficulty="20분 이내").values()
+            elif request.session['filter_name'] == "30분":
+                filter_value = Recipe.objects.filter(difficulty="30분 이내").values()
+            elif request.session['filter_name'] == "60분":
+                filter_value = Recipe.objects.filter(difficulty="60분 이내").values()
+            elif request.session['filter_name'] == "상":
+                filter_value = Recipe.objects.filter(timecost="중급").values()
+            elif request.session['filter_name'] == "중":
+                filter_value = Recipe.objects.filter(timecost="초급").values()
+            elif request.session['filter_name'] == "하":
+                filter_value = Recipe.objects.filter(timecost="아무나").values()
+            elif request.session['filter_name'] == "most_popular":
+                filter_value = sorted(all_recipe, key=lambda d: d['like_num'])
+                filter_value.reverse()
+                print(filter_value[2])
+                # all_recipe = list(all_recipes.values('id', 'title', 'img_url', 'img_file', 'author_id'))
+                # for i in all_recipe:
+                #
+            elif request.session['filter_name'] == "most_recent":
+                filter_value = all_recipe
+            #필터를 사용했을때의 결과값
+            using_recipes =filter_value
+        elif request.session['filter_type'] == "searched":
+            using_recipes = Recipe.objects.filter(title__contains=request.session['filter_name'])
 
-    else:
+    except:
         using_recipes = all_recipe
     name= request.session['filter_name']
     print(f'using2->{name}')
