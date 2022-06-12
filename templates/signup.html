@@ -20,32 +20,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>전세계 1인 가구를 위한 레시피</title>
     <link rel="shortcut icon" href="/static/image/source/cook_hat.png"/>
+    <style>
+        button:hover{
+            font-size: 1rem;
+            color: #63a355;
+            font-weight: bold;
+        }
+        .head-div{
+            height:56px;
+            background-image: url("/static/image/source/top-view-1248955.jpg");
+            position: absolute;
+            left:0;
+            top:0;
+            width: 100%;
+
+            z-index: 100;
+        }
+        .nav-link{
+            color:white;
+            font-size: 1rem;
+        }
+        .navbar-brand{
+            color:white;
+            font-weight: bold;
+        }
+        .signup-title{
+            font-size: 2.3rem;
+        }
+    </style>
 
 </head>
 
 <body>
-<div class="head-div">
-    <nav class="naviBar">
-    <ul>
-        <li><a class="logoLink" href="/"><img class="logoIcon" src="/static/image/source/logo.png"></a></li>
-        <li><a class="menuLink" aria-current="page" href="/search/?page=1">전체 레시피</a></li>
-        <li><a class="menuLink" href="/rank">랭킹 보기</a></li>
-        <li><a class="menuLink" href="/write">나만의 레시피</a></li>
-        <li><a class="menuLink" href="/myrecipe/{{ user.id }}">마이페이지</a></li>
-{#        <li>#}
-{#            <a class="myPageLink" href="/login"#}
-{#            ><img src="/static/image/source/myPageIcon.png" class="loginIcon"#}
-{#            /></a>#}
-{#        </li>#}
-        {% if user.is_authenticated %}
-            <li> {{ user }} 님 반갑습니다</li>
-            <li><a class="menuLink" href="/logout"> 로그아웃 </a></li>
-        {% endif %}
-    </ul>
-</nav>
-</div>
+<div class="head-div" style="position: fixed;z-index: 1500"></div>
+<nav class="navbar navbar-expand-lg"  style="top:0; left:0;position:fixed;z-index: 2000">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">혼자서도 잘해요리</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" >
+                <a class="nav-link" aria-current="page" href="/search/?page=1">전체 레시피</a>
+                <a class="nav-link" href="/write">나만의 레시피</a>
+                <a class="nav-link" href="/myrecipe/{{ user.id }}">마이페이지</a>
 
-<main class="wrap main-col signup-main">
+            </div>
+        </div>
+    </div>
+    <div>
+
+
+    </div>
+</nav>
+
+<main class="wrap main-col signup-main" style="width:400px; margin: 0 auto">
     <h1 class="signup-title">회원가입</h1>
     <form class="form-area" method="post" action="/signup/">
         {% csrf_token %}
@@ -80,10 +110,17 @@
                 {{ error }}
             </div>
         {% endif %}
-        <button type="submit">회원가입</button>
-        <a href="/signin" class="login-link"
-        >회원이신가요? 로그인 페이지로 이동</a
-        >
+        <div >
+            <div style="margin: 20px auto; ; width:80px;  ">
+                <button type="submit" style="border:none; background-color: transparent">회원가입</button>
+            </div>
+
+            <div style="margin: 0 auto; width:250px">
+                <a href="/signin" class="login-link">회원이신가요? 로그인 페이지로 이동</a>
+            </div>
+
+        </div>
+
     </form>
 </main>
 </body>
