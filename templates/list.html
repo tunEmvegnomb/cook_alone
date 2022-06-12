@@ -135,23 +135,6 @@
         }
 
     </style>
-    <script>
-
-
-        $(document).ready(function () {
-            $('.sortByLike').click(function () {
-                $('.col_like_sort').show();
-                $('.col_normal_recipes').hide();
-            })
-            $('.sortByDate').click(function () {
-                $('.col_normal_recipes').show();
-                $('.col_like_sort').hide();
-            })
-
-        })
-
-
-    </script>
 
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -256,111 +239,6 @@
     </div>
     <!--------------------필터----------------------->
     <div class="row row-cols-1 row-cols-md-3 g-4 card-group">
-{#        {% if searched %}#}
-{#            {% for recipe in search_list %}#}
-{#                <div class="col">#}
-{#                    <div class="card">#}
-{#                        <div class="card-img-div">#}
-{#                            <a href="/detail/{{ recipe.id }}">#}
-{#                                <img#}
-{#                                        src={{ recipe.img_url }}#}
-{#                                                class="card-img-top"#}
-{#                                        alt="..."#}
-{#                                        style="width: 320px; height: 240px"#}
-{#                                />#}
-{##}
-{#                            </a>#}
-{#                        </div>#}
-{#                        <div class="card-body">#}
-{#                            <div class="card-info">#}
-{#                                <a href="/detail/{{ recipe.id }}" class="recipe-link"#}
-{#                                ><span class="card-title">{{ recipe.title }}</span></a#}
-{#                                >#}
-{#                                <div class="card-bottom-row">#}
-{#                                    <span class="card-text">{{ recipe.author }}</span>#}
-{#                                    <div class="like-div">#}
-{#                                        <span class="like-text">추천</span>#}
-{#                                        <span class="like-num">{{ recipe.like_num }}</span>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="card-like">#}
-{#                                <i class="fa-regular fa-thumbs-up like-icon"></i>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            {% endfor %}#}
-{#        {% elif timecost %}#}
-{#            {% for recipe in filter_value %}#}
-{#                <div class="col">#}
-{#                    <div class="card">#}
-{#                        <div class="card-img-div">#}
-{#                            <a href="/detail/{{ recipe.id }}">#}
-{#                                <img#}
-{#                                        src={{ recipe.img_url }}#}
-{#                                                class="card-img-top"#}
-{#                                        alt="..."#}
-{#                                        style="width: 320px; height: 240px"#}
-{#                                />#}
-{#                            </a>#}
-{#                        </div>#}
-{#                        <div class="card-body">#}
-{#                            <div class="card-info">#}
-{#                                <a href="/detail/{{ recipe.id }}" class="recipe-link"#}
-{#                                ><span class="card-title">{{ recipe.title }}</span></a#}
-{#                                >#}
-{#                                <div class="card-bottom-row">#}
-{#                                    <span class="card-text">{{ recipe.author }}</span>#}
-{#                                    <div class="like-div">#}
-{#                                        <span class="like-text">추천</span>#}
-{#                                        <span class="like-num">{{ recipe.like_num }}</span>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="card-like">#}
-{#                                <i class="fa-regular fa-thumbs-up like-icon"></i>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            {% endfor %}#}
-{#        {% elif difficulty %}#}
-{#            {% for recipe in filter_value %}#}
-{#                <div class="col">#}
-{#                    <div class="card">#}
-{#                        <div class="card-img-div">#}
-{#                            <a href="/detail/{{ recipe.id }}">#}
-{#                                <img#}
-{#                                        src={{ recipe.img_url }}#}
-{#                                                class="card-img-top"#}
-{#                                        alt="..."#}
-{#                                        style="width: 320px; height: 240px"#}
-{#                                />#}
-{#                            </a>#}
-{#                        </div>#}
-{#                        <div class="card-body">#}
-{#                            <div class="card-info">#}
-{#                                <a href="/detail/{{ recipe.id }}" class="recipe-link"#}
-{#                                ><span class="card-title">{{ recipe.title }}</span></a#}
-{#                                >#}
-{#                                <div class="card-bottom-row">#}
-{#                                    <span class="card-text">{{ recipe.author }}</span>#}
-{#                                    <div class="like-div">#}
-{#                                        <span class="like-text">추천</span>#}
-{#                                        <span class="like-num">{{ recipe.like_num }}</span>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="card-like">#}
-{#                                <i class="fa-regular fa-thumbs-up like-icon"></i>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            {% endfor %}#}
-{#        {% else %}#}
-{#        {% endif %}#}
         {% for recipe in recipes %}
             <div class="col_normal_recipes">
                 <div class="card">
@@ -403,58 +281,10 @@
                 </div>
             </div>
         {% endfor %}
-        {#        {% for recipe in like_sort_list %}#}
-        {#            <div class="col_like_sort">#}
-        {#                <div class="card">#}
-        {#                    <div class="card-img-div">#}
-        {#                        <a href="/detail/{{ recipe.id }}">#}
-        {#                            {% if recipe.img_url %}#}
-        {#                                <img#}
-        {#                                        src={{ recipe.img_url }}#}
-        {#                                                class="card-img-top"#}
-        {#                                        alt="..."#}
-        {#                                        style="width: 320px; height: 240px"#}
-        {#                                />#}
-        {#                            {% else %}#}
-        {#                                <img#}
-        {#                                    src="/media/{{ recipe.img_file }}"#}
-        {#                                            class="card-img-top"#}
-        {#                                    alt="..."#}
-        {#                                    style="width: 320px; height: 240px"#}
-        {#                            />#}
-        {#                            {% endif %}#}
-        {#                        </a>#}
-        {#                    </div>#}
-        {#                    <div class="card-body">#}
-        {#                        <div class="card-info">#}
-        {#                            <a href="/detail/{{ recipe.id }}" class="recipe-link">#}
-        {#                                <span class="card-title">{{ recipe.title }}</span>#}
-        {#                            </a>#}
-        {#                            <div class="card-bottom-row">#}
-        {#                                <span class="card-text">{{ recipe.author }}</span>#}
-        {#                                <div class="like-div">#}
-        {#                                    <span class="like-text">추천</span>#}
-        {#                                    <span class="like-num">{{ recipe.like_num }}</span>#}
-        {#                                </div>#}
-        {#                            </div>#}
-        {#                        </div>#}
-        {#                        <div class="card-like">#}
-        {#                            <i class="fa-regular fa-thumbs-up like-icon"></i>#}
-        {#                        </div>#}
-        {#                    </div>#}
-        {#                </div>#}
-        {#            </div>#}
-        {#        {% endfor %}#}
-    </div>
-    {#    <div class="d-flex justify-content-center">#}
-    {#        <div class="spinner-border" role="status">#}
-    {#            <span class="visually-hidden">Loading...</span>#}
-    {#        </div>#}
     {#    </div>#}
 </main>
 <footer>
     <div class="footer_paginator" >
-    여기에 아무거나 써보자
         {% if page_obj.has_previous %}
             <a href="?page=1"> ◁ </a>
             <a href="?page={{ page_obj.previous_page_number }}"> < </a>
@@ -466,28 +296,9 @@
             <a href="?page={{ page_obj.next_page_number }}"> > </a>
             <a href="?page={{ page_obj.paginator.num_pages }}"> ▷ </a>
         {% endif %}
-여기가 끝이다
     </div>
 </footer>
 <script>
-    {#const title_input= document.getElementById("title_input");//검색창 내용물#}
-    {##}
-    {#function recipe_scroll(title){#}
-    {#    const title_id = document.getElementById("recipe_scroll_" + title);//자동완성제목#}
-    {#    title_input.value = title_id.innerText;#}
-    {# }//자동완성을 클릭하면 검색창에 클릭한 제목이 뜨게 만들어주는 함수#}
-    {##}
-    {#title_input.addEventListener('input', function(){#}
-    {#    const title_class = document.querySelectorAll('.input_title_list > .input_title_list_obj');#}
-    {#    var include_text = document.getElementById("title_input").value;//검색창 내용물의 값#}
-    {##}
-    {#    for (let i=0; i<title_class.length; i++){#}
-    {#        title_class[i].style.display = title_class[i].innerText.includes(include_text))?'block' : 'none';#}
-    {#    }#}
-    {# })#}
-    {##}
-    {##}
-    {##}
 
 
 </script>
