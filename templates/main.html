@@ -88,7 +88,18 @@
         .ingredient-li{
             list-style-type: none;
         }
-
+        .imageDefault {
+            width: 230px; height: 230px;
+            background-size: cover;
+            background-position: center;
+            margin-top: 10px;
+        }
+        .item-center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -138,33 +149,31 @@
         <div class="card mb-3" style="width: 100%; height: 600px; box-shadow: 0 1px 5px 3px rgba(0, 0, 0, .12);">
             <div class="row g-0">
                 <div class="col-md-4" style="width:550px; height: 600px">
-                    <img src="{{ reco.img_url }}" style="width:550px; height:100%; object-fit: cover" alt="...">
+                    <img src="{{ reco_main.img_url }}" style="width:550px; height:100%; object-fit: cover" alt="...">
                 </div>
                 <div class="col-md-8" style="width: 500px">
                     <div class="card-body" style="padding-left:50px" >
                         <div style="height:40px"></div>
-                        <h2 style="font-weight: 900;">{{ reco.title }}</h2>
+                        <h2 style="font-weight: 900;">{{ reco_main.title }}</h2>
                         <br><hr><br>
 
                         <div class="random-food-recipe-difficulty">
                             <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
                                 <img src="\static\image\source\time.png" alt="이미지"
                                      style="width: 30px; height: 30px; margin-bottom: 10px"/>
-                                <p style="font-weight: 500;">{{ reco.timecost }}</p>
+                                <p style="font-weight: 500;">{{ reco_main.timecost }}</p>
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
                                 <img src="\static\image\source\star.png" alt="이미지"
                                      style="width: 30px; height: 30px; margin-bottom: 10px"/>
-                                <p style="font-weight: 500;">{{ reco.difficulty }}</p>
+                                <p style="font-weight: 500;">{{ reco_main.difficulty }}</p>
                             </div>
                         </div>
                         <div style="margin-top: 55px; margin-left: 10px">
                             <p style="font-weight: 600;">최소한 이건 준비하자!</p>
                             <div class="ingredient">
                                 <ul>
-                                    {% for ing in reco_ing %}
-                                    <li class="ingredient-li">{{ ing }}</li>
-                                    {% endfor %}
+                                    <li class="ingredient-li">{{ reco_main.ingredient }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -183,27 +192,15 @@
 
     <div class="rec_bar">
         <div class="rec_bar_inner">
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+
+            {% for reco_recipe in reco_recipes %}
+            <div class="card item-center" style="width: 18rem;">
+                <div class="imageDefault" style="background-image: url({{ reco_recipe.img_url }})"></div>
                 <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
+                    <p class="card-text"><a href="#">{{ reco_recipe.title|slice:10 }}</a></p>
                 </div>
             </div>
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
 
 
