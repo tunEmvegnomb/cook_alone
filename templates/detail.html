@@ -63,7 +63,6 @@
         .detail-img-wrap {
             border-radius: 3px;
             text-align: center;
-            padding-top: 40px;
         }
 
         .detail-tab-content {
@@ -113,6 +112,33 @@
             color: white;
             text-align: center;
         }
+
+        .main-card-flex {
+            width: 100%;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .likeform {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .detailImage {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .detail-img-wrap {
+            width: 100%;
+            height: 515px;
+        }
     </style>
 
 </head>
@@ -154,27 +180,26 @@
         <div class="detail-img-wrap" id="imgWrap"
              style="background-color: whitesmoke;border-radius: 3px; border:1px black solid;">
             <!--                레시피 이미지 들어가는 부분-->
-            <img src="{{ recipe.img_url }}" style="width: 700px; height: 400px; object-fit: cover">
-
-            {% if not like_status %}
-
-                <form method="post" action="/detail/like/{{ recipe.id }}">
-                    {% csrf_token %}
-                    <button class="btn btn-success" style="margin: 20px 0;">꺼야꺼야 요리할꺼야</button>
-                </form>
+            {% if recipe.img_url %}
+                <div class="detailImage" style="background-image: url({{ recipe.img_url }})"></div>
             {% else %}
-                <form method="post" action="/detail/like/{{ recipe.id }}">
-                    {% csrf_token %}
-                    <button class="btn btn-danger" style="margin: 20px 0;">아니아니 안할꺼야</button>
-                </form>
+                <div class="detailImage" style="background-image: url({{ recipe.img_file }})"></div>
             {% endif %}
         </div>
         <div class="main-card">
             {% if recipe.author %}
-                <h3 class="detail-title">{{ recipe.title }}     by.{{ recipe.author }}</h3>
+                <div class="main-card-flex">
+                    <h3 class="detail-title">{{ recipe.title }}</h3>
+                    <h3 class="detail-title">by.{{ recipe.author }}</h3>
+                </div>
+
             {% else %}
-                <h3 class="detail-title">{{ recipe.title }}     by.혼자서도 잘해요리</h3>
+                <div class="main-card-flex">
+                    <h3 class="detail-title">{{ recipe.title }}</h3>
+                    <h3 class="detail-title">by.{{ recipe.author }}</h3>
+                </div>
             {% endif %}
+
             <div style=" height:500px; margin-top:25px; float:left">
                 <div style="float:left;">
                     <div class="sortBar">
@@ -212,6 +237,17 @@
                                     <img class="size20" src="../static/image/source/timeIcon.png">
                                     {{ recipe.difficulty }}</p>
                             </div>
+                            {% if not like_status %}
+                                <form method="post" action="/detail/like/{{ recipe.id }}" class="likeform">
+                                    {% csrf_token %}
+                                    <button class="btn btn-success" style="margin: 20px 0;">꺼야꺼야 요리할꺼야</button>
+                                </form>
+                            {% else %}
+                                <form method="post" action="/detail/like/{{ recipe.id }}" class="likeform">
+                                    {% csrf_token %}
+                                    <button class="btn btn-danger" style="margin: 20px 0;">아니아니 안할꺼야</button>
+                                </form>
+                            {% endif %}
                             <br><br>
                             <div class="ingredientWrap">
                                 <span class="ingTitle">📌 최소한 이건 준비하자!</span>
