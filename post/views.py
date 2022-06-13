@@ -45,49 +45,40 @@ def view_search(request):
     total = Recipe.objects.count()
     latest_num = Recipe.objects.latest('id').id
     # print(f'total->{total}')
-    print(f'latest_num->{latest_num}')
-    all_recipes = Recipe.objects.get_queryset().order_by('-id')
-    all_recipes2 = Recipe.objects.get_queryset().order_by('id')
-    all_recipe = list(all_recipes2.values('id', 'title', 'img_url', 'img_file', 'author_id'))
-
+    # print(f'latest_num->{latest_num}')
+    all_recipes = Recipe.objects.get_queryset().order_by('-id').values('id', 'title', 'img_url', 'img_file', 'author_id')
+    all_recipe = []
+    # print(f'1->{all_recipes.filter(id=1)}')
     for index in range(1, latest_num+1):
+
         try:
             like_num = LikeModel.objects.filter(like_recipe_id=index).count()
-            all_recipe[index-1]['like_num'] = like_num
-            if like_num == 1:
-                print(f'index,num->{index, like_num, Recipe.objects.filter(id=index)}')
+            target_recipe = all_recipes.get(id=index)
+            target_recipe['like_num'] = like_num
+            all_recipe.append(target_recipe)
 
+            if like_num == 1:
+                # print(f'index,num->{index, like_num, target_recipe}')
+                pass
         except:
             pass
-    # print(all_recipe)
-    # print(f'ALL RECIPE2-->{all_recipe}')
 
-    #좋아요수 보여야 하니까 all_recipe에 like_num넣기
-    # for index, recipe in enumerate(all_recipe):
-    #     # print(f'index->{index}, recipe->{recipe}')
-    #     try:
-    #         num = LikeModel.objects.filter(like_recipe_id=index).count()
-    #         all_recipe[total-index-1]['like_num'] = num
-    #         # print(f'total-index-1->{total-index-1}')
-    #     except:
-    #         pass
-    # for index, recipe in enumerate(all_recipe):
-    #     try:
-    #         num = LikeModel.objects.filter(like_recipe_id=index).count()
-    #         # print(f'total-index,num->{total-index-1,num}')
-    #         # print('#################################')
-    #         if num == 1:
-    #             # print(f'total-index,num->{total - index, num, Recipe.objects.filter(id=index)}')
-    #             print(f'index,num->{index, num, Recipe.objects.filter(id=index)}')
+    # print(f'target_recipes->{target_recipes}')
+            # print(f'예외번호->{index}')
+    # all_recipes2 = Recipe.objects.get_queryset().order_by('id')
+
+    # all_recipe = list(all_recipes2.values('id', 'title', 'img_url', 'img_file', 'author_id'))
     #
-    #         all_recipe[total - index]['like_num'] = num
+    # for index in range(1, latest_num+1):
+    #     try:
+    #         like_num = LikeModel.objects.filter(like_recipe_id=index).count()
+    #         all_recipe[index-1]['like_num'] = like_num
+    #         if like_num == 1:
+    #             print(f'index,num->{index, like_num, Recipe.objects.filter(id=index)}')
+    #
     #     except:
     #         pass
-        # break
-    # print(all_recipe)
-    gulbi = all_recipe[1932]
-    # filter(lambda person: person['name']
-    print(f'recipe->{gulbi}')
+
     searched=0
 
     try: #세션이 들어온게 있는지 try
