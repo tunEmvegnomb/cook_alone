@@ -28,83 +28,104 @@
 
     <title>상세 레시피 페이지</title>
     <style>
-        .nav-link{
-            color:white;
+        .nav-link {
+            color: white;
             font-size: 1rem;
         }
-        .navbar-brand{
-            color:white;
+
+        .navbar-brand {
+            color: white;
             font-weight: bold;
         }
-        .nav-link{
-            color:black;
+
+        .nav-link {
+            color: black;
         }
-        .head-div{
-            height:56px;
+
+        .head-div {
+            height: 56px;
             background-image: url("/static/image/source/top-view-1248955.jpg");
             position: absolute;
-            left:0;
-            top:0;
+            left: 0;
+            top: 0;
             width: 100%;
 
             z-index: 100;
         }
-        .navbar navbar-expand-lg{
+
+        .navbar navbar-expand-lg {
             position: absolute;
-            left:0;
-            top:0;
+            left: 0;
+            top: 0;
 
         }
-        .detail-img-wrap{
+
+        .detail-img-wrap {
             border-radius: 3px;
             text-align: center;
             padding-top: 40px;
         }
-        .detail-tab-content{
+
+        .detail-tab-content {
             margin: 0 auto;
-            width:1070px;
+            width: 1070px;
             height: 480px;
             padding-left: 60px;
 
-            margin-bottom:100px
-        }
-        .wrap2{
-            background-image: url("/static/image/source/top-view-1248955.jpg");
-            width:1070px;
-            margin:60px auto;
-            height:1300px;
-        }
-        .comment{
-            width: 700px;
-        }
-        ::-webkit-scrollbar{
-            width:10px;
+            margin-bottom: 100px
         }
 
-        ::-webkit-scrollbar-track{
-            border-radius: 5px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.25);
+        .wrap2 {
+            background-image: url("/static/image/source/top-view-1248955.jpg");
+            width: 1070px;
+            margin: 60px auto;
+            height: 1300px;
         }
+
+        .comment {
+            width: 700px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            border-radius: 5px;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.25);
+        }
+
         ::-webkit-scrollbar-thumb {
             border-radius: 5px;
             background-color: #3A3845;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background-color: #7a7686;
+        }
+
+        body {
+            background-color: #c3d391;
+        }
+
+        .detail-title {
+            margin: 20px 0;
+            color: white;
+            text-align: center;
         }
     </style>
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg" >
-    <div class="container-fluid" style="z-index: 1000" >
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid" style="z-index: 1000">
         <a class="navbar-brand" href="/">혼자서도 잘해요리</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup" >
-            <div class="navbar-nav"  >
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
                 <a class="nav-link" style="color:white;" aria-current="page" href="/search/?page=1">전체 레시피</a>
                 <a class="nav-link" style="color:white;" href="/write">나만의 레시피</a>
                 <a class="nav-link" style="color:white;" href="/myrecipe/{{ user.id }}">마이페이지</a>
@@ -114,27 +135,29 @@
     </div>
     <div style="z-index: 1000">
 
-        <div class="navbar-nav" style="width:300px; z-index: 1000"  >
+        <div class="navbar-nav" style="width:300px; z-index: 1000">
             {% if user.is_authenticated %}
-            <a class="nav-link"  style="color:white;">{{ user }} 님 반갑습니다</a>
-            <a class="nav-link"  style="color:white;" href="/logout">로그아웃</a>
+                <a class="nav-link" style="color:white;">{{ user }} 님 반갑습니다</a>
+                <a class="nav-link" style="color:white;" href="/logout">로그아웃</a>
             {% else %}
-            <a class="myPageLink" href="/login">
-                <img src="/static/image/source/myPageIcon.png" class="loginIcon"/>
-            </a>
+                <a class="myPageLink" href="/login">
+                    <img src="/static/image/source/myPageIcon.png" class="loginIcon"/>
+                </a>
             {% endif %}
         </div>
     </div>
 </nav>
 <div class="head-div"></div>
 
-<div class="wrap2" >
+<div class="wrap2">
     <div class="detail_wrap">
-        <div class="detail-img-wrap" id="imgWrap"style="background-color: whitesmoke;border-radius: 3px; border:1px black solid;">
+        <div class="detail-img-wrap" id="imgWrap"
+             style="background-color: whitesmoke;border-radius: 3px; border:1px black solid;">
             <!--                레시피 이미지 들어가는 부분-->
             <img src="{{ recipe.img_url }}" style="width: 700px; height: 400px; object-fit: cover">
-            <h3 style="margin: 20px 0;">{{ recipe.title }}--{{ recipe.id }}</h3>
+
             {% if not like_status %}
+
                 <form method="post" action="/detail/like/{{ recipe.id }}">
                     {% csrf_token %}
                     <button class="btn btn-success" style="margin: 20px 0;">꺼야꺼야 요리할꺼야</button>
@@ -147,68 +170,79 @@
             {% endif %}
         </div>
         <div class="main-card">
-                <div style=" height:500px; margin-top:25px; float:left">
-                    <div style="float:left;">
-                        <div class="sortBar">
+            {% if recipe.author %}
+                <h3 class="detail-title">{{ recipe.title }}     by.{{ recipe.author }}</h3>
+            {% else %}
+                <h3 class="detail-title">{{ recipe.title }}     by.혼자서도 잘해요리</h3>
+            {% endif %}
+            <div style=" height:500px; margin-top:25px; float:left">
+                <div style="float:left;">
+                    <div class="sortBar">
 
                         <ul class="tabs" style="margin-left: 60px;">
-                            <li class="nav-item" data-tab="tab-1" style="display: inline-block;background-color:whitesmoke; border-radius: 3px;">
+                            <li class="nav-item" data-tab="tab-1"
+                                style="display: inline-block;background-color:whitesmoke; border-radius: 3px;">
                                 <a class="nav-link" aria-current="page" href="#">레시피</a>
                             </li>
-                            <li class="nav-item" data-tab="tab-2" style="display: inline-block;background-color:whitesmoke; border-radius: 3px;">
+                            <li class="nav-item" data-tab="tab-2"
+                                style="display: inline-block;background-color:whitesmoke; border-radius: 3px;">
                                 <a class="nav-link" href="#">조리과정</a>
                             </li>
-                            <li class="nav-item" data-tab="tab-3" style="display: inline-block;background-color:whitesmoke; border-radius: 3px;">
+                            <li class="nav-item" data-tab="tab-3"
+                                style="display: inline-block;background-color:whitesmoke; border-radius: 3px;">
                                 <a class="nav-link" href="#">리뷰</a>
                             </li>
-                            <li class="nav-item" data-tab="tab-4" style="display: inline-block;background-color:whitesmoke; border-radius: 3px;">
+                            <li class="nav-item" data-tab="tab-4"
+                                style="display: inline-block;background-color:whitesmoke; border-radius: 3px;">
                                 <a class="nav-link" href="#">추천레시피</a>
                             </li>
 
                         </ul>
                     </div>
-                        <div class="detail-tab-content">
-                            <div id="tab-1" class="tabContent current"
-                                 style="height:570px;width:950px; background-color:whitesmoke;">
-                                <div class="iconWrap" id="iconWrap">
-                                    <!--                                조리시간, 난이도 아이콘 들어가는 정보 박스 부분-->
-                                    <p style="font-size: 25px"><img class="size20"
-                                                                    src="../static/image/source/diffIcon.png">
-                                        {{ recipe.timecost }}
+                    <div class="detail-tab-content">
+                        <div id="tab-1" class="tabContent current"
+                             style="height:570px;width:950px; background-color:whitesmoke;">
+                            <div class="iconWrap" id="iconWrap">
+                                <!--                                조리시간, 난이도 아이콘 들어가는 정보 박스 부분-->
+                                <p style="font-size: 25px"><img class="size20"
+                                                                src="../static/image/source/diffIcon.png">
+                                    {{ recipe.timecost }}
 
 
-                                        <img class="size20" src="../static/image/source/timeIcon.png">
-                                        {{ recipe.difficulty }}</p>
-                                </div><br><br>
-                                <div class="ingredientWrap">
-                                    <span class="ingTitle">📌 최소한 이건 준비하자!</span>
-                                    <hr class="line"><br>
-
-                                    <ul class="ingList" id="ingList">
-                                        <!--                                    레시피 재료 들어가는 부분-->
-                                        {% for ing in ing_list %}
-                                            {{ ing }}
-                                        {% endfor %}
-                                    </ul>
-                                </div>
+                                    <img class="size20" src="../static/image/source/timeIcon.png">
+                                    {{ recipe.difficulty }}</p>
                             </div>
-                            <div id="tab-2" class="tabContent"
-                                 style="height:570px;width:950px; background-color:whitesmoke; overflow: auto;">
-                                <div class="processWrap" >
-                                    <span class="processTitle">📌 이정돈 만들 수 있다!</span>
-                                    <hr class="line">
-                                    <ul class="processList" id="processList" >
-                                        <!--                                    레시피 조리과정 들어가는 부분-->
-                                        {% for step in cookstep_list %}
-                                            <p>{{ step }}</p>
+                            <br><br>
+                            <div class="ingredientWrap">
+                                <span class="ingTitle">📌 최소한 이건 준비하자!</span>
+                                <hr class="line">
+                                <br>
 
-                                        {% endfor %}
-                                    </ul>
-                                </div>
+                                <ul class="ingList" id="ingList">
+                                    <!--                                    레시피 재료 들어가는 부분-->
+                                    {% for ing in ing_list %}
+                                        {{ ing }}
+                                    {% endfor %}
+                                </ul>
                             </div>
-                            <div id="tab-3" class="tabContent"
-                                 style="height:570px; width:950px; background-color:whitesmoke; overflow: auto;">
-                                <div class="reviewWrap">
+                        </div>
+                        <div id="tab-2" class="tabContent"
+                             style="height:570px;width:950px; background-color:whitesmoke; overflow: auto;">
+                            <div class="processWrap">
+                                <span class="processTitle">📌 이정돈 만들 수 있다!</span>
+                                <hr class="line">
+                                <ul class="processList" id="processList">
+                                    <!--                                    레시피 조리과정 들어가는 부분-->
+                                    {% for step in cookstep_list %}
+                                        <p>{{ step }}</p>
+
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="tab-3" class="tabContent"
+                             style="height:570px; width:950px; background-color:whitesmoke; overflow: auto;">
+                            <div class="reviewWrap">
                         <span class="reviewTitle">📌 나도 만들었다! 내가 만든 요리 후기
                         <hr class="line">
                             <br>
@@ -222,8 +256,9 @@
                             </form>
                             <br>
 
-                        {% for cm in comment %}
-                            <div class="reviewListWrap" id="reviewList" style="justify-content: space-between;display: flex">
+                            {% for cm in comment %}
+                                <div class="reviewListWrap" id="reviewList"
+                                     style="justify-content: space-between;display: flex">
                                 <!-- 리뷰 List 들어가는 부분-->
 
 
@@ -232,7 +267,7 @@
                                                 style="font-size: 12px">{{ cm.comment_me }}-{{ cm.created_at|timesince }} 전</span> </h5>
                                     </div>
                                     {% if cm.comment_me == user %}
-                                    <div style="">
+                                        <div style="">
                                         <div style="text-align: right; float:left;font-size: 1.2rem;">
                                             <a href="/detail/comment/delete/{{ cm.id }}">
                                                 <span class="badge rounded-pill bg-danger"
@@ -241,7 +276,8 @@
                                         </div>
                                         <div style="text-align: right; float:left; font-size: 1.2rem;">
                                             <a href="/detail/comment/update/{{ cm.id }}">
-                                                <span class="badge rounded-pill bg-success" style="color: white">수정</span>
+                                                <span class="badge rounded-pill bg-success"
+                                                      style="color: white">수정</span>
                                             </a>
                                         </div>
 
@@ -250,13 +286,13 @@
 
 
                             </div>
-                        {% endfor %}
+                            {% endfor %}
                         </span>
-                                </div>
                             </div>
-                            <div id="tab-4" class="tabContent"
-                                 style="height:570px; width:950px; background-color:whitesmoke; ">
-                                <div>
+                        </div>
+                        <div id="tab-4" class="tabContent"
+                             style="height:570px; width:950px; background-color:whitesmoke; ">
+                            <div>
                         <span class="reviewTitle">📌 이 레시피와 비슷한 레시피!
 
                         <hr class="line">
@@ -264,21 +300,23 @@
                                 <!-- 레시피 List 들어가는 부분-->
                                 {% for reco in reco_list %}
                                     <div class="reviewListWrap recoWrap" id="reviewList">
-                                            <img style="height:130px; object-fit: cover" src={{ reco.img_url }} class="recoImg">
-                                            <a style="font-size: 1rem;color:gray" href="/detail/{{ reco.id }}">{{ reco.title|slice:15 }}...</a>
+                                            <img style="height:130px; object-fit: cover"
+                                                 src={{ reco.img_url }} class="recoImg">
+                                            <a style="font-size: 1rem;color:gray"
+                                               href="/detail/{{ reco.id }}">{{ reco.title|slice:15 }}...</a>
                                 </div>
                                 {% endfor %}
                             </div>
 
                         </span>
-                                </div>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
+
+
             </div>
+        </div>
     </div>
 
 </div>
