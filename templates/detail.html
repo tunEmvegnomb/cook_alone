@@ -306,13 +306,13 @@
                                         {% if cm.comment_me == user %}
                                             <div style="">
                                         <div style="text-align: right; float:left; font-size: 1.2rem;">
-                                            <a href="/detail/comment/update/{{ cm.id }}">
+                                            <a href="/detail/comment/update/{{ cm.id }}" onclick="return confirm('수정할래잉?')">
                                                 <span class="badge rounded-pill bg-success"
                                                       style="color: white">수정</span>
                                             </a>
                                         </div>
                                         <div style="text-align: right; float:left;font-size: 1.2rem;">
-                                            <a href="/detail/comment/delete/{{ cm.id }}">
+                                            <a href="/detail/comment/delete/{{ cm.id }}" onclick="return confirm('삭제할래잉?')">
                                                 <span class="badge rounded-pill bg-danger"
                                                       style="color: white">삭제</span>
                                             </a>
@@ -344,13 +344,13 @@
                                         {% if cm.comment_me == user %}
                                             <div style="">
                                         <div style="text-align: right; float:left;font-size: 1.2rem;">
-                                            <a href="/detail/comment/delete/{{ cm.id }}">
+                                            <a href="/detail/comment/delete/{{ cm.id }}" onclick="return confirm('삭제할래잉?')">
                                                 <span class="badge rounded-pill bg-danger"
                                                       style="color: white">삭제</span>
                                             </a>
                                         </div>
                                         <div style="text-align: right; float:left; font-size: 1.2rem;">
-                                            <a href="/detail/comment/update/{{ cm.id }}">
+                                            <a href="/detail/comment/update/{{ cm.id }}" onclick="return confirm('수정할래잉?')">
                                                 <span class="badge rounded-pill bg-success"
                                                       style="color: white">수정</span>
                                             </a>
