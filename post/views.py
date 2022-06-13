@@ -47,27 +47,17 @@ def view_main(request):
 
 
 def view_search(request):
-    total = Recipe.objects.count()
-
     latest_num = Recipe.objects.latest('id').id
-    # print(f'total->{total}')
-    # print(f'latest_num->{latest_num}')
     all_recipes = Recipe.objects.get_queryset().order_by('-id').values('id', 'title', 'img_url', 'img_file', 'author_id')
     all_recipe = []
-    # print(f'1->{all_recipes.filter(id=1)}')
+
     for index in range(1, latest_num+1):
-
-
         try:
             like_num = LikeModel.objects.filter(like_recipe_id=index).count()
             target_recipe = all_recipes.get(id=index)
             target_recipe['like_num'] = like_num
             all_recipe.append(target_recipe)
 
-
-            if like_num == 1:
-                # print(f'index,num->{index, like_num, target_recipe}')
-                pass
         except:
             pass
 
@@ -142,9 +132,7 @@ def view_search(request):
         'page_index': page_index,
         'searched': searched,
     }
-    # NUMBER = doc['recipes'][0]['like_num']
-    # RECIPE = doc['recipes'][0]
-    # print(f'레시피넘버->{RECIPE}좋아요를 체크->{NUMBER}')
+
     if request.method == 'GET':
         return render(request, 'list.html', doc)
 
@@ -176,7 +164,7 @@ def view_filter(request):
 def upload_recipes(request):
 
     if request.method == 'GET':
-        # print(f'세션 있어 없어 -> {request.session["update"]}')
+
         try:
             #세션이 있다면
             is_update = request.session['update']
