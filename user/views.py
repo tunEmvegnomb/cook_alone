@@ -72,14 +72,23 @@ def logout(request):
 def myrecipe(request, id):
     if request.method == 'GET':
         user = request.user.is_authenticated #지금 요청을 보낸 사용자가 로그인이 되어 있는 사용자가 맞는지 알아보는 함수
+        print("3")
         if user:
+            print("1")
             me = request.user
             #내가 쓴 레시피 정보를 가져와서 보여줘야됨
             myrecipe = Recipe.objects.filter(author=id)
             mycomment = CommentModel.objects.filter(comment_me=id)
             mylike = LikeModel.objects.filter(like_me=id)
+            print("0")
+            random_img = Recipe.objects.filter().order_by('?')[:1].values('img_url')[0]['img_url']
 
-            return render(request, 'mypage.html', {'me': me, 'myrecipe': myrecipe, 'mycomment' : mycomment, 'mylike' : mylike})
+
+
+
+
+
+            return render(request, 'mypage.html', {'me': me, 'myrecipe': myrecipe, 'mycomment' : mycomment, 'mylike' : mylike,'random_img':random_img})
 
         else:
             return render(request, 'signin.html')

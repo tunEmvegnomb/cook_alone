@@ -104,7 +104,7 @@
         }
 
         body {
-            background-color: #c3d391;
+            background-color: #b1be96;
         }
 
         .detail-title {
@@ -133,6 +133,7 @@
             height: 100%;
             background-size: cover;
             background-position: center;
+            border-radius: 3px;
         }
 
         .detail-img-wrap {
@@ -175,10 +176,10 @@
 </nav>
 <div class="head-div"></div>
 
-<div class="wrap2">
-    <div class="detail_wrap">
+<div class="wrap2" style="border-radius: 3px">
+    <div class="detail_wrap" >
         <div class="detail-img-wrap" id="imgWrap"
-             style="background-color: whitesmoke;border-radius: 3px; border:1px black solid;">
+             style="background-color: whitesmoke;border-radius: 3px;">
             <!--                레시피 이미지 들어가는 부분-->
             {% if recipe.img_url %}
                 <div class="detailImage" style="background-image: url({{ recipe.img_url }})"></div>
@@ -311,10 +312,17 @@
                                                       style="color: white">삭제</span>
                                             </a>
                                         </div>
+
                                         <div style="text-align: right; float:left; font-size: 1.2rem;">
                                             <a href="/detail/comment/update/{{ cm.id }}">
                                                 <span class="badge rounded-pill bg-success"
                                                       style="color: white">수정</span>
+                                            </a>
+                                        </div>
+                                        <div style="text-align: right; float:left;font-size: 1.2rem;">
+                                            <a href="/detail/comment/delete/{{ cm.id }}">
+                                                <span class="badge rounded-pill bg-danger"
+                                                      style="color: white">삭제</span>
                                             </a>
                                         </div>
 
