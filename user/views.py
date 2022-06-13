@@ -99,15 +99,11 @@ def myrecipe_delete(request, id):
 
 @login_required
 def myrecipe_update(request, id):
-    update = "update_recipe"
+    update = True
     # print(request.session['recipe_update'],1)
-    myrecipe = Recipe.objects.get(id=id)
+    print(f'마이페이지에서 수정할 레시피 번호는 -> {id}')
 
-    context = {
-        'myrecipe': myrecipe,
-        'update': update,
-    }
     request.session['update'] = update
-    request.session['myrecipe'] = myrecipe
-    
+    request.session['myrecipe'] = id
+
     return redirect("/write")

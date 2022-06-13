@@ -141,15 +141,31 @@ def view_filter(request):
 
 
 def upload_recipes(request):
-    print(request.session['update'])
 
     if request.method == 'GET':
+        # print(f'세션 있어 없어 -> {request.session["update"]}')
+        try:
+            #세션이 있다면
+            is_update = request.session['update']
+            #아이디로 레시피 가져오기
+            print(f'타겟 아이디는 -> {request.session["myrecipe"]}')
+            target_recipe = Recipe.objects.get(id=request.session['myrecipe'])
+            print(f'타겟 레시피는 -> {target_recipe}')
+        except:
+            #세션이 없다면
+            is_update = False
+            target_recipe = ''
         ur_user = request.user.is_authenticated
 
         if ur_user:
             timecate = Timecate.objects.all()
             diffcate = Diffcate.objects.all()
-            return render(request, 'upload.html',{'timecost': timecate, 'difficulty': diffcate})
+            return render(request, 'upload.html',
+                          {'timecost': timecate,
+                           'difficulty': diffcate,
+                           'is_update': is_update,
+                           'target_recipe':target_recipe
+                           })
         else:
             return redirect('/')
 
