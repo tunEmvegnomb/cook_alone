@@ -42,17 +42,36 @@ def view_main(request):
 
 
 def view_search(request):
-    total = Recipe.objects.count()
+    total = Recipe.objects.latest('id').id
+    print(f'total->{total}')
     all_recipes = Recipe.objects.get_queryset().order_by('-id')
-    all_recipe = list(all_recipes.values('id', 'title', 'img_url', 'img_file', 'author_id'))
-
+    all_recipes2 = Recipe.objects.get_queryset().order_by('id')
+    all_recipe = list(all_recipes2.values('id', 'title', 'img_url', 'img_file', 'author_id'))
+    # print(f'ALL RECIPE2-->{all_recipe}')
 
     #좋아요수 보여야 하니까 all_recipe에 like_num넣기
+    # for index, recipe in enumerate(all_recipe):
+    #     # print(f'index->{index}, recipe->{recipe}')
+    #     try:
+    #         num = LikeModel.objects.filter(like_recipe_id=index).count()
+    #         all_recipe[total-index-1]['like_num'] = num
+    #         # print(f'total-index-1->{total-index-1}')
+    #     except:
+    #         pass
     for index, recipe in enumerate(all_recipe):
+        try:
+            num = LikeModel.objects.filter(like_recipe_id=index).count()
+            # print(f'total-index,num->{total-index-1,num}')
+            # print('#################################')
+            if num == 1:
+                print(f'total-index,num->{total - index, num, Recipe.objects.filter(id=index)}')
 
-        num = LikeModel.objects.filter(like_recipe_id=index).count()
-        all_recipe[total-index-1]['like_num'] = num
-
+            all_recipe[total - index]['like_num'] = num
+        except:
+            pass
+        # break
+    # print(all_recipe)
+    print(f'recipe->{all_recipe[57]}')
     searched=0
 
     try: #세션이 들어온게 있는지 try
@@ -122,9 +141,9 @@ def view_search(request):
         'page_index': page_index,
         'searched': searched,
     }
-    NUMBER = doc['recipes'][0]['like_num']
-    RECIPE = doc['recipes'][0]
-    print(f'레시피넘버->{RECIPE}좋아요를 체크->{NUMBER}')
+    # NUMBER = doc['recipes'][0]['like_num']
+    # RECIPE = doc['recipes'][0]
+    # print(f'레시피넘버->{RECIPE}좋아요를 체크->{NUMBER}')
     if request.method == 'GET':
         return render(request, 'list.html', doc)
 
