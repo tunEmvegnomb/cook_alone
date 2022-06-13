@@ -96,8 +96,13 @@ def view_search(request):
     # 페이지 인덱스 번호 구하기
     page_index = []
     page_digit = len(str(page_obj.number-1))
+    # 한자릿수
     if page_digit == 1:
         page_firstNum = 0
+    # 세자릿수
+    if page_digit == 3:
+        page_firstNum = int(str(page_obj.number-1)[:2])
+        print(f'page 100~ {page_firstNum}')
     else:
         page_firstNum = int(str(page_obj.number - 1)[0])
     for page in range(1, 11):
