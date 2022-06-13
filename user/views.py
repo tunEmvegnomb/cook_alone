@@ -119,6 +119,10 @@ def myrecipe_update_end(request, id):
         all_recipe.difficulty = request.POST.get('difficulty', '')
         all_recipe.img_file = request.FILES.get('img_url', '')
 
-
         all_recipe.save()
+
+        update = False
+
+        request.session['update'] = update
+
         return redirect('/')
