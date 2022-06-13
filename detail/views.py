@@ -46,13 +46,27 @@ def view_detail(request, id):
         like_status = True
     else:
         like_status = False
+
+    try:
+        # 세션이 있다면
+        is_update = request.session['commentupdate']
+        # 아이디로 코멘트 가져오기
+        print(f'코멘트 타겟 아이디는 -> {request.session["mycomment"]}')
+        target_comment = CommentModel.objects.get(id=request.session['mycomment'])
+        print(f'타겟 코멘트는 -> {target_comment}')
+    except:
+        is_update = False
+        target_comment = ''
+
     return render(request, 'detail.html', {
         'recipe': target_recipe,
         'like_status': like_status,
         'comment': all_comment,
         'ing_list': target_ing,
         'cookstep_list': target_step,
-        'reco_list': reco_recipes
+        'reco_list': reco_recipes,
+        'is_update': is_update,
+        'target_comment': target_comment
     })
 
 
@@ -73,6 +87,9 @@ def like_post(request, id):
 
 @login_required
 def comment_post(request, id):
+    if request.method == 'GET':
+        pass
+
     if request.method == 'POST':
         me = request.user
         recipe = Recipe.objects.get(id=id)
@@ -97,11 +114,19 @@ def comment_delete(request, id):
 
 @login_required
 def comment_update(request, id):
+    commentupdate = True
+    print(f'마이페이지에서 댓글 수정할 코멘트 번호는 {id}')
+
     all_comment = CommentModel.objects.get(id=id)
-    context = {
-        'all_comment': all_comment
-    }
-    return render(request, 'comment_update.html', context)
+    print(f'올코멘트 -> 너 뭐야?{all_comment}')
+    target_recipe = str(all_comment.comment_recipe_id)
+    all_comment = str(CommentModel.objects.get(id=id).id)
+    print(f'타겟레시피 넌 진짜 뭐냐 -> {target_recipe}')
+
+    request.session['commentupdate'] = commentupdate
+    request.session['mycomment'] = all_comment
+
+    return redirect(f'/detail/{target_recipe}')
 
 
 @login_required
