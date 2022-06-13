@@ -176,12 +176,17 @@
 </div>
 
 <div class="page2">
-
     <div class="page2_col">
+        <h4>{{ user.username }} 님이 마지막으로 클릭한 레시피에요!</h4>
+
         <div class="card mb-3" style="width: 100%; height: 700px; box-shadow: 0 1px 5px 3px rgba(0, 0, 0, .12);">
             <div class="row g-0">
                 <div class="col-md-4" style="width:550px; height: 700px; overflow: hidden">
-                    <img src="{{ reco_main.img_url }}" style="width:550px; height:100%; object-fit: cover" alt="...">
+                    <div style=" background-image: url({{ reco_main.img_url }});
+                            background-position: center; background-size: cover;
+                            width:550px; height:100%; object-fit: cover"></div>
+
+
                 </div>
                 <div class="col-md-8" style="width: 500px">
                     <div class="card-body" style="padding-left:50px">
