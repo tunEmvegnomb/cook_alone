@@ -107,3 +107,18 @@ def myrecipe_update(request, id):
     request.session['myrecipe'] = id
 
     return redirect("/write")
+
+@login_required
+def myrecipe_update_end(request, id):
+    if request.method == 'POST':
+        all_recipe = Recipe.objects.get(id=id)
+        all_recipe.title = request.POST.get('title', '')
+        all_recipe.ingredient = request.POST.get('ingredient', '')
+        all_recipe.cookstep = request.POST.get('cookstep','')
+        all_recipe.timecost = request.POST.get('timecost', '')
+        all_recipe.difficulty = request.POST.get('difficulty', '')
+        all_recipe.img_file = request.FILES.get('img_url', '')
+
+
+        all_recipe.save()
+        return redirect('/')
