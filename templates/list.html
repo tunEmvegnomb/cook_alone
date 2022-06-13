@@ -22,13 +22,15 @@
     <style>
         body {
             font-family: 'Gowun Batang', serif;
-            background-image: url("/static/image/source/asparagus3.jpg");
+            background-image: url("/static/image/source/cookie.png");
             background-size: contain;
             background-repeat: no-repeat;
+            background-color: #b1be96;
         }
 
         title {
             color: white;
+
 
         }
         a{
@@ -74,9 +76,7 @@
             transition: 0.5s;
         }
 
-        .card-body {
-            height: 120px;
-        }
+
 
 
         .card:hover {
@@ -85,7 +85,7 @@
         }
 
         .card-body {
-            height: 120px;
+            height: 52px;
         }
 
 
@@ -133,6 +133,15 @@
             font-weight: bold;
             margin: 5px;
         }
+        .head-div{
+            height:56px;
+            background-image: url("/static/image/source/top-view-1248955.jpg");
+            position: absolute;
+            left:0;
+            top:0;
+            width: 100%;
+            z-index: 100;
+        }
 
     </style>
 
@@ -144,7 +153,7 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg" style="position: fixed;z-index: 2000">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">혼자서도 잘해요리</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -174,6 +183,7 @@
         </div>
     </div>
 </nav>
+<div class="head-div" style="position: fixed;z-index: 1500"></div>
 <main class="wrap">
     <div class="list-title">
         <img src=""/>
@@ -181,6 +191,7 @@
         <title style="left:-150px">전세계 1인 가구를 위한 레시피</title>
         <br><br><br><br>
     </div>
+    <br>
     <div style="height: 150px"></div>
     {% if searched %}
         <h1>{{ searched }}</h1>
@@ -199,17 +210,17 @@
 
 
     <!--------------------필터----------------------->
-    <div class="filters">
+    <div class="filters" style="background-color: #2E2525FF;">
         <div class="filter-row">
             <div class="filter-one">
 
-                <span class="filter-key">Timecost</span>
-                <div class="filter-values" id="recipe_time">
+                <span class="filter-key" style="margin-left: 50px">Timecost</span>
+                <div class="filter-values" id="recipe_time" style="background-color: #2E2525FF;color:white">
                     {% for filter in timecost %}
                         <form action="/search/filter/" method="post">
                             {% csrf_token %}
                             <button id="{{ filter }}" class="filter-value" name="timecost"
-                                    value={{ filter }} type="submit">{{ filter }}</button>
+                                    value={{ filter }} type="submit" style="color:white">{{ filter }}</button>
                         </form>
                     {% endfor %}
 
@@ -217,12 +228,12 @@
             </div>
             <div class="filter-one">
                 <span class="filter-key">Difficulty</span>
-                <div class="filter-values" id="recipe_diff">
+                <div class="filter-values" id="recipe_diff" style="background-color: #2E2525FF">
                     {% for filter in difficulty %}
                         <form action="/search/filter/" method="post">
                         {% csrf_token %}
                         <button id="{{ filter }}" class="filter-value" name="difficulty"
-                                value={{ filter }} type="submit">{{ filter }}</button>
+                                value={{ filter }} type="submit" style="color:white">{{ filter }}</button>
                         </form>
                     {% endfor %}
                 </div>
@@ -243,40 +254,44 @@
         {% for recipe in recipes %}
             <div class="col_normal_recipes">
                 <div class="card">
-                    <div class="card-img-div">
+                    <div class="card-img-div" style="width: 320px; height: 190px">
                         <a href="/detail/{{ recipe.id }}">
                             {% if recipe.img_url %}
                                 <img
                                         src={{ recipe.img_url }}
                                                 class="card-img-top"
                                         alt="..."
-                                        style="width: 320px; height: 240px"
+                                        style="width: 320px; height: 190px; object-fit:cover"
                                 />
                             {% else %}
                                 <img
                                         src="/media/{{ recipe.img_file }}"
                                         class="card-img-top"
                                         alt="..."
-                                        style="width: 320px; height: 240px"
+                                        style="width: 320px; height: 190px; object-fit:cover"
                                 />
                             {% endif %}
                         </a>
                     </div>
                     <div class="card-body">
                         <div class="card-info">
-                            <a href="/detail/{{ recipe.id }}" class="recipe-link">
-                                <span class="card-title">{{ recipe.title }}</span>
+                            <a href="/detail/{{ recipe.id }}" class="recipe-link" style="text-decoration:none;">
+                                {% if recipe.title|length >= 15 %}
+                                    <span class="card-title" >{{ recipe.title|slice:":15" }}..</span>
+                                {% else %}
+                                    <span class="card-title">{{ recipe.title }}</span>
+                                {% endif %}
                             </a>
-                            <div class="card-bottom-row">
+                            <div class="card-bottom-row" style="float:right">
                                 <span class="card-text">{{ recipe.author }}</span>
-                                <div class="like-div">
-                                    <span class="like-text">추천</span>
+                                <div class="like-div" >
+                                    <span class="like-text" style="">추천</span>
                                     <span class="like-num">{{ recipe.like_num }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="card-like">
-                            <i class="fa-regular fa-thumbs-up like-icon"></i>
+
                         </div>
                     </div>
                 </div>

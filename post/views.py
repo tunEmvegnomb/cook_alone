@@ -52,6 +52,8 @@ def view_search(request):
         num = LikeModel.objects.filter(like_recipe_id=index).count()
         all_recipe[total-index-1]['like_num'] = num
 
+    searched=0
+
     try: #세션이 들어온게 있는지 try
         #경우의 수 1=> 필터를 사용했는가?
         if request.session['filter_type'] == "filters":
@@ -78,8 +80,9 @@ def view_search(request):
             using_recipes =filter_value
         # 경우의 수 2=> 서치바를 사용했는가?
         elif request.session['filter_type'] == "searched":
-            using_recipes = Recipe.objects.filter(title__contains=request.session['filter_name']) \
-                            or Recipe.objects.filter(author__username__contains=request.session['filter_name'])
+            using_recipes = Recipe.objects.filter(title__contains=request.session['filter_name']) or Recipe.objects.filter(author__username__contains=request.session['filter_name'])
+            searched=request.session['filter_name']
+
     # 경우의 수 3=> 둘 다 아닐때에는 기존의 all_recipe를 반환
     except:
         using_recipes = all_recipe
@@ -110,7 +113,8 @@ def view_search(request):
         'timecost': timecost,
         'difficulty': difficulty,
         'page_obj': page_obj,
-        'page_index':page_index
+        'page_index': page_index,
+        'searched': searched,
     }
 
     if request.method == 'GET':
@@ -121,7 +125,7 @@ def view_search(request):
 def searching(request):
     if request.method == 'POST':
         searched = request.POST.get('searched', '')
-
+        #세션 저장
         request.session['filter_name'] = searched
         request.session['filter_type'] = "searched"
 
@@ -137,6 +141,7 @@ def view_filter(request):
 
         request.session['filter_name'] = timecost_value or difficulty_value or mostfilter_value
         request.session['filter_type'] = "filters"
+        request.session['edit'] = True
         return redirect('/search/?page=1')
 
 

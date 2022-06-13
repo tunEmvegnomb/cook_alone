@@ -139,7 +139,7 @@
         .main_subtitle {
             text-align: center;
             margin: 50px 0;
-            background-color: white;
+            background-color: whitesmoke;
             width: 1100px;
         }
 
@@ -200,7 +200,7 @@
     <div style="width:100% ;height:100vh; background-color: rgb(0,0,0,0.8); position: absolute">
         <h1 style="font-size: 6rem; margin: 180px auto; position: relative">혼자서도 잘해요리</h1>
         <div class="arrowWrap">
-            <button class="arrowBtn" onclick="goToScroll(1)">💚</button>
+            <button class="arrowBtn" style="color:white" onclick="goToScroll(1)"><i class="fa fa-angle-down"></i></button>
         </div>
 
     </div>
@@ -212,7 +212,7 @@
 
 <div class="page2">
     <div class="page2_col">
-        <h3 class="main_subtitle">📌 {{ user.username }} 님이 마지막으로 클릭한 레시피에요!</h3>
+        <h3 class="main_subtitle"> {{ user.username }} 님이 마지막으로 클릭한 레시피예요!</h3>
 
         <div class="card mb-3"
              style="width: 100%; height: 700px; box-shadow: 0 1px 5px 3px rgba(0, 0, 0, .12); overflow: hidden">
@@ -259,7 +259,7 @@
         </div>
     </div>
     <div class="arrowWrap">
-        <button class="arrowBtn" onclick="goToScroll(2)">💚</button>
+        <button class="arrowBtn" onclick="goToScroll(2)"><i class="fa fa-angle-down"></i></button>
     </div>
 </div>
 
@@ -269,7 +269,7 @@
     <div style="height: 40px; background-color: #b1be96"></div>
 
     <div class="rec_bar">
-        <h3 class="main_subtitle" style="margin: 80px auto"> 🙌 클릭한 레시피를 바탕으로 추천해드릴게요!</h3>
+        <h3 class="main_subtitle" style="margin: 80px auto"> 클릭한 레시피를 바탕으로 추천해드릴게요!</h3>
         <div class="rec_bar_inner">
 
             {% for reco_recipe in reco_recipes %}
@@ -277,7 +277,7 @@
                      style="width: 18rem; height:25rem; background-image: url({{ reco_recipe.img_url }}); background-size:cover">
                     <div class="imageDefault"></div>
                     <div class="card-body main3card">
-                        <p class="card-text"><a href="/detail/{{ reco_recipe.id }}">{{ reco_recipe.title|slice:10 }}</a>
+                        <p class="card-text" ><a style="color:black; font-size: 1.2rem"href="/detail/{{ reco_recipe.id }}">{{ reco_recipe.title|slice:10 }}</a>
                         </p>
                     </div>
                 </div>
@@ -285,7 +285,7 @@
         </div>
     </div>
     <div class="arrowWrap">
-        <button class="arrowBtn" onclick="goToScroll(3)">💚</button>
+        <button class="arrowBtn" onclick="goToScroll(3)"><i class="fa fa-angle-up"></i></button>
     </div>
 </div>
 
