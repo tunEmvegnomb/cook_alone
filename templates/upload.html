@@ -70,10 +70,16 @@
         }
         ::-webkit-scrollbar-thumb {
             border-radius: 5px;
-            background-color: #3A3845;
+            background-color: #2E2525FF;
         }
         ::-webkit-scrollbar-thumb:hover {
             background-color: #7a7686;
+        }
+        .fin-btn{
+            border: none;
+            background-color: #2e2525;
+            width: 300px;
+            height: 45px;
         }
     </style>
 </head>
@@ -124,7 +130,7 @@
             <br><br><br><br><br><br>
         </div>
         <div style="background-color: whitesmoke; width: 710px; margin: 0 auto; border-radius:4px;">
-            <form action="/myrecipe/update/{{ target_recipe.id }}/" method="post" enctype="multipart/form-data">
+            <form action="/myrecipe/update/end/{{ target_recipe.id }}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {#            <img src="" alt="이미지" class="random-food"/>#}
                 <div class="recipe-total">
@@ -215,7 +221,7 @@
             <br><br><br><br><br><br>
         </div>
         <div style="background-color: whitesmoke; width: 710px; margin: 0 auto; border-radius:4px;">
-            <form action="/myrecipe/update/{{ myrecipe.id }}/" method="post" enctype="multipart/form-data">
+            <form action="/write/" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {#            <img src="" alt="이미지" class="random-food"/>#}
                 <div class="recipe-total">

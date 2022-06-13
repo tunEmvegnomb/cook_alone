@@ -45,7 +45,7 @@
 
         .main-card {
             background-image: url("/static/image/source/top-view-1248955.jpg");
-            height: 630px;
+            height: 750px;
             padding-top: 20px;
             border-radius: 3px;
         }
@@ -57,10 +57,16 @@
             margin: 0 auto;
 
         }
+        .tabContent{
+            width: 560px;
+            height:600px;
+            background-color:whitesmoke;
+            overflow: auto;
+        }
 
         .random-img-box {
-            height: 480px;
-            width: 420px;
+            height: 600px;
+            width: 560px;
             background-color: #96d000;
             float: left;
             margin: 40px auto auto 40px;
@@ -143,17 +149,17 @@
 </nav>
 <div class="head-div"></div>
 
-<main class="wrap mypage-main">
-    <div class="mypage-title">
-        <span class="mypage-greeting">
-            안녕하세요,<span class="mypage-nickname">{{ user }}</span>님!</span>
+<main class="wrap mypage-main" style=" width: 1300px; height:900px">
+    <div class="mypage-title" style=" padding:0; margin:0;">
+
+        <div style="font-size: 2rem">안녕하세요,<span class="mypage-nickname">{{ user }}</span>님!</div>
         <span class="mypage-email">{{ me.email }}</span>
-        <br><br><br>
+
     </div>
     <div class="mypage-cols">
-        <div class="mypage-main-div">
+        <div class="mypage-main-div" >
             <div class="main-card">
-                <div style=" height:500px; margin-top:25px; float:left">
+                <div style=" height:800px; margin-top:25px; float:left">
                     <div style="float:left;">
                         <div class="sortBar">
 
@@ -174,44 +180,42 @@
                             </ul>
                         </div>
                         <div style="margin: 0 auto; height: 480px; padding-left: 60px">
-                            <div id="tab-1" class="tabContent current"
-                                 style="height:480px;width:480px; background-color:whitesmoke;overflow: auto;">
+                            <div id="tab-1" class="tabContent current">
                                 {% for myrp in myrecipe %}
                                     <a href="/detail/{{ myrp.id }}">
                                         <div>
                                             {{ myrp.title }}
                                         </div>
                                         <div style="text-align: right; float:left;font-size: 1.2rem;">
-                                            <a href="/myrecipe/delete/{{ myrp.id }}">
+                                            <a href="/myrecipe/delete/{{ myrp.id }}" onclick="return confirm('정말 삭제하시겠습니까?')">
                                                 <span class="badge rounded-pill bg-danger"
                                                       style="color: white">삭제</span>
                                             </a>
                                         </div>
-                                        <br>
                                         <div style="text-align: right; float:left; font-size: 1.2rem;">
-                                            <a href="/myrecipe/update/{{ myrp.id }}">
+                                            <a href="/myrecipe/update/{{ myrp.id }}" onclick="return confirm('수정할래잉?')">
                                                 <span class="badge rounded-pill bg-success"
                                                       style="color: white">수정</span>
                                             </a>
                                         </div>
                                     </a>
+                                    <br>
+                                    <br>
                                 {% endfor %}
                             </div>
-                            <div id="tab-2" class="tabContent"
-                                 style="height:480px;width:480px; background-color:whitesmoke; overflow: auto;">
+                            <div id="tab-2" class="tabContent">
                                 {% for mycm in mycomment %}
                                     <a href="/detail/{{ mycm.comment_recipe.id }}">
-                                        <div>
+                                        <div style="margin-bottom: 5px">
                                             {{ mycm.comment_content }}
                                         </div>
-                                        <br>
+
                                     </a>
                                 {% endfor %}
                             </div>
-                            <div id="tab-3" class="tabContent"
-                                 style="height:480px; width:480px; background-color:whitesmoke;overflow: auto; ">
+                            <div id="tab-3" class="tabContent">
                                 {% for mylk in mylike %}
-                                    <div>
+                                    <div style="margin-bottom: 5px">
                                         <a href="/detail/{{ mylk.like_recipe.id }}">
                                             {{ mylk.like_recipe }}
                                         </a><br>
