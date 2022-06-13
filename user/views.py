@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import UserModel
-from post.models import Recipe
+from post.models import Recipe, Timecate, Diffcate
 from detail.models import CommentModel, LikeModel
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model
@@ -90,3 +90,20 @@ def myrecipe_delete(request, id):
     myrecipe_id = myrecipe.author.id
     myrecipe.delete()
     return redirect(f'/myrecipe/{myrecipe_id}')
+
+
+# 수정하기를 클릭하면 세션에 저장하고 업로드 html로 이동
+# 기존에 작성한 글을 가지고와서 폼에 뿌려준다
+# 수정하고 저장한다
+# 기존 페이지로 보내준다
+
+@login_required
+def myrecipe_update(request, id):
+    update = True
+    # print(request.session['recipe_update'],1)
+    print(f'마이페이지에서 수정할 레시피 번호는 -> {id}')
+
+    request.session['update'] = update
+    request.session['myrecipe'] = id
+
+    return redirect("/write")
