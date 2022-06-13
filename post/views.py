@@ -36,7 +36,7 @@ def view_main(request):
     for reco_num in reco_list:
         reco_recipe = Recipe.objects.get(id=reco_num)
         reco_recipes.append(reco_recipe)
-    print(f'reco_recipes->{reco_recipes}')
+    # print(f'reco_recipes->{reco_recipes}')
     return render(request, 'main.html', {'reco_main': reco_main, 'reco_recipes': reco_recipes})
 
 
@@ -45,12 +45,22 @@ def view_search(request):
     total = Recipe.objects.count()
     all_recipes = Recipe.objects.get_queryset().order_by('-id')
     all_recipe = list(all_recipes.values('id', 'title', 'img_url', 'img_file', 'author_id'))
+    print("여기까진 됨")
 
 
     #좋아요수 보여야 하니까 all_recipe에 like_num넣기
-    for index, recipe in enumerate(all_recipe):
-        num = LikeModel.objects.filter(like_recipe_id=index).count()
-        all_recipe[total-index-1]['like_num'] = num
+    for index in range(1960):
+        try:
+            num = LikeModel.objects.filter(like_recipe_id=index).count()
+            # print(f'total-index,num->{total-index-1,num}')
+            # print('#################################')
+            if num==1:
+                print(f'total-index,num->{total-index,num,Recipe.objects.filter(id=index)}')
+
+
+            all_recipe[total-index]['like_num'] = num
+        except:
+            pass
 
     searched=0
 
