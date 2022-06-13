@@ -124,7 +124,7 @@
             <br><br><br><br><br><br>
         </div>
         <div style="background-color: whitesmoke; width: 710px; margin: 0 auto; border-radius:4px;">
-            <form action="/myrecipe/update/{{ target_recipe.id }}/" method="post" enctype="multipart/form-data">
+            <form action="/myrecipe/update/end/{{ target_recipe.id }}/" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {#            <img src="" alt="이미지" class="random-food"/>#}
                 <div class="recipe-total">

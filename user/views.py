@@ -107,3 +107,36 @@ def myrecipe_update(request, id):
     request.session['myrecipe'] = id
 
     return redirect("/write")
+
+# @login_required
+# def myrecipe_update_end(request, id):
+#     if request.method == 'POST':
+#         all_recipe = Recipe.objects.get(id=id)
+#         all_recipe.title = request.POST.get('title', '')
+#
+#         all_recipe.save()
+#         return redirect('/')
+
+    # if request.method == 'POST':
+    #     author = request.user
+    #     title = request.POST.get('title', '')
+    #     img_file = request.FILES.get('img_url', '')
+    #     timecost = request.POST.get('timecost', '')
+    #     difficulty = request.POST.get('difficulty', '')
+    #     ingredient = request.POST.get('ingredient', '')
+    #     cookstep = request.POST.get('ingredient', '')
+    #
+    #     my_post = (title, img_file, timecost, difficulty, ingredient, cookstep)
+    #     my_post.save()
+    #     return redirect('/')
+
+#
+# @login_required
+# def comment_update_end(request, id):
+#     all_comment = CommentModel.objects.get(id=id)
+#     target_recipe = all_comment.comment_recipe.id
+#
+#     all_comment.comment_content = request.POST.get('comment_update')
+#     all_comment.save()
+#     print(all_comment.comment_content)
+#     return redirect(f'/detail/{target_recipe}')
