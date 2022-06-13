@@ -121,7 +121,7 @@ def view_search(request):
 def searching(request):
     if request.method == 'POST':
         searched = request.POST.get('searched', '')
-
+        #세션 저장
         request.session['filter_name'] = searched
         request.session['filter_type'] = "searched"
 
@@ -137,6 +137,7 @@ def view_filter(request):
 
         request.session['filter_name'] = timecost_value or difficulty_value or mostfilter_value
         request.session['filter_type'] = "filters"
+        request.session['edit'] = True
         return redirect('/search/?page=1')
 
 

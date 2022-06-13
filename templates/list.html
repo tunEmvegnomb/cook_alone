@@ -199,17 +199,17 @@
 
 
     <!--------------------필터----------------------->
-    <div class="filters">
+    <div class="filters" style="background-color: #2E2525FF;">
         <div class="filter-row">
             <div class="filter-one">
 
-                <span class="filter-key">Timecost</span>
-                <div class="filter-values" id="recipe_time">
+                <span class="filter-key" style="margin-left: 50px">Timecost</span>
+                <div class="filter-values" id="recipe_time" style="background-color: #2E2525FF;color:white">
                     {% for filter in timecost %}
                         <form action="/search/filter/" method="post">
                             {% csrf_token %}
                             <button id="{{ filter }}" class="filter-value" name="timecost"
-                                    value={{ filter }} type="submit">{{ filter }}</button>
+                                    value={{ filter }} type="submit" style="color:white">{{ filter }}</button>
                         </form>
                     {% endfor %}
 
@@ -217,12 +217,12 @@
             </div>
             <div class="filter-one">
                 <span class="filter-key">Difficulty</span>
-                <div class="filter-values" id="recipe_diff">
+                <div class="filter-values" id="recipe_diff" style="background-color: #2E2525FF">
                     {% for filter in difficulty %}
                         <form action="/search/filter/" method="post">
                         {% csrf_token %}
                         <button id="{{ filter }}" class="filter-value" name="difficulty"
-                                value={{ filter }} type="submit">{{ filter }}</button>
+                                value={{ filter }} type="submit" style="color:white">{{ filter }}</button>
                         </form>
                     {% endfor %}
                 </div>
