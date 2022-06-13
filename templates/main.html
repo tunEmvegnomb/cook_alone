@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
     <!-- style.css 파일을 같은 폴더에 만들고, head 태그에서 불러오기 -->
     <link rel="stylesheet" type="text/css" href="\static\css\main.css">
-    <script src="\static\js\main.js"></script>
+    <script src="../static/js/scrollMove.js"></script>
     <style>
         body {
             background-color: #b1be96;
@@ -88,7 +88,7 @@
 
         .card {
             height: 100%;
-            border:0
+            border: 0
         }
 
         .nav-link {
@@ -142,6 +142,21 @@
             background-color: white;
             width: 1100px;
         }
+
+        .arrowBtn {
+            background-color: rgba(0, 0, 0, 0);
+            font-size: 50px;
+            border: 0;
+            width: 100px;
+            height: 100px;
+        }
+
+        .arrowWrap {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -166,6 +181,7 @@
                 </div>
             </div>
         </div>
+
         <div>
 
             <div class="navbar-nav" style="width:300px">
@@ -182,7 +198,11 @@
     </nav>
     <div class="head-div" style="position: fixed;z-index: 1500"></div>
     <div style="width:100% ;height:100vh; background-color: rgb(0,0,0,0.8); position: absolute">
-        <h1 style="font-size: 6rem; margin: 200px auto; position: relative">혼자서도 잘해요리</h1>
+        <h1 style="font-size: 6rem; margin: 180px auto; position: relative">혼자서도 잘해요리</h1>
+        <div class="arrowWrap">
+            <button class="arrowBtn" onclick="goToScroll(1)">💚</button>
+        </div>
+
     </div>
     {#    <div class="page_icon"><a style="display:scroll;position:fixed;top:1300px;right:3px;" rel="nofollow"#}
     {#href="#"><i class="fa fa-angle-down"></i>여기다가 아무말</a></div>#}
@@ -194,7 +214,8 @@
     <div class="page2_col">
         <h3 class="main_subtitle">📌 {{ user.username }} 님이 마지막으로 클릭한 레시피에요!</h3>
 
-        <div class="card mb-3" style="width: 100%; height: 700px; box-shadow: 0 1px 5px 3px rgba(0, 0, 0, .12); overflow: hidden">
+        <div class="card mb-3"
+             style="width: 100%; height: 700px; box-shadow: 0 1px 5px 3px rgba(0, 0, 0, .12); overflow: hidden">
             <div class="row g-0">
                 <div class="col-md-4" style="width:550px; height: 700px; overflow: hidden">
                     <div style="width:550px; height:100%; object-fit: cover">
@@ -237,7 +258,9 @@
             </div>
         </div>
     </div>
-
+    <div class="arrowWrap">
+        <button class="arrowBtn" onclick="goToScroll(2)">💚</button>
+    </div>
 </div>
 
 </div>
@@ -260,8 +283,9 @@
                 </div>
             {% endfor %}
         </div>
-
-
+    </div>
+    <div class="arrowWrap">
+        <button class="arrowBtn" onclick="goToScroll(3)">💚</button>
     </div>
 </div>
 
