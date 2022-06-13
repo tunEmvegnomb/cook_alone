@@ -10,11 +10,15 @@
     />
     <link rel="stylesheet" href="/static/css/mypage.css"/>
     <link rel="stylesheet" href="/static/css/detail.css/">
-    <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-            crossorigin="anonymous"
-    ></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
     <meta charset="UTF-8"/>
@@ -28,20 +32,18 @@
             background-color: #b1be96;
         }
 
-        ::-webkit-scrollbar {
-            width: 10px;
+        ::-webkit-scrollbar{
+            width:10px;
         }
 
-        ::-webkit-scrollbar-track {
+        ::-webkit-scrollbar-track{
             border-radius: 5px;
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.25);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.25);
         }
-
         ::-webkit-scrollbar-thumb {
             border-radius: 5px;
             background-color: #3A3845;
         }
-
         ::-webkit-scrollbar-thumb:hover {
             background-color: #7a7686;
         }
@@ -60,11 +62,10 @@
             margin: 0 auto;
 
         }
-
-        .tabContent {
+        .tabContent{
             width: 560px;
-            height: 600px;
-            background-color: whitesmoke;
+            height:600px;
+            background-color:whitesmoke;
             overflow: auto;
         }
 
@@ -161,7 +162,7 @@
 
     </div>
     <div class="mypage-cols">
-        <div class="mypage-main-div">
+        <div class="mypage-main-div" >
             <div class="main-card">
                 <div style=" height:800px; margin-top:25px; float:left">
                     <div style="float:left;">
@@ -186,28 +187,32 @@
                         <div style="margin: 0 auto; height: 480px; padding-left: 60px">
                             <div id="tab-1" class="tabContent current">
                                 {% for myrp in myrecipe %}
-                                    <div style="display: flex; flex-direction: row; justify-content: space-between">
-                                        <div><a href="/detail/{{ myrp.id }}">{{ myrp.title }}</a></div>
+                                    <div style="display:flex;justify-content: space-between;">
+                                    <a href="/detail/{{ myrp.id }}" >
                                         <div>
-                                            <div style="text-align: right; float:left;font-size: 1.2rem;">
-                                                <a href="/myrecipe/delete/{{ myrp.id }}"
-                                                   onclick="return confirm('정말 삭제하시겠습니까?')">
-                                                <span class="badge rounded-pill bg-danger"
-                                                      style="color: white">삭제</span>
-                                                </a>
-                                            </div>
-                                            <div style="text-align: right; float:left; font-size: 1.2rem;">
-                                                <a href="/myrecipe/update/{{ myrp.id }}" onclick="return confirm('수정할래잉?')">
-                                                <span class="badge rounded-pill bg-success"
-                                                      style="color: white">수정</span>
-                                                </a>
-                                            </div>
+                                            {{ myrp.title }}
+                                        </div>
+                                    </a>
+                                    <div padding>
+
+                                        <div style="text-align: right; float:left; font-size: 1.2rem;">
+                                            <a href="/myrecipe/update/{{ myrp.id }}"
+                                               onclick="return confirm('수정할래잉?')">
+                                            <span class="badge rounded-pill bg-success"
+                                                  style="color: white">수정</span>
+                                            </a>
+                                        </div>
+                                        <div style="text-align: right; float:left;font-size: 1.2rem;">
+                                            <a href="/myrecipe/delete/{{ myrp.id }}"
+                                               onclick="return confirm('정말 삭제하시겠습니까?')">
+                                            <span class="badge rounded-pill bg-danger"
+                                                  style="color: white">삭제</span>
+                                            </a>
                                         </div>
                                     </div>
 
+                                    </div>
 
-                                    <br>
-                                    <br>
                                 {% endfor %}
                             </div>
                             <div id="tab-2" class="tabContent">
@@ -232,7 +237,8 @@
                         </div>
                     </div>
 
-                    <div class="random-img-box">
+                    <div class="random-img-box" style="background-image: url('{{ random_img }}');background-size: cover; background-position: center;">
+
                     </div>
                 </div>
             </div>
@@ -240,7 +246,10 @@
 
     </div>
     </div>
+
 </main>
+
+
 <script type="text/javascript" src="/static/js/detail.js"></script>
 </body>
 </html>
