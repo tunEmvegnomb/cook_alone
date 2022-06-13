@@ -22,7 +22,7 @@ def view_main(request):
     try:
         target_reco = RecommendModel.objects.get(id=request.session['latestRecipe'])
     except:
-        target_reco = RecommendModel.objects.get(id=1)
+        target_reco = RecommendModel.objects.get(id=2)
 
 
     reco_main = int((target_reco.reco1.strip('()').split(',')[0])) + 1
@@ -141,12 +141,15 @@ def view_filter(request):
 
 
 def upload_recipes(request):
+    print(request.session['update'])
+
     if request.method == 'GET':
         ur_user = request.user.is_authenticated
+
         if ur_user:
             timecate = Timecate.objects.all()
             diffcate = Diffcate.objects.all()
-            return render(request, 'upload.html', {'timecost': timecate, 'difficulty': diffcate})
+            return render(request, 'upload.html',{'timecost': timecate, 'difficulty': diffcate})
         else:
             return redirect('/')
 
