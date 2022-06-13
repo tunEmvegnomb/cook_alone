@@ -8,4 +8,5 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('myrecipe/<int:id>', views.myrecipe, name='mypage'),
     path('myrecipe/delete/<int:id>', views.myrecipe_delete, name='myrecipe-delete'),
+    path('myrecipe/update/<int:id>', views.myrecipe_update, name='myrecipe-update'),
 ]
