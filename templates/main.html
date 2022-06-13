@@ -88,7 +88,7 @@
 
         .card {
             height: 100%;
-
+            border:0
         }
 
         .nav-link {
@@ -132,7 +132,7 @@
             padding: 0.5rem 0.5rem;
             width: 100%;
             text-align: center;
-            background-color: rgba(247,247,247,0.8);
+            background-color: rgba(247, 247, 247, 0.8);
             flex: 0;
         }
 
@@ -194,14 +194,15 @@
     <div class="page2_col">
         <h3 class="main_subtitle">📌 {{ user.username }} 님이 마지막으로 클릭한 레시피에요!</h3>
 
-        <div class="card mb-3" style="width: 100%; height: 700px; box-shadow: 0 1px 5px 3px rgba(0, 0, 0, .12);">
+        <div class="card mb-3" style="width: 100%; height: 700px; box-shadow: 0 1px 5px 3px rgba(0, 0, 0, .12); overflow: hidden">
             <div class="row g-0">
                 <div class="col-md-4" style="width:550px; height: 700px; overflow: hidden">
-                    <div style=" background-image: url({{ reco_main.img_url }});
-                            background-position: center; background-size: cover;
-                            width:550px; height:100%; object-fit: cover"></div>
-
-
+                    <div style="width:550px; height:100%; object-fit: cover">
+                        <div style=" background-image: url({{ reco_main.img_url }});
+                                background-position: center; background-size: cover;
+                                width: 100%; height: 100%">
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-8" style="width: 500px">
                     <div class="card-body" style="padding-left:50px">
@@ -253,7 +254,8 @@
                      style="width: 18rem; height:25rem; background-image: url({{ reco_recipe.img_url }}); background-size:cover">
                     <div class="imageDefault"></div>
                     <div class="card-body main3card">
-                        <p class="card-text"><a href="/detail/{{ reco_recipe.id }}">{{ reco_recipe.title|slice:10 }}</a></p>
+                        <p class="card-text"><a href="/detail/{{ reco_recipe.id }}">{{ reco_recipe.title|slice:10 }}</a>
+                        </p>
                     </div>
                 </div>
             {% endfor %}
