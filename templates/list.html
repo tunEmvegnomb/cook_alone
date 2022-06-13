@@ -308,7 +308,8 @@
                             <div class="listCard" style="background-image: url('{{ recipe.img_url }}')"><a
                                     href="/detail/{{ recipe.id }}"></a></div>
                         {% else %}
-                            <div class="listCard" style="background-image: url({{ recipe.img.file }})"><a
+                            {{ recipe.img_file }}
+                            <div class="listCard" style="background-image: url({{ recipe.img_file }})"><a
                                     href="/detail/{{ recipe.id }}"></a></div>
                         {% endif %}
                     </div>
