@@ -27,6 +27,21 @@
             font-family: 'Gowun Batang', serif;
             background-color: #bec8ac;
         }
+        ::-webkit-scrollbar{
+            width:10px;
+        }
+
+        ::-webkit-scrollbar-track{
+            border-radius: 5px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.25);
+        }
+        ::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background-color: #3A3845;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #7a7686;
+        }
 
         .main-card {
             background-image: url("/static/image/source/top-view-1248955.jpg");
@@ -160,7 +175,7 @@
                         </div>
                         <div style="margin: 0 auto; height: 480px; padding-left: 60px">
                             <div id="tab-1" class="tabContent current"
-                                 style="height:480px;width:480px; background-color:whitesmoke;">
+                                 style="height:480px;width:480px; background-color:whitesmoke;overflow: auto;">
                                 {% for myrp in myrecipe %}
                                     <a href="/detail/{{ myrp.id }}">
                                         <div>
@@ -183,7 +198,7 @@
                                 {% endfor %}
                             </div>
                             <div id="tab-2" class="tabContent"
-                                 style="height:480px;width:480px; background-color:whitesmoke;">
+                                 style="height:480px;width:480px; background-color:whitesmoke; overflow: auto;">
                                 {% for mycm in mycomment %}
                                     <a href="/detail/{{ mycm.comment_recipe.id }}">
                                         <div>
@@ -194,7 +209,7 @@
                                 {% endfor %}
                             </div>
                             <div id="tab-3" class="tabContent"
-                                 style="height:480px; width:480px; background-color:whitesmoke; ">
+                                 style="height:480px; width:480px; background-color:whitesmoke;overflow: auto; ">
                                 {% for mylk in mylike %}
                                     <div>
                                         <a href="/detail/{{ mylk.like_recipe.id }}">

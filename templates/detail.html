@@ -77,6 +77,21 @@
         .comment{
             width: 700px;
         }
+        ::-webkit-scrollbar{
+            width:10px;
+        }
+
+        ::-webkit-scrollbar-track{
+            border-radius: 5px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.25);
+        }
+        ::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background-color: #3A3845;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #7a7686;
+        }
     </style>
 
 </head>
@@ -178,11 +193,11 @@
                                 </div>
                             </div>
                             <div id="tab-2" class="tabContent"
-                                 style="height:570px;width:950px; background-color:whitesmoke;">
-                                <div class="processWrap">
+                                 style="height:570px;width:950px; background-color:whitesmoke; overflow: auto;">
+                                <div class="processWrap" >
                                     <span class="processTitle">📌 이정돈 만들 수 있다!</span>
                                     <hr class="line">
-                                    <ul class="processList" id="processList">
+                                    <ul class="processList" id="processList" >
                                         <!--                                    레시피 조리과정 들어가는 부분-->
                                         {% for step in cookstep_list %}
                                             <p>{{ step }}</p>
@@ -192,7 +207,7 @@
                                 </div>
                             </div>
                             <div id="tab-3" class="tabContent"
-                                 style="height:570px; width:950px; background-color:whitesmoke; ">
+                                 style="height:570px; width:950px; background-color:whitesmoke; overflow: auto;">
                                 <div class="reviewWrap">
                         <span class="reviewTitle">📌 나도 만들었다! 내가 만든 요리 후기
                         <hr class="line">
