@@ -33,16 +33,19 @@
 
 
         }
-        a{
-            color:gray;
+
+        a {
+            color: gray;
             font-weight: bold;
             font-size: 1.1rem;
         }
-        button{
+
+        button {
             background-color: transparent;
             border: none;
         }
-        button:hover{
+
+        button:hover {
             color: #63a355;
             font-weight: bold;
         }
@@ -75,8 +78,6 @@
             box-shadow: 0 1px 5px 3px rgba(0, 0, 0, .22);
             transition: 0.5s;
         }
-
-
 
 
         .card:hover {
@@ -133,12 +134,13 @@
             font-weight: bold;
             margin: 5px;
         }
-        .head-div{
-            height:56px;
+
+        .head-div {
+            height: 56px;
             background-image: url("/static/image/source/top-view-1248955.jpg");
             position: absolute;
-            left:0;
-            top:0;
+            left: 0;
+            top: 0;
             width: 100%;
             z-index: 100;
         }
@@ -158,6 +160,34 @@
             background-color: #7a7686;
         }
 
+        .listCard {
+            background-position: center;
+            background-size: cover;
+            width: 100%;
+            height: 244px;
+        }
+
+        .cardfit {
+            overflow: hidden;
+            border: 0;
+        }
+
+        .card-body {
+            height: 30px;
+            flex: 0;
+            padding: 0.5rem 0.5rem;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            background-color: rgba(247, 247, 247, 0.7);
+        }
+
+        .card-title {
+            color: black;
+        }
     </style>
 
     <meta charset="UTF-8"/>
@@ -246,9 +276,9 @@
                 <div class="filter-values" id="recipe_diff" style="background-color: #2E2525FF">
                     {% for filter in difficulty %}
                         <form action="/search/filter/" method="post">
-                        {% csrf_token %}
-                        <button id="{{ filter }}" class="filter-value" name="difficulty"
-                                value={{ filter }} type="submit" style="color:white">{{ filter }}</button>
+                            {% csrf_token %}
+                            <button id="{{ filter }}" class="filter-value" name="difficulty"
+                                    value={{ filter }} type="submit" style="color:white">{{ filter }}</button>
                         </form>
                     {% endfor %}
                 </div>
@@ -259,8 +289,8 @@
     <div class="list-sort">
         <form action="/search/filter/" method="post">
             {% csrf_token %}
-            <button name ="most_filter" value="most_recent" class="sortByDate" type="submit">최신순</button>
-            <button name ="most_filter" value="most_popular"  class="sortByLike" type="submit">인기순</button>
+            <button name="most_filter" value="most_recent" class="sortByDate" type="submit">최신순</button>
+            <button name="most_filter" value="most_popular" class="sortByLike" type="submit">인기순</button>
         </form>
 
     </div>
@@ -268,38 +298,28 @@
     <div class="row row-cols-1 row-cols-md-3 g-4 card-group">
         {% for recipe in recipes %}
             <div class="col_normal_recipes">
-                <div class="card">
-                    <div class="card-img-div" style="width: 320px; height: 190px">
-                        <a href="/detail/{{ recipe.id }}">
-                            {% if recipe.img_url %}
-                                <img
-                                        src={{ recipe.img_url }}
-                                                class="card-img-top"
-                                        alt="..."
-                                        style="width: 320px; height: 190px; object-fit:cover"
-                                />
-                            {% else %}
-                                <img
-                                        src="/media/{{ recipe.img_file }}"
-                                        class="card-img-top"
-                                        alt="..."
-                                        style="width: 320px; height: 190px; object-fit:cover"
-                                />
-                            {% endif %}
-                        </a>
+                <div class="card cardfit">
+                    <div class="card-img-div" style="width: 100%; height: 190px">
+                        {% if recipe.img_url %}
+                            <div class="listCard" style="background-image: url('{{ recipe.img_url }}')"><a
+                                    href="/detail/{{ recipe.id }}"></a></div>
+                        {% else %}
+                            <div class="listCard" style="background-image: url({{ recipe.img.file }})"><a
+                                    href="/detail/{{ recipe.id }}"></a></div>
+                        {% endif %}
                     </div>
                     <div class="card-body">
                         <div class="card-info">
                             <a href="/detail/{{ recipe.id }}" class="recipe-link" style="text-decoration:none;">
                                 {% if recipe.title|length >= 15 %}
-                                    <span class="card-title" >{{ recipe.title|slice:":15" }}..</span>
+                                    <span class="card-title">{{ recipe.title|slice:":15" }}..</span>
                                 {% else %}
                                     <span class="card-title">{{ recipe.title }}</span>
                                 {% endif %}
                             </a>
                             <div class="card-bottom-row" style="float:right">
                                 <span class="card-text">{{ recipe.author }}</span>
-                                <div class="like-div" >
+                                <div class="like-div">
                                     <span class="like-text" style="">추천</span>
                                     <span class="like-num">{{ recipe.like_num }}</span>
                                 </div>
@@ -312,11 +332,11 @@
                 </div>
             </div>
         {% endfor %}
-    {#    </div>#}
+        {#    </div>#}
     </div>
 </main>
 <footer>
-    <div class="footer_paginator" >
+    <div class="footer_paginator">
         {% if page_obj.has_previous %}
             <a href="?page=1"> ◁ </a>
             <a href="?page={{ page_obj.previous_page_number }}"> < </a>
