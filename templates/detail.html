@@ -182,9 +182,9 @@
              style="background-color: whitesmoke;border-radius: 3px;">
             <!--                레시피 이미지 들어가는 부분-->
             {% if recipe.img_url %}
-                <div class="detailImage" style="background-image: url({{ recipe.img_url }})"></div>
+                <div class="detailImage" style="background-image: url('{{ recipe.img_url }}')"></div>
             {% else %}
-                <div class="detailImage" style="background-image: url({{ recipe.img_file }})"></div>
+                <div class="detailImage" style="background-image: url('../media/{{ recipe.img_file }}')"></div>
             {% endif %}
         </div>
         <div class="main-card">
@@ -197,7 +197,7 @@
             {% else %}
                 <div class="main-card-flex">
                     <h3 class="detail-title">{{ recipe.title }}</h3>
-                    <h3 class="detail-title">by.{{ recipe.author }}</h3>
+                    <h3 class="detail-title">by.혼자서도 잘해요리</h3>
                 </div>
             {% endif %}
 
