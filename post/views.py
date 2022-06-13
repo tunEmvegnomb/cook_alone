@@ -27,6 +27,9 @@ def view_main(request):
 
     reco_main = int((target_reco.reco1.strip('()').split(',')[0])) + 1
     reco_main = Recipe.objects.get(id=reco_main)
+    reco_ing = reco_main.ingredient.split('>')[:5]
+
+
     reco_list = []
     reco_list.append(int(target_reco.reco2.strip('()').split(',')[0]) + 1)
     reco_list.append(int(target_reco.reco3.strip('()').split(',')[0]) + 1)
@@ -37,7 +40,7 @@ def view_main(request):
         reco_recipe = Recipe.objects.get(id=reco_num)
         reco_recipes.append(reco_recipe)
     print(f'reco_recipes->{reco_recipes}')
-    return render(request, 'main.html', {'reco_main': reco_main, 'reco_recipes': reco_recipes})
+    return render(request, 'main.html', {'reco_main': reco_main, 'reco_recipes': reco_recipes, 'reco_ing':reco_ing})
 
 
 
@@ -62,7 +65,6 @@ def view_search(request):
                 pass
         except:
             pass
-
     # print(f'target_recipes->{target_recipes}')
             # print(f'예외번호->{index}')
     # all_recipes2 = Recipe.objects.get_queryset().order_by('id')
@@ -103,6 +105,7 @@ def view_search(request):
                 filter_value.reverse()
             elif request.session['filter_name'] == "most_recent":
                 filter_value = all_recipe
+                filter_value.reverse()
             ###필터를 사용했을때의 결과값####
             using_recipes =filter_value
         # 경우의 수 2=> 서치바를 사용했는가?
@@ -113,7 +116,7 @@ def view_search(request):
     # 경우의 수 3=> 둘 다 아닐때에는 기존의 all_recipe를 반환
     except:
         using_recipes = all_recipe
-
+        using_recipes.reverse()
 
     # <<<--- 페이지네이션 --- #
     paginator = Paginator(using_recipes, 15)
@@ -215,7 +218,7 @@ def upload_recipes(request):
         timecost = request.POST.get('timecost', '')
         difficulty = request.POST.get('difficulty', '')
         ingredient = request.POST.get('ingredient', '')
-        cookstep = request.POST.get('ingredient', '')
+        cookstep = request.POST.get('cookstep', '')
 
         my_post = Recipe.objects.create(author=author, title=title, img_file=img_file, timecost=timecost,
                                         difficulty=difficulty, ingredient=ingredient, cookstep=cookstep)
