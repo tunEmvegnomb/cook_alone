@@ -27,18 +27,21 @@
             font-family: 'Gowun Batang', serif;
             background-color: #b1be96;
         }
-        ::-webkit-scrollbar{
-            width:10px;
+
+        ::-webkit-scrollbar {
+            width: 10px;
         }
 
-        ::-webkit-scrollbar-track{
+        ::-webkit-scrollbar-track {
             border-radius: 5px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.25);
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.25);
         }
+
         ::-webkit-scrollbar-thumb {
             border-radius: 5px;
             background-color: #3A3845;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background-color: #7a7686;
         }
@@ -57,10 +60,11 @@
             margin: 0 auto;
 
         }
-        .tabContent{
+
+        .tabContent {
             width: 560px;
-            height:600px;
-            background-color:whitesmoke;
+            height: 600px;
+            background-color: whitesmoke;
             overflow: auto;
         }
 
@@ -157,7 +161,7 @@
 
     </div>
     <div class="mypage-cols">
-        <div class="mypage-main-div" >
+        <div class="mypage-main-div">
             <div class="main-card">
                 <div style=" height:800px; margin-top:25px; float:left">
                     <div style="float:left;">
@@ -182,23 +186,26 @@
                         <div style="margin: 0 auto; height: 480px; padding-left: 60px">
                             <div id="tab-1" class="tabContent current">
                                 {% for myrp in myrecipe %}
-                                    <a href="/detail/{{ myrp.id }}">
+                                    <div style="display: flex; flex-direction: row; justify-content: space-between">
+                                        <div><a href="/detail/{{ myrp.id }}">{{ myrp.title }}</a></div>
                                         <div>
-                                            {{ myrp.title }}
-                                        </div>
-                                        <div style="text-align: right; float:left;font-size: 1.2rem;">
-                                            <a href="/myrecipe/delete/{{ myrp.id }}" onclick="return confirm('정말 삭제하시겠습니까?')">
+                                            <div style="text-align: right; float:left;font-size: 1.2rem;">
+                                                <a href="/myrecipe/delete/{{ myrp.id }}"
+                                                   onclick="return confirm('정말 삭제하시겠습니까?')">
                                                 <span class="badge rounded-pill bg-danger"
                                                       style="color: white">삭제</span>
-                                            </a>
-                                        </div>
-                                        <div style="text-align: right; float:left; font-size: 1.2rem;">
-                                            <a href="/myrecipe/update/{{ myrp.id }}" onclick="return confirm('수정할래잉?')">
+                                                </a>
+                                            </div>
+                                            <div style="text-align: right; float:left; font-size: 1.2rem;">
+                                                <a href="/myrecipe/update/{{ myrp.id }}" onclick="return confirm('수정할래잉?')">
                                                 <span class="badge rounded-pill bg-success"
                                                       style="color: white">수정</span>
-                                            </a>
+                                                </a>
+                                            </div>
                                         </div>
-                                    </a>
+                                    </div>
+
+
                                     <br>
                                     <br>
                                 {% endfor %}

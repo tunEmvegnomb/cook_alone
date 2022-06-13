@@ -101,7 +101,7 @@ def comment_update(request, id):
     context = {
         'all_comment': all_comment
     }
-    return render(request, 'comment_update.html', context)
+    return render(request, 'detail.html', context)
 
 
 @login_required

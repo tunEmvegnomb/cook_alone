@@ -49,6 +49,7 @@ def view_search(request):
 
     #좋아요수 보여야 하니까 all_recipe에 like_num넣기
     for index, recipe in enumerate(all_recipe):
+
         num = LikeModel.objects.filter(like_recipe_id=index).count()
         all_recipe[total-index-1]['like_num'] = num
 
@@ -121,7 +122,9 @@ def view_search(request):
         'page_index': page_index,
         'searched': searched,
     }
-
+    NUMBER = doc['recipes'][0]['like_num']
+    RECIPE = doc['recipes'][0]
+    print(f'레시피넘버->{RECIPE}좋아요를 체크->{NUMBER}')
     if request.method == 'GET':
         return render(request, 'list.html', doc)
 
