@@ -131,12 +131,16 @@ def comment_update(request, id):
 
 @login_required
 def comment_update_end(request, id):
-    all_comment = CommentModel.objects.get(id=id)
-    target_recipe = all_comment.comment_recipe.id
+    if request.method == 'POST':
+        all_comment = CommentModel.objects.get(id=id)
+        target_recipe = str(all_comment.comment_recipe_id)
+        all_comment.comment_content = request.POST.get('comment')
+        all_comment.save()
 
-    all_comment.comment_content = request.POST.get('comment_update')
-    all_comment.save()
-    print(all_comment.comment_content)
-    return redirect(f'/detail/{target_recipe}')
+        commentupdate = False
+
+        request.session['commentupdate'] = commentupdate
+
+        return redirect(f'/detail/{target_recipe}')
 
 ###풀 리퀘스트가 안되서 혹시 몰라 낙서합니다!!ㅎㅎ

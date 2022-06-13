@@ -177,7 +177,7 @@
 <div class="head-div"></div>
 
 <div class="wrap2" style="border-radius: 3px">
-    <div class="detail_wrap" >
+    <div class="detail_wrap">
         <div class="detail-img-wrap" id="imgWrap"
              style="background-color: whitesmoke;border-radius: 3px;">
             <!--                레시피 이미지 들어가는 부분-->
@@ -285,13 +285,12 @@
                             <br>
 
                             {% if is_update %}
-                                <h3>수정작업중</h3>
-                                <form action="/detail/comment/{{ recipe.id }}" method="post">
+                                <form action="/detail/comment/update_end/{{ target_comment.id }}" method="post">
                                 {% csrf_token %}
                                 <div class="reviewWrite">
                                     <input type="text" placeholder="후기를 작성해주세요!" class="comment" id="comment"
                                            name="comment" value={{ target_comment.comment_content }}>
-                                    <button type="submit" class="reviewBtn" id="reviewPostBtn">등록</button>
+                                    <button type="submit" class="reviewBtn" id="reviewPostBtn">수정</button>
                                 </div>
                             </form>
                                 <br>
@@ -306,13 +305,6 @@
                                     </div>
                                         {% if cm.comment_me == user %}
                                             <div style="">
-                                        <div style="text-align: right; float:left;font-size: 1.2rem;">
-                                            <a href="/detail/comment/delete/{{ cm.id }}">
-                                                <span class="badge rounded-pill bg-danger"
-                                                      style="color: white">삭제</span>
-                                            </a>
-                                        </div>
-
                                         <div style="text-align: right; float:left; font-size: 1.2rem;">
                                             <a href="/detail/comment/update/{{ cm.id }}">
                                                 <span class="badge rounded-pill bg-success"
