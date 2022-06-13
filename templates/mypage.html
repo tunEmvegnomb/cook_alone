@@ -23,61 +23,72 @@
     <link rel="shortcut icon" href="/static/image/source/cook_hat.png"/>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <style>
-        body{
+        body {
             font-family: 'Gowun Batang', serif;
             background-color: #bec8ac;
         }
-        .main-card{
+
+        .main-card {
             background-image: url("/static/image/source/top-view-1248955.jpg");
-            height:630px;
-            padding-top:20px;
-            border-radius:3px;
+            height: 630px;
+            padding-top: 20px;
+            border-radius: 3px;
         }
 
 
-        .mypage-main-div{
-            width:1300px;
-            height:750px;
+        .mypage-main-div {
+            width: 1300px;
+            height: 750px;
             margin: 0 auto;
 
         }
 
-        .random-img-box{
-            height:480px; width: 420px; background-color: #96d000; float: left; margin:40px auto auto 40px;
+        .random-img-box {
+            height: 480px;
+            width: 420px;
+            background-color: #96d000;
+            float: left;
+            margin: 40px auto auto 40px;
             background-image: url("/static/image/source/rice.jpg");
         }
-        .tabContent a{
+
+        .tabContent a {
             color: grey;
             font-size: 1.2rem;
         }
-        .tabContent a:hover{
-            color:darkslateblue;
+
+        .tabContent a:hover {
+            color: darkslateblue;
         }
 
-        .nav-link{
-            color:white;
+        .nav-link {
+            color: white;
             font-size: 1rem;
         }
-        .navbar-brand{
-            color:white;
+
+        .navbar-brand {
+            color: white;
             font-weight: bold;
         }
-        .nav-link{
-            color:black;
+
+        .nav-link {
+            color: black;
         }
-        .head-div{
-            height:56px;
+
+        .head-div {
+            height: 56px;
             background-image: url("/static/image/source/top-view-1248955.jpg");
             position: absolute;
-            left:0;
-            top:0;
+            left: 0;
+            top: 0;
             width: 100%;
             z-index: 100;
         }
-        .navbar navbar-expand-lg{
+
+        .navbar navbar-expand-lg {
             position: absolute;
-            left:0;
-            top:0;
+            left: 0;
+            top: 0;
 
         }
     </style>
@@ -85,15 +96,15 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg" >
-    <div class="container-fluid" style="z-index: 1000" >
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid" style="z-index: 1000">
         <a class="navbar-brand" href="/">혼자서도 잘해요리</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup" >
-            <div class="navbar-nav"  >
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
                 <a class="nav-link" style="color:white;" aria-current="page" href="/search/?page=1">전체 레시피</a>
                 <a class="nav-link" style="color:white;" href="/write">나만의 레시피</a>
                 <a class="nav-link" style="color:white;" href="/myrecipe/{{ user.id }}">마이페이지</a>
@@ -103,14 +114,14 @@
     </div>
     <div style="z-index: 1000">
 
-        <div class="navbar-nav" style="width:300px; z-index: 1000"  >
+        <div class="navbar-nav" style="width:300px; z-index: 1000">
             {% if user.is_authenticated %}
-            <a class="nav-link"  style="color:white;">{{ user }} 님 반갑습니다</a>
-            <a class="nav-link"  style="color:white;" href="/logout">로그아웃</a>
+                <a class="nav-link" style="color:white;">{{ user }} 님 반갑습니다</a>
+                <a class="nav-link" style="color:white;" href="/logout">로그아웃</a>
             {% else %}
-            <a class="myPageLink" href="/login">
-                <img src="/static/image/source/myPageIcon.png" class="loginIcon"/>
-            </a>
+                <a class="myPageLink" href="/login">
+                    <img src="/static/image/source/myPageIcon.png" class="loginIcon"/>
+                </a>
             {% endif %}
         </div>
     </div>
@@ -131,53 +142,68 @@
                     <div style="float:left;">
                         <div class="sortBar">
 
-                        <ul class="tabs" style="margin-left: 60px">
-                            <li class="nav-item" data-tab="tab-1" style="display: inline-block;background-color:whitesmoke; border-radius: 3px;">
-                                <a class="nav-link" aria-current="page" href="#">내 레시피</a>
-                            </li>
-                            <li class="nav-item" data-tab="tab-2" style="display: inline-block;background-color:whitesmoke; border-radius: 3px;">
-                                <a class="nav-link" href="#">내 후기</a>
-                            </li>
-                            <li class="nav-item" data-tab="tab-3" style="display: inline-block;background-color:whitesmoke; border-radius: 3px;">
-                                <a class="nav-link" href="#">좋아요</a>
-                            </li>
+                            <ul class="tabs" style="margin-left: 60px">
+                                <li class="nav-item" data-tab="tab-1"
+                                    style="display: inline-block;background-color:whitesmoke; border-radius: 3px;">
+                                    <a class="nav-link" aria-current="page" href="#">내 레시피</a>
+                                </li>
+                                <li class="nav-item" data-tab="tab-2"
+                                    style="display: inline-block;background-color:whitesmoke; border-radius: 3px;">
+                                    <a class="nav-link" href="#">내 후기</a>
+                                </li>
+                                <li class="nav-item" data-tab="tab-3"
+                                    style="display: inline-block;background-color:whitesmoke; border-radius: 3px;">
+                                    <a class="nav-link" href="#">좋아요</a>
+                                </li>
 
-                        </ul>
-                    </div>
+                            </ul>
+                        </div>
                         <div style="margin: 0 auto; height: 480px; padding-left: 60px">
-                        <div id="tab-1" class="tabContent current" style="height:480px;width:480px; background-color:whitesmoke;">
-                            {% for myrp in myrecipe %}
-                                <a href="/detail/{{ myrp.id }}">
-                                <div>
-                                    {{ myrp.title }}
-                                </div>
-                                <div style="text-align: right; float:left;font-size: 1.2rem;">
-                                    <a href="/myrecipe/delete/{{ myrp.id }}">
-                                        <span class="badge rounded-pill bg-danger" style="color: white">삭제</span>
+                            <div id="tab-1" class="tabContent current"
+                                 style="height:480px;width:480px; background-color:whitesmoke;">
+                                {% for myrp in myrecipe %}
+                                    <a href="/detail/{{ myrp.id }}">
+                                        <div>
+                                            {{ myrp.title }}
+                                        </div>
+                                        <div style="text-align: right; float:left;font-size: 1.2rem;">
+                                            <a href="/myrecipe/delete/{{ myrp.id }}">
+                                                <span class="badge rounded-pill bg-danger"
+                                                      style="color: white">삭제</span>
+                                            </a>
+                                        </div>
+                                        <br>
+                                        <div style="text-align: right; float:left; font-size: 1.2rem;">
+                                            <a href="/myrecipe/update/{{ myrp.id }}">
+                                                <span class="badge rounded-pill bg-success"
+                                                      style="color: white">수정</span>
+                                            </a>
+                                        </div>
                                     </a>
-                                </div><br>
-                                </a>
-                            {% endfor %}
-                        </div>
-                        <div id="tab-2" class="tabContent" style="height:480px;width:480px; background-color:whitesmoke;">
-                            {% for mycm in mycomment %}
-                                <a href="/detail/{{ mycm.comment_recipe.id }}">
+                                {% endfor %}
+                            </div>
+                            <div id="tab-2" class="tabContent"
+                                 style="height:480px;width:480px; background-color:whitesmoke;">
+                                {% for mycm in mycomment %}
+                                    <a href="/detail/{{ mycm.comment_recipe.id }}">
+                                        <div>
+                                            {{ mycm.comment_content }}
+                                        </div>
+                                        <br>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            <div id="tab-3" class="tabContent"
+                                 style="height:480px; width:480px; background-color:whitesmoke; ">
+                                {% for mylk in mylike %}
                                     <div>
-                                        {{ mycm.comment_content }}
-                                    </div><br>
-                                </a>
-                            {% endfor %}
+                                        <a href="/detail/{{ mylk.like_recipe.id }}">
+                                            {{ mylk.like_recipe }}
+                                        </a><br>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </div>
-                        <div id="tab-3" class="tabContent" style="height:480px; width:480px; background-color:whitesmoke; ">
-                            {% for mylk in mylike %}
-                                <div>
-                                    <a href="/detail/{{ mylk.like_recipe.id }}">
-                                        {{ mylk.like_recipe }}
-                                    </a><br>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
                     </div>
 
                     <div class="random-img-box">

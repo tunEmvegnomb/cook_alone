@@ -29,31 +29,35 @@
             height: 1500px;
         }
 
-        .nav-link{
-            color:white;
+        .nav-link {
+            color: white;
             font-size: 1rem;
         }
-        .navbar-brand{
-            color:white;
+
+        .navbar-brand {
+            color: white;
             font-weight: bold;
         }
-        .nav-link{
-            color:black;
+
+        .nav-link {
+            color: black;
         }
-        .head-div{
-            height:56px;
+
+        .head-div {
+            height: 56px;
             background-image: url("/static/image/source/top-view-1248955.jpg");
             position: absolute;
-            left:0;
-            top:0;
+            left: 0;
+            top: 0;
             width: 100%;
 
             z-index: 100;
         }
-        .navbar navbar-expand-lg{
+
+        .navbar navbar-expand-lg {
             position: absolute;
-            left:0;
-            top:0;
+            left: 0;
+            top: 0;
 
         }
     </style>
@@ -62,15 +66,15 @@
 <body>
 <!--    여기서부터 네비게이션바-->
 
-<nav class="navbar navbar-expand-lg" >
-    <div class="container-fluid" style="z-index: 1000" >
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid" style="z-index: 1000">
         <a class="navbar-brand" href="/">혼자서도 잘해요리</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup" >
-            <div class="navbar-nav"  >
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
                 <a class="nav-link" style="color:white;" aria-current="page" href="/search/?page=1">전체 레시피</a>
                 <a class="nav-link" style="color:white;" href="/write">나만의 레시피</a>
                 <a class="nav-link" style="color:white;" href="/myrecipe/{{ user.id }}">마이페이지</a>
@@ -80,14 +84,14 @@
     </div>
     <div style="z-index: 1000">
 
-        <div class="navbar-nav" style="width:300px; z-index: 1000"  >
+        <div class="navbar-nav" style="width:300px; z-index: 1000">
             {% if user.is_authenticated %}
-            <a class="nav-link"  style="color:white;">{{ user }} 님 반갑습니다</a>
-            <a class="nav-link"  style="color:white;" href="/logout">로그아웃</a>
+                <a class="nav-link" style="color:white;">{{ user }} 님 반갑습니다</a>
+                <a class="nav-link" style="color:white;" href="/logout">로그아웃</a>
             {% else %}
-            <a class="myPageLink" href="/login">
-                <img src="/static/image/source/myPageIcon.png" class="loginIcon"/>
-            </a>
+                <a class="myPageLink" href="/login">
+                    <img src="/static/image/source/myPageIcon.png" class="loginIcon"/>
+                </a>
             {% endif %}
         </div>
     </div>
@@ -95,93 +99,188 @@
 </nav>
 <div class="head-div"></div>
 <!--실제 컨텐츠 작성-->
-<div class="wrap">
-    <!--여기서부터 입력 창-->
-    <div class="list-title">
-        <img src=""/>
-        <img src=""/>
+{% if is_update %}
+    <div class="wrap">
+        <!--여기서부터 입력 창-->
+        <div class="list-title">
+            <img src=""/>
+            <img src=""/>
 
-        <br><br><br><br><br><br>
-    </div>
-    <div style="background-color: whitesmoke; width: 710px; margin: 0 auto; border-radius:4px;">
-        <form action="/write/" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-{#            <img src="" alt="이미지" class="random-food"/>#}
-            <div class="recipe-total">
-                <!--레시피 타이틀-->
-                <!--레시피 타이틀-->
-                <div class="recipe-title">
-                    <p style="font-weight: 600;">레시피 타이틀</p>
-                    <hr style="width: 600px; border: 1px solid #8C8C8C;">
-                    <!--레시피 제목-->
-                    <div class="input-title  mb-3">
-                        <label for="title" class="col-sm-2 col-form-label input-title-label">제목</label>
-                        <input name="title" type="text" class="input-title-input" placeholder="내가 만든 레시피의 타이틀을 입력해주세요">
-                    </div>
-                    <!--이미지 첨부-->
-                    <div class="input-img mb-3">
-                        <label for="img_url" class="col-sm-2 col-form-label">이미지</label>
-                        <input name="img_url" class="form-control form-control-sm" accept="image/*" type="file">
-                    </div>
-                    <hr style="width: 600px; border: 1px solid #8C8C8C;">
-                    <!--제작 시간-->
-                    <div class="select-level">
-                        <label for="timecost" class="col-sm-2 col-form-label">제작 시간</label>
-                        <select name="timecost" class="form-select" id="time">
-                            {% for time in timecost %}
-                                <option value="{{ time.timecost }}">{{ time.timecost }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="select-level">
-                        <label for="difficulty" class="col-sm-2 col-form-label">난이도</label>
-                        <select name="difficulty" class="form-select" aria-label="Default select example" id="diff">
-                            {% for diff in difficulty %}
-                                <option value="{{ diff.difficulty }}">{{ diff.difficulty }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                </div>
-                <!--난이도 및 레시피-->
-                <div class="recipe-level">
-                    <div>
-                        <!--난이도-->
-                        <span></span>
-                        <div class="select-level">
+            <br><br><br><br><br><br>
+        </div>
+        <div style="background-color: whitesmoke; width: 710px; margin: 0 auto; border-radius:4px;">
+            <form action="/myrecipe/update/{{ target_recipe.id }}/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {#            <img src="" alt="이미지" class="random-food"/>#}
+                <div class="recipe-total">
+                    <!--레시피 타이틀-->
+                    <!--레시피 타이틀-->
+                    <div class="recipe-title">
+                        <p style="font-weight: 600;">레시피 타이틀</p>
+                        <hr style="width: 600px; border: 1px solid #8C8C8C;">
+                        <!--레시피 제목-->
+                        <div class="input-title  mb-3">
+                            <label for="title" class="col-sm-2 col-form-label input-title-label">제목</label>
+                            <input name="title" type="text" class="input-title-input"
+                                   placeholder="내가 만든 레시피의 타이틀을 입력해주세요" value= {{ target_recipe.title }}>
                         </div>
-                    </div>
+                        <!--이미지 첨부-->
+                        <div class="input-img mb-3">
+                            <label for="img_url" class="col-sm-2 col-form-label">이미지</label>
+                            <input name="img_url" class="form-control form-control-sm" accept="image/*" type="file"
+                                   value= {{ target_recipe.img_file }}>
+                        </div>
+                        <hr style="width: 600px; border: 1px solid #8C8C8C;">
+                        <!--제작 시간-->
+                        <div class="select-level">
+                            <label for="timecost" class="col-sm-2 col-form-label">제작 시간</label>
+                            <select name="timecost" class="form-select" id="time">
+                                {% for time in timecost %}
+                                    <option value="{{ time.timecost }}">{{ time.timecost }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="select-level">
+                            <label for="difficulty" class="col-sm-2 col-form-label">난이도</label>
+                            <select name="difficulty" class="form-select" aria-label="Default select example" id="diff">
+                                {% for diff in difficulty %}
+                                    <option value="{{ diff.difficulty }}">{{ diff.difficulty }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
 
-                    <hr style="width: 600px; border: 1px solid #8C8C8C;">
-                    <!--레시피 재료-->
-                    <div class="recipe-ingredient">
-                        <p class="ingredient-title">레시피 재료</p>
-                        <div class="row g-3" id="recipe-ing">
-                            <div class="input-ingredient col col-row">
-                                <textarea name="ingredient" class="form-control" cols="30" name="ingredient"></textarea>
+                    </div>
+                    <!--난이도 및 레시피-->
+                    <div class="recipe-level">
+                        <div>
+                            <!--난이도-->
+                            <span></span>
+                            <div class="select-level">
+                            </div>
+                        </div>
+
+                        <hr style="width: 600px; border: 1px solid #8C8C8C;">
+                        <!--레시피 재료-->
+                        <div class="recipe-ingredient">
+                            <p class="ingredient-title">레시피 재료</p>
+                            <div class="row g-3" id="recipe-ing">
+                                <div class="input-ingredient col col-row">
+                                    <textarea name="ingredient" class="form-control" cols="30"
+                                              name="ingredient"> {{ target_recipe.ingredient }} </textarea>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr style="width: 600px; border: 1px solid #8C8C8C;">
+                        <!--조리 순서-->
+                        <div class="recipe-order" id="recipe-order">
+                            <p class="order-title">조리 순서</p>
+                            <div class="input-order mb-3 row" id="recipe-order-input">
+
+                            <textarea name="cookstep" class="form-control" cols="50" rows="10"
+                                      name="cookstep"> {{ target_recipe.cookstep }} </textarea>
                             </div>
 
                         </div>
-                    </div>
-                    <hr style="width: 600px; border: 1px solid #8C8C8C;">
-                    <!--조리 순서-->
-                    <div class="recipe-order" id="recipe-order">
-                        <p class="order-title">조리 순서</p>
-                        <div class="input-order mb-3 row" id="recipe-order-input">
 
-                            <textarea name="cookstep" class="form-control" cols="50" rows="10"
-                                      name="cookstep"></textarea>
+                    </div>
+                    <!--작성완료 버튼-->
+                    <button type="submit" class="fin-btn">수정완료</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% else %}
+    <div class="wrap">
+        <!--여기서부터 입력 창-->
+        <div class="list-title">
+            <img src=""/>
+            <img src=""/>
+
+            <br><br><br><br><br><br>
+        </div>
+        <div style="background-color: whitesmoke; width: 710px; margin: 0 auto; border-radius:4px;">
+            <form action="/myrecipe/update/{{ myrecipe.id }}/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {#            <img src="" alt="이미지" class="random-food"/>#}
+                <div class="recipe-total">
+                    <!--레시피 타이틀-->
+                    <!--레시피 타이틀-->
+                    <div class="recipe-title">
+                        <p style="font-weight: 600;">레시피 타이틀</p>
+                        <hr style="width: 600px; border: 1px solid #8C8C8C;">
+                        <!--레시피 제목-->
+                        <div class="input-title  mb-3">
+                            <label for="title" class="col-sm-2 col-form-label input-title-label">제목</label>
+                            <input name="title" type="text" class="input-title-input"
+                                   placeholder="내가 만든 레시피의 타이틀을 입력해주세요" value= {{ myrecipe.title }}>
+                        </div>
+                        <!--이미지 첨부-->
+                        <div class="input-img mb-3">
+                            <label for="img_url" class="col-sm-2 col-form-label">이미지</label>
+                            <input name="img_url" class="form-control form-control-sm" accept="image/*" type="file"
+                                   value= {{ myrecipe.img_file }}>
+                        </div>
+                        <hr style="width: 600px; border: 1px solid #8C8C8C;">
+                        <!--제작 시간-->
+                        <div class="select-level">
+                            <label for="timecost" class="col-sm-2 col-form-label">제작 시간</label>
+                            <select name="timecost" class="form-select" id="time">
+                                {% for time in timecost %}
+                                    <option value="{{ time.timecost }}">{{ time.timecost }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="select-level">
+                            <label for="difficulty" class="col-sm-2 col-form-label">난이도</label>
+                            <select name="difficulty" class="form-select" aria-label="Default select example" id="diff">
+                                {% for diff in difficulty %}
+                                    <option value="{{ diff.difficulty }}">{{ diff.difficulty }}</option>
+                                {% endfor %}
+                            </select>
                         </div>
 
                     </div>
+                    <!--난이도 및 레시피-->
+                    <div class="recipe-level">
+                        <div>
+                            <!--난이도-->
+                            <span></span>
+                            <div class="select-level">
+                            </div>
+                        </div>
 
+                        <hr style="width: 600px; border: 1px solid #8C8C8C;">
+                        <!--레시피 재료-->
+                        <div class="recipe-ingredient">
+                            <p class="ingredient-title">레시피 재료</p>
+                            <div class="row g-3" id="recipe-ing">
+                                <div class="input-ingredient col col-row">
+                                    <textarea name="ingredient" class="form-control" cols="30"
+                                              name="ingredient"> {{ myrecipe.ingredient }} </textarea>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr style="width: 600px; border: 1px solid #8C8C8C;">
+                        <!--조리 순서-->
+                        <div class="recipe-order" id="recipe-order">
+                            <p class="order-title">조리 순서</p>
+                            <div class="input-order mb-3 row" id="recipe-order-input">
+
+                            <textarea name="cookstep" class="form-control" cols="50" rows="10"
+                                      name="cookstep"> {{ myrecipe.cookstep }} </textarea>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!--작성완료 버튼-->
+                    <button type="submit" class="fin-btn">작성완료</button>
                 </div>
-                <!--작성완료 버튼-->
-                <button type="submit" class="fin-btn">작성완료</button>
-            </div>
-        </form>
-
+            </form>
+        </div>
     </div>
-</div>
+{% endif %}
 </body>
 </html>
