@@ -129,6 +129,7 @@ def comment_update(request, id):
     return redirect(f'/detail/{target_recipe}')
 
 
+
 @login_required
 def comment_update_end(request, id):
     if request.method == 'POST':
