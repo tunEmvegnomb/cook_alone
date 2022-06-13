@@ -304,17 +304,18 @@
                                                 style="font-size: 12px">{{ cm.comment_me }}-{{ cm.created_at|timesince }} 전</span> </h5>
                                     </div>
                                     {% if cm.comment_me == user %}
-                                        <div style="">
-                                        <div style="text-align: right; float:left;font-size: 1.2rem;">
-                                            <a href="/detail/comment/delete/{{ cm.id }}">
-                                                <span class="badge rounded-pill bg-danger"
-                                                      style="color: white">삭제</span>
-                                            </a>
-                                        </div>
+                                    <div>
+
                                         <div style="text-align: right; float:left; font-size: 1.2rem;">
                                             <a href="/detail/comment/update/{{ cm.id }}">
                                                 <span class="badge rounded-pill bg-success"
                                                       style="color: white">수정</span>
+                                            </a>
+                                        </div>
+                                        <div style="text-align: right; float:left;font-size: 1.2rem;">
+                                            <a href="/detail/comment/delete/{{ cm.id }}">
+                                                <span class="badge rounded-pill bg-danger"
+                                                      style="color: white">삭제</span>
                                             </a>
                                         </div>
 

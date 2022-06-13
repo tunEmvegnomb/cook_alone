@@ -186,25 +186,32 @@
                         <div style="margin: 0 auto; height: 480px; padding-left: 60px">
                             <div id="tab-1" class="tabContent current">
                                 {% for myrp in myrecipe %}
-                                    <a href="/detail/{{ myrp.id }}">
+                                    <div style="display:flex;justify-content: space-between;">
+                                    <a href="/detail/{{ myrp.id }}" >
                                         <div>
                                             {{ myrp.title }}
                                         </div>
-                                        <div style="text-align: right; float:left;font-size: 1.2rem;">
-                                            <a href="/myrecipe/delete/{{ myrp.id }}" onclick="return confirm('정말 삭제하시겠습니까?')">
-                                                <span class="badge rounded-pill bg-danger"
-                                                      style="color: white">삭제</span>
-                                            </a>
-                                        </div>
-                                        <div style="text-align: right; float:left; font-size: 1.2rem;">
-                                            <a href="/myrecipe/update/{{ myrp.id }}" onclick="return confirm('수정할래잉?')">
-                                                <span class="badge rounded-pill bg-success"
-                                                      style="color: white">수정</span>
-                                            </a>
-                                        </div>
                                     </a>
-                                    <br>
-                                    <br>
+                                    <div padding>
+
+                                        <div style="text-align: right; float:left; font-size: 1.2rem;">
+                                            <a href="/myrecipe/update/{{ myrp.id }}"
+                                               onclick="return confirm('수정할래잉?')">
+                                            <span class="badge rounded-pill bg-success"
+                                                  style="color: white">수정</span>
+                                            </a>
+                                        </div>
+                                        <div style="text-align: right; float:left;font-size: 1.2rem;">
+                                            <a href="/myrecipe/delete/{{ myrp.id }}"
+                                               onclick="return confirm('정말 삭제하시겠습니까?')">
+                                            <span class="badge rounded-pill bg-danger"
+                                                  style="color: white">삭제</span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    </div>
+
                                 {% endfor %}
                             </div>
                             <div id="tab-2" class="tabContent">
