@@ -43,8 +43,10 @@ def view_main(request):
 def view_search(request):
     total = Recipe.objects.count()
     latest_num = Recipe.objects.latest('id').id
+
     all_recipes = Recipe.objects.get_queryset().order_by('-id').values('id', 'title', 'img_url', 'img_file', 'author_id')
     all_recipe = []
+
     for index in range(1, latest_num+1):
 
         try:
@@ -96,13 +98,10 @@ def view_search(request):
     page_number = request.GET.get('page')
     p_recipe = paginator.page(page_number).object_list
     page_obj = paginator.page(page_number)
-    # 페이지 인덱스 번호 구하기
     page_index = []
     page_digit = len(str(page_obj.number-1))
-    # 한자릿수
     if page_digit == 1:
         page_firstNum = 0
-    # 세자릿수
     if page_digit == 3:
         page_firstNum = int(str(page_obj.number-1)[:2])
     else:
@@ -123,9 +122,9 @@ def view_search(request):
         'page_index': page_index,
         'searched': searched,
     }
+    
     if request.method == 'GET':
         return render(request, 'list.html', doc)
-
 
 def searching(request):
     if request.method == 'POST':
@@ -135,7 +134,6 @@ def searching(request):
         request.session['filter_type'] = "searched"
 
         return redirect('/search/?page=1')
-
 
 def view_filter(request):
     if request.method == 'POST':

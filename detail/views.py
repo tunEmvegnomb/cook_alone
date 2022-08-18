@@ -16,6 +16,7 @@ def view_detail(request, id):
     for index in range(target_like.count()):
         index = target_like[index].like_me_id
         target_user_list.append(index)
+
     if me in target_user_list:
         iLikeThis = True
     else:
@@ -116,9 +117,11 @@ def comment_delete(request, id):
 @login_required
 def comment_update(request, id):
     commentupdate = True
+
     all_comment = CommentModel.objects.get(id=id)
     target_recipe = str(all_comment.comment_recipe_id)
     all_comment = str(CommentModel.objects.get(id=id).id)
+
     request.session['commentupdate'] = commentupdate
     request.session['mycomment'] = all_comment
     return redirect(f'/detail/{target_recipe}')
