@@ -8,7 +8,6 @@ from django.shortcuts import render,redirect
 
 
 # Create your views here.
-# def pagenating(request_list):
 
 def home(request):
     user = request.user.is_authenticated
@@ -24,11 +23,9 @@ def view_main(request):
     except:
         target_reco = RecommendModel.objects.get(id=2)
 
-
     reco_main = int((target_reco.reco1.strip('()').split(',')[0])) + 1
     reco_main = Recipe.objects.get(id=reco_main)
     reco_ing = reco_main.ingredient.split('>')[:5]
-
 
     reco_list = []
     reco_list.append(int(target_reco.reco2.strip('()').split(',')[0]) + 1)
@@ -59,16 +56,13 @@ def view_search(request):
             all_recipe.append(target_recipe)
 
             if like_num == 1:
-                # print(f'index,num->{index, like_num, target_recipe}')
                 pass
         except:
             pass
 
-
     searched=0
 
-    try: #세션이 들어온게 있는지 try
-        #경우의 수 1=> 필터를 사용했는가?
+    try:
         if request.session['filter_type'] == "filters":
             if request.session['filter_name'] == "10분":
                 filter_value = Recipe.objects.filter(timecost="10분 이내").values()
@@ -90,19 +84,16 @@ def view_search(request):
             elif request.session['filter_name'] == "most_recent":
                 filter_value = all_recipe
                 filter_value.reverse()
-            ###필터를 사용했을때의 결과값####
             using_recipes =filter_value
-        # 경우의 수 2=> 서치바를 사용했는가?
         elif request.session['filter_type'] == "searched":
             using_recipes = Recipe.objects.filter(title__contains=request.session['filter_name']) or Recipe.objects.filter(author__username__contains=request.session['filter_name'])
             searched=request.session['filter_name']
 
-    # 경우의 수 3=> 둘 다 아닐때에는 기존의 all_recipe를 반환
     except:
         using_recipes = all_recipe
         using_recipes.reverse()
 
-    # <<<--- 페이지네이션 --- #
+    # 페이지네이션 
     paginator = Paginator(using_recipes, 15)
     page_number = request.GET.get('page')
     p_recipe = paginator.page(page_number).object_list
@@ -113,14 +104,13 @@ def view_search(request):
         page_firstNum = 0
     if page_digit == 3:
         page_firstNum = int(str(page_obj.number-1)[:2])
-        print(f'page 100~ {page_firstNum}')
     else:
         page_firstNum = int(str(page_obj.number - 1)[0])
     for page in range(1, 11):
         page = page_firstNum * 10 + page
         page_index.append(page)
 
-    # --- 페이지네이션 --->>> #
+    # 페이지네이션 
 
     timecost = ["10분", "20분", "30분", "60분"]
     difficulty = ["상", "중", "하"]
@@ -132,7 +122,7 @@ def view_search(request):
         'page_index': page_index,
         'searched': searched,
     }
-
+    
     if request.method == 'GET':
         return render(request, 'list.html', doc)
 
@@ -158,7 +148,6 @@ def view_filter(request):
 
 
 def upload_recipes(request):
-
     if request.method == 'GET':
         try:
             #세션이 있다면

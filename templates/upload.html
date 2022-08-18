@@ -132,9 +132,7 @@
         <div style="background-color: whitesmoke; width: 710px; margin: 0 auto; border-radius:4px;">
             <form action="/myrecipe/update/end/{{ target_recipe.id }}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {#            <img src="" alt="이미지" class="random-food"/>#}
                 <div class="recipe-total">
-                    <!--레시피 타이틀-->
                     <!--레시피 타이틀-->
                     <div class="recipe-title">
                         <p style="font-weight: 600;">레시피 타이틀</p>
@@ -223,9 +221,7 @@
         <div style="background-color: whitesmoke; width: 710px; margin: 0 auto; border-radius:4px;">
             <form action="/write/" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {#            <img src="" alt="이미지" class="random-food"/>#}
                 <div class="recipe-total">
-                    <!--레시피 타이틀-->
                     <!--레시피 타이틀-->
                     <div class="recipe-title">
                         <p style="font-weight: 600;">레시피 타이틀</p>

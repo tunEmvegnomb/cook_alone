@@ -50,10 +50,6 @@ def view_detail(request, id):
     target_step = target_recipe.cookstep
     target_step = target_step.split('>')
     del target_step[-1]
-    # if target_like:
-    #     like_status = True
-    # else:
-    #     like_status = False
 
     try:
         # 세션이 있다면
@@ -64,7 +60,6 @@ def view_detail(request, id):
         is_update = False
         target_comment = ''
 
-    print(f'iLikeThis->{iLikeThis}')
     return render(request, 'detail.html', {
         'recipe': target_recipe,
         'like_status': iLikeThis,
@@ -129,7 +124,6 @@ def comment_update(request, id):
 
     request.session['commentupdate'] = commentupdate
     request.session['mycomment'] = all_comment
-
     return redirect(f'/detail/{target_recipe}')
 
 
@@ -141,10 +135,7 @@ def comment_update_end(request, id):
         target_recipe = str(all_comment.comment_recipe_id)
         all_comment.comment_content = request.POST.get('comment')
         all_comment.save()
-
         commentupdate = False
-
         request.session['commentupdate'] = commentupdate
-
         return redirect(f'/detail/{target_recipe}')
 
