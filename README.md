@@ -40,6 +40,9 @@
 
 <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
 
+## 프로젝트 기능 요약
+![혼자서도 잘해요리 메인1](https://user-images.githubusercontent.com/61997714/185313870-7d35923f-d6a4-4e83-8cbe-67ff324f760f.gif)
+
 # 📌프로젝트 구조
 
 ## 프로젝트 아키텍쳐
@@ -76,4 +79,4 @@
 
 - 내가 작성한 글, 댓글, 북마크한 요리를 모아볼 수 있습니다
 
-# 📌[Starting Assignment]()
+# 📌[Starting Assignment](https://github.com/tunEmvegnomb/cook_alone/wiki/Project-Starting-Assignment)
