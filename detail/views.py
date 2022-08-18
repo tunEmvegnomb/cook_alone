@@ -11,18 +11,15 @@ from user.models import UserModel
 def view_detail(request, id):
     me = request.user.id
     target_recipe = Recipe.objects.get(id=id)
-    print(f'target_recipe->{target_recipe}')
     target_like = LikeModel.objects.filter(like_recipe=id)
     target_user_list = []
     for index in range(target_like.count()):
         index = target_like[index].like_me_id
         target_user_list.append(index)
-    print(f'target_user_list->{target_user_list}')
     if me in target_user_list:
         iLikeThis = True
     else:
         iLikeThis = False
-    print(f'iLikeThis->{iLikeThis}')
     all_comment = CommentModel.objects.filter(comment_recipe=id).order_by('-created_at')
     try:
         target_reco = RecommendModel.objects.get(id=id)
@@ -42,7 +39,6 @@ def view_detail(request, id):
         request.session['latestRecipe'] = str(target_recipe.id)
     except:
         request.session['latestRecipe'] = 1
-    # print(request.session['latestRecipe'])
 
     # 타겟 재료 정제
     target_ing = target_recipe.ingredient
@@ -53,24 +49,16 @@ def view_detail(request, id):
     target_step = target_recipe.cookstep
     target_step = target_step.split('>')
     del target_step[-1]
-    print(f'target_step->{target_step}')
-    # if target_like:
-    #     like_status = True
-    # else:
-    #     like_status = False
 
     try:
         # 세션이 있다면
         is_update = request.session['commentupdate']
         # 아이디로 코멘트 가져오기
-        print(f'코멘트 타겟 아이디는 -> {request.session["mycomment"]}')
         target_comment = CommentModel.objects.get(id=request.session['mycomment'])
-        print(f'타겟 코멘트는 -> {target_comment}')
     except:
         is_update = False
         target_comment = ''
 
-    print(f'iLikeThis->{iLikeThis}')
     return render(request, 'detail.html', {
         'recipe': target_recipe,
         'like_status': iLikeThis,
@@ -128,17 +116,11 @@ def comment_delete(request, id):
 @login_required
 def comment_update(request, id):
     commentupdate = True
-    print(f'마이페이지에서 댓글 수정할 코멘트 번호는 {id}')
-
     all_comment = CommentModel.objects.get(id=id)
-    print(f'올코멘트 -> 너 뭐야?{all_comment}')
     target_recipe = str(all_comment.comment_recipe_id)
     all_comment = str(CommentModel.objects.get(id=id).id)
-    print(f'타겟레시피 넌 진짜 뭐냐 -> {target_recipe}')
-
     request.session['commentupdate'] = commentupdate
     request.session['mycomment'] = all_comment
-
     return redirect(f'/detail/{target_recipe}')
 
 
@@ -150,11 +132,7 @@ def comment_update_end(request, id):
         target_recipe = str(all_comment.comment_recipe_id)
         all_comment.comment_content = request.POST.get('comment')
         all_comment.save()
-
         commentupdate = False
-
         request.session['commentupdate'] = commentupdate
-
         return redirect(f'/detail/{target_recipe}')
 
-###풀 리퀘스트가 안되서 혹시 몰라 낙서합니다!!ㅎㅎ
